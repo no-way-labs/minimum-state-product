@@ -26,12 +26,11 @@ $\sigma = (\sigma_0, \ldots, \sigma_{n-1})$ with each
 $\sigma_i \in \mathrm{Sym}(\mathrm{Fin}(m_i))$. Define the action
 
 $$
-\begin{aligned}
-(\sigma \cdot c)(i) &= \sigma_i(c(i)), \\
-(\sigma \cdot f_i)(\ell, s, r) &=
-  \sigma_i\bigl( f_i(\sigma_{i-1}^{-1}(\ell), \sigma_i^{-1}(s),
-                     \sigma_{i+1}^{-1}(r)) \bigr).
-\end{aligned}
+(\sigma \cdot c)(i) = \sigma_i(c(i)).
+$$
+
+$$
+(\sigma \cdot f_i)(\ell, s, r) = \sigma_i\bigl( f_i(\sigma_{i-1}^{-1}(\ell), \sigma_i^{-1}(s), \sigma_{i+1}^{-1}(r)) \bigr).
 $$
 
 Here $(\ell, s, r)$ is the rule-table's local context triple (left
@@ -54,28 +53,22 @@ properties is the soundness half.
 
 ## 2. The key commutation identity
 
-**Lemma 2.1** *(commutation on rule evaluation).* For every
-configuration $c$ and every position $i$,
+**Lemma 2.1 (commutation on rule evaluation).**
+For every configuration $c$ and every position $i$,
 $$
-(\sigma \cdot f_i)\bigl( (\sigma \cdot c)(i-1), (\sigma \cdot c)(i),
-                         (\sigma \cdot c)(i+1) \bigr)
-=
-\sigma_i\bigl( f_i(c(i-1), c(i), c(i+1)) \bigr).
+(\sigma \cdot f_i)\bigl( (\sigma \cdot c)(i-1), (\sigma \cdot c)(i), (\sigma \cdot c)(i+1) \bigr) = \sigma_i\bigl( f_i(c(i-1), c(i), c(i+1)) \bigr).
 $$
 
 *Proof.* Expand the left-hand side using the definition of
 $\sigma \cdot f_i$:
 $$
-\begin{aligned}
-(\sigma \cdot f_i)\bigl( \sigma_{i-1}(c(i-1)), \sigma_i(c(i)),
-                         \sigma_{i+1}(c(i+1)) \bigr)
-&=
-\sigma_i\bigl( f_i(\sigma_{i-1}^{-1}\sigma_{i-1}(c(i-1)),
-                   \sigma_i^{-1}\sigma_i(c(i)),
-                   \sigma_{i+1}^{-1}\sigma_{i+1}(c(i+1))) \bigr) \\
-&=
-\sigma_i\bigl( f_i(c(i-1), c(i), c(i+1)) \bigr).
-\end{aligned}
+(\sigma \cdot f_i)\bigl( \sigma_{i-1}(c(i-1)), \sigma_i(c(i)), \sigma_{i+1}(c(i+1)) \bigr) = \sigma_i\bigl( f_i(\sigma_{i-1}^{-1}\sigma_{i-1}(c(i-1)), \sigma_i^{-1}\sigma_i(c(i)), \sigma_{i+1}^{-1}\sigma_{i+1}(c(i+1))) \bigr).
+$$
+
+This simplifies to
+
+$$
+(\sigma \cdot f_i)\bigl( \sigma_{i-1}(c(i-1)), \sigma_i(c(i)), \sigma_{i+1}(c(i+1)) \bigr) = \sigma_i\bigl( f_i(c(i-1), c(i), c(i+1)) \bigr).
 $$
 $\square$
 
@@ -217,19 +210,17 @@ Define $\sigma^{-1} := (\sigma_0^{-1}, \ldots, \sigma_{n-1}^{-1})$.
 From the definitions,
 
 $$
-\begin{aligned}
-((\sigma^{-1}) \cdot (\sigma \cdot f_i))(\ell, s, r)
-&=
-\sigma_i^{-1}\bigl( (\sigma \cdot f_i)(\sigma_{i-1}(\ell), \sigma_i(s),
-                                       \sigma_{i+1}(r)) \bigr) \\
-&=
-\sigma_i^{-1}\sigma_i(f_i(\ell, s, r)) \\
-&=
-f_i(\ell, s, r).
-\end{aligned}
+((\sigma^{-1}) \cdot (\sigma \cdot f_i))(\ell, s, r) = \sigma_i^{-1}\bigl( (\sigma \cdot f_i)(\sigma_{i-1}(\ell), \sigma_i(s), \sigma_{i+1}(r)) \bigr).
 $$
 
-so $\sigma^{-1} \cdot (\sigma \cdot f) = f$. Symmetrically
+Substituting the definition of $\sigma \cdot f_i$ and cancelling the
+permutations gives
+
+$$
+((\sigma^{-1}) \cdot (\sigma \cdot f_i))(\ell, s, r) = f_i(\ell, s, r).
+$$
+
+So $\sigma^{-1} \cdot (\sigma \cdot f) = f$. Symmetrically
 $\sigma \cdot (\sigma^{-1} \cdot f) = f$. Hence the action is a group
 action of $\prod_i \mathrm{Sym}(\mathrm{Fin}(m_i))$ on systems with
 state-count vector $\mathbf{m}$, and the map
@@ -262,7 +253,7 @@ coordinate $i$, and the canonicalization pass defines a renaming only
 on labels that actually appear in $C$. We bridge the two by the
 standard finite-set extension argument.
 
-**Lemma 7.1** *(extension of injective partial relabelings).* Let
+**Lemma 7.1 (extension of injective partial relabelings).** Let
 $A_i \subseteq \mathrm{Fin}(m_i)$ and let $\tilde{\sigma}_i : A_i \to
 \mathrm{Fin}(m_i)$ be injective. Then $\tilde{\sigma}_i$ extends to a
 permutation $\sigma_i \in \mathrm{Sym}(\mathrm{Fin}(m_i))$.
@@ -296,7 +287,7 @@ table. The soundness-critical question for canonicalization is:
 > *Does canonicalizing by a state-label renaming ever discard an
 > extendable candidate?*
 
-**Corollary 8.1** *(extendability is $\sigma$-equivariant).* Let $C$
+**Corollary 8.1 (extendability is $\sigma$-equivariant).** Let $C$
 be a candidate good cycle with determined dictionary
 $\mathrm{detOf}(C)$, and let $\sigma \in \prod_i
 \mathrm{Sym}(\mathrm{Fin}(m_i))$. Then $C$ has a valid completion
