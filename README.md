@@ -1,8 +1,12 @@
 # Minimum state product for self-stabilizing token rings
 
+[![DOI](https://zenodo.org/badge/1178892429.svg)](https://doi.org/10.5281/zenodo.19744462)
+
 Companion artifact for the paper
 **"Minimum State Products on Dijkstra's Token Ring: Exact Values for
 n = 3 through 9 and a large-n conjecture supported through n = 10."**
+
+Zenodo archive DOI: [10.5281/zenodo.19744463](https://doi.org/10.5281/zenodo.19744463)
 
 ## What's here
 
