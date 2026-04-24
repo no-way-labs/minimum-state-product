@@ -1,0 +1,21 @@
+name: lint-no-archive-import
+
+on:
+  push:
+    paths:
+      - "LeanMn/LowerBound/**/*.lean"
+      - "scripts/lint_no_archive_import.sh"
+      - ".github/workflows/lint-no-archive-import.yml"
+  pull_request:
+    paths:
+      - "LeanMn/LowerBound/**/*.lean"
+      - "scripts/lint_no_archive_import.sh"
+      - ".github/workflows/lint-no-archive-import.yml"
+
+jobs:
+  lint-no-archive-import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Enforce No Live Archive Imports
+        run: bash scripts/lint_no_archive_import.sh

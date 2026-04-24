@@ -1,0 +1,28 @@
+{
+  "n": 4,
+  "ms": [
+    2,
+    2,
+    2,
+    3
+  ],
+  "graph": {
+    "configCount": 24,
+    "directedEdgeCount": 120,
+    "perConfigDegree": 5,
+    "ruleKeyCount": 44
+  },
+  "search": {
+    "nodes": 161,
+    "forced_assignments": 420,
+    "branch_choices": 160,
+    "best_assigned": 14,
+    "elapsedSec": 0.008379749953746796
+  },
+  "counts": {
+    "hamiltonianGoodCycles": 0,
+    "shadowSuccesses": 0,
+    "shadowFailures": 0
+  },
+  "cycleSummaries": []
+}

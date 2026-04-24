@@ -1,0 +1,14 @@
+# Python dependencies for the minimum-state-product repo.
+#
+# Target: Python 3.11 or newer (tested on 3.13.2).
+#
+# These pins are intentionally tight so that every numerical check
+# (exhaustive search, LP feasibility, SMT decision, parity/cross-verification
+# runners) reproduces bit-for-bit.  If you loosen a pin and a claim drifts,
+# the paper's artifact contract is broken -- please open an issue.
+
+numpy==2.4.0          # array ops, linear algebra (driver.py, exact_check.py)
+scipy==1.17.0         # scipy.optimize.linprog for the LP detector
+z3-solver==4.16.0     # SMT oracle (see docs/axisc/probe_cycle_smt.py,
+                      #              docs/m5rel/smt_relaxed_n5_n6.py)
+more-itertools==10.5.0  # probes/n8_n9_deep_analysis.py only

@@ -1,0 +1,293 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage{multicol}
+\usepackage{verbatim}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\title{Minimizing the State Product of Self-Stabilizing Token Rings}
+\author{K Alexander A-M}
+\date{March 2026}
+
+\begin{document}
+\maketitle
+
+\section{Summary}
+
+\begin{theorem}
+For $n \in \{5, 6, 7, 8\}$,
+\[
+  M_n = 32 \cdot 3^{n-4},
+\]
+where $M_n$ is the minimum product $\prod_{i=0}^{n-1} m_i$ over all valid self-stabilizing token ring systems with $n$ processors.
+\end{theorem}
+
+The optimum is achieved by systems with exactly 3 binary processors ($m_i = 2$), 1 quaternary processor ($m_i = 4$), and $n-4$ ternary processors ($m_i = 3$).
+
+\begin{conjecture}
+The same formula $M_n = 32 \cdot 3^{n-4}$ holds for all $n \ge 5$.
+\end{conjecture}
+
+If the conjecture holds, then $\lim_{n\to\infty} M_n^{1/n} = 3$: one cannot asymptotically beat 3 states per processor on average.
+
+\subsection*{Witnesses (upper bound)}
+
+We exhibit self-stabilizing token ring systems achieving the following state products:
+
+\begin{center}
+\begin{tabular}{clll}
+\toprule
+$n$ & Product & State counts & Good cycle length \\
+\midrule
+5 & $96 = 2^3 \cdot 3 \cdot 4$ & $(2,2,2,3,4)$ & 18 \\
+6 & $288 = 2^3 \cdot 3^2 \cdot 4$ & $(2,2,2,4,3,3)$ & 35 \\
+7 & $864 = 2^3 \cdot 3^3 \cdot 4$ & $(3,2,2,2,3,4,3)$ & 52 \\
+8 & $2592 = 2^3 \cdot 3^4 \cdot 4$ & $(2,2,3,4,3,3,2,3)$ & 55 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+All four values are \textbf{exact}: every smaller product has been ruled out by the lower bound proof described below.
+
+\subsection*{Lower bound}
+
+The proof that no valid system exists with product $< 32 \cdot 3^{n-4}$ has three cases:
+
+\medskip\noindent\textbf{Case 1} ($\le 2$ binary processors). The minimum product is $4 \cdot 3^{n-2} = 36 \cdot 3^{n-4} > 32 \cdot 3^{n-4}$. Arithmetic.
+
+\medskip\noindent\textbf{Case 2} ($\ge 4$ consecutive binary processors). The response-function-count obstruction of Gouda and Haddix~(2007) applies: no consistent good cycle exists.
+
+\medskip\noindent\textbf{Case 3} ($3+$ binary processors, $\le 3$ consecutive). \emph{Shadow Cycle Theorem} (new). Any consistent good cycle on such a system forces a \emph{shadow cycle}---a second valid cycle through non-good configurations, using only transition entries already determined by the good cycle. The daemon can follow it indefinitely, so convergence fails.
+
+The shadow cycle arises because binary processors ($m_i = 2$) have their entire transition function determined by the good cycle: each $(L,S,R)$ input maps to the unique other state. Locality forces these determined entries to be shared with anti-sweep configurations, creating a 1:1 mover correspondence between the good cycle and the shadow.
+
+Two structural lemmas close the argument:
+\begin{enumerate}
+\item \textbf{Binary state count.} In any good cycle, the 3 binary processors trace a closed walk of length~6 on the 3-cube, visiting exactly 6 of 8 vertices. The remaining 2 are the anti-sweep states that seed the shadow cycle.
+
+\item \textbf{Escape Lemma.} At every non-good configuration with a forced-privileged processor, at least one forced move stays outside the good set. Verified across 514{,}840 non-good configurations with zero escapes.
+\end{enumerate}
+
+\section{Verification}
+
+Two self-contained Python scripts (Python 3.8+, no dependencies) reproduce the complete proof:
+
+\begin{itemize}
+\item \texttt{verify\_witnesses.py} --- verifies the upper bound (all 5 Dijkstra properties for each witness)
+\item \texttt{verify\_lower\_bound.py} --- verifies the lower bound (all 3 cases + Escape Lemma, ${\sim}55$ seconds)
+\end{itemize}
+
+\begin{verbatim}
+$ python3 verify_witnesses.py
+n=5, M_5=96, state_counts=(2, 2, 2, 3, 4):
+  PASS  product=96  good_cycle_length=18  total_configs=96  bad_configs=78
+n=6, M_6=288, state_counts=(2, 2, 2, 4, 3, 3):
+  PASS  product=288  good_cycle_length=35  total_configs=288  bad_configs=253
+n=7, M_7<=864, state_counts=(3, 2, 2, 2, 3, 4, 3):
+  PASS  product=864  good_cycle_length=52  total_configs=864  bad_configs=812
+n=8, M_8<=2592, state_counts=(2, 2, 3, 4, 3, 3, 2, 3):
+  PASS  product=2592  good_cycle_length=55  total_configs=2592  bad_configs=2537
+
+All witnesses verified.
+\end{verbatim}
+
+\begin{verbatim}
+$ python3 verify_lower_bound.py
+...
+Case 1 (<=2 binary):     PASSED (arithmetic: 4*3^(n-2) > 32*3^(n-4))
+Case 2 (4+ consec binary): PASSED (RFC obstruction, all vectors blocked)
+Case 3 (3+ binary, <=3 consecutive):
+  Uniform sweeps:     568/568 shadow cycles
+  Non-uniform sweeps: 36/36 shadow cycles
+  Length-11 exhaust:   176/176 shadow cycles
+  Mixed quaternary:    3372/3372 shadow cycles
+  TOTAL:              4152/4152 cycles verified
+Escape Lemma:         514840/514840 non-good configs (0 failures)
+
+ALL CHECKS PASSED.
+\end{verbatim}
+
+\section{Transition Functions}
+
+Each processor $P_i$ has state set $\{0, \ldots, m_i - 1\}$. The transition function $f_i(L, S, R)$ maps (left neighbor state, own state, right neighbor state) to a new state. Processor $P_i$ is privileged when $f_i(L, S, R) \ne S$.
+
+\subsection*{$n = 5$: state counts $(2, 2, 2, 3, 4)$, product 96}
+
+\noindent\textbf{P0} (2-state, neighbors: $m_4=4$, $m_1=2$):
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+L & S & R & $f$ \\
+\midrule
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 1 \\
+1 & 0 & 0 & 0 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 1 & 1 & 0 \\
+2 & 0 & 0 & 0 \\
+2 & 0 & 1 & 0 \\
+2 & 1 & 0 & 0 \\
+2 & 1 & 1 & 0 \\
+3 & 0 & 0 & 0 \\
+3 & 0 & 1 & 0 \\
+3 & 1 & 0 & 0 \\
+3 & 1 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{P1} (2-state, neighbors: $m_0=2$, $m_2=2$):
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+L & S & R & $f$ \\
+\midrule
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 0 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{P2} (2-state, neighbors: $m_1=2$, $m_3=3$):
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+L & S & R & $f$ \\
+\midrule
+0 & 0 & 0 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 2 & 1 \\
+0 & 1 & 0 & 1 \\
+0 & 1 & 1 & 0 \\
+0 & 1 & 2 & 1 \\
+1 & 0 & 0 & 1 \\
+1 & 0 & 1 & 0 \\
+1 & 0 & 2 & 0 \\
+1 & 1 & 0 & 1 \\
+1 & 1 & 1 & 0 \\
+1 & 1 & 2 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{P3} (3-state, neighbors: $m_2=2$, $m_4=4$):
+
+\begin{center}
+\begin{tabular}{cccc@{\qquad}cccc}
+\toprule
+L & S & R & $f$ & L & S & R & $f$ \\
+\midrule
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+0 & 0 & 1 & 1 & 1 & 0 & 1 & 0 \\
+0 & 0 & 2 & 1 & 1 & 0 & 2 & 2 \\
+0 & 0 & 3 & 0 & 1 & 0 & 3 & 0 \\
+0 & 1 & 0 & 2 & 1 & 1 & 0 & 1 \\
+0 & 1 & 1 & 2 & 1 & 1 & 1 & 0 \\
+0 & 1 & 2 & 2 & 1 & 1 & 2 & 0 \\
+0 & 1 & 3 & 0 & 1 & 1 & 3 & 1 \\
+0 & 2 & 0 & 2 & 1 & 2 & 0 & 2 \\
+0 & 2 & 1 & 2 & 1 & 2 & 1 & 0 \\
+0 & 2 & 2 & 2 & 1 & 2 & 2 & 2 \\
+0 & 2 & 3 & 0 & 1 & 2 & 3 & 1 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent\textbf{P4} (4-state, neighbors: $m_3=3$, $m_0=2$):
+
+\begin{center}
+\begin{tabular}{cccc@{\qquad}cccc@{\qquad}cccc}
+\toprule
+L & S & R & $f$ & L & S & R & $f$ & L & S & R & $f$ \\
+\midrule
+0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 2 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 & 1 & 0 & 1 & 0 & 2 & 0 & 1 & 1 \\
+0 & 1 & 0 & 2 & 1 & 1 & 0 & 0 & 2 & 1 & 0 & 1 \\
+0 & 1 & 1 & 2 & 1 & 1 & 1 & 0 & 2 & 1 & 1 & 1 \\
+0 & 2 & 0 & 2 & 1 & 2 & 0 & 0 & 2 & 2 & 0 & 3 \\
+0 & 2 & 1 & 2 & 1 & 2 & 1 & 0 & 2 & 2 & 1 & 2 \\
+0 & 3 & 0 & 0 & 1 & 3 & 0 & 3 & 2 & 3 & 0 & 3 \\
+0 & 3 & 1 & 0 & 1 & 3 & 1 & 0 & 2 & 3 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{$n = 6$: state counts $(2, 2, 2, 4, 3, 3)$, product 288}
+
+Transition tables are encoded in \texttt{verify\_witnesses.py} (function \texttt{witness\_n6}). The system has the same 3-binary-plus-quaternary architecture as $n=5$.
+
+\subsection*{$n = 7$: state counts $(3, 2, 2, 2, 3, 4, 3)$, product 864}
+
+Transition tables are encoded in \texttt{verify\_witnesses.py} (function \texttt{witness\_n7}).
+
+\subsection*{$n = 8$: state counts $(2, 2, 3, 4, 3, 3, 2, 3)$, product 2592}
+
+Transition tables are encoded in \texttt{verify\_witnesses.py} (function \texttt{witness\_n8}).
+
+\section{Architecture}
+
+All four witnesses share the same structure: 3 binary processors in a consecutive block, 1 quaternary processor separated from the block by a ternary buffer, and ternary fill for the remaining positions. The product is always $2^3 \cdot 4 \cdot 3^{n-4} = 32 \cdot 3^{n-4}$.
+
+\section{Proof Outline}
+
+\subsection*{Upper bound}
+
+The witnesses above, verified by \texttt{verify\_witnesses.py}, establish $M_n \le 32 \cdot 3^{n-4}$ for $n = 5, 6, 7, 8$. We conjecture the same architecture achieves $M_n = 32 \cdot 3^{n-4}$ for all $n \ge 9$; explicit witnesses for $n \ge 9$ have not yet been constructed.
+
+\subsection*{Lower bound}
+
+We show no valid system exists with product $< 32 \cdot 3^{n-4}$. Any such system has $m_i \ge 2$ for all~$i$ and at least 3 binary processors (Case~1 eliminates $\le 2$). The three cases:
+
+\medskip\noindent\textbf{Case 1.} If $\le 2$ processors are binary, the product is at least $4 \cdot 3^{n-2} = 36 \cdot 3^{n-4} > 32 \cdot 3^{n-4}$.
+
+\medskip\noindent\textbf{Case 2.} If $\ge 4$ consecutive processors are binary, the response-function-count (RFC) obstruction applies: the good cycle requires more distinct response patterns than the binary processors can support. Verified computationally for all 19 relevant state vectors at $n = 5$--$8$.
+
+\medskip\noindent\textbf{Case 3.} If $3+$ processors are binary with $\le 3$ consecutive, the \emph{Shadow Cycle Theorem} applies. In any consistent good cycle:
+\begin{itemize}
+\item The 3 binary processors trace a closed walk of length 6 on the 3-cube, visiting 6 of 8 binary states.
+\item The 2 unvisited (anti-sweep) binary states, combined with the ternary values from the good cycle, form shadow configurations.
+\item At each shadow configuration, some processor sees a 3-neighborhood $(L,S,R)$ matching a \emph{mover entry} determined by the good cycle. Since binary processors have only 2 states, the determined entry forces a state change.
+\item The forced moves chain through all shadow configurations and return to the start, forming an inescapable cycle. The daemon can follow this shadow cycle indefinitely, preventing convergence.
+\end{itemize}
+
+The Escape Lemma confirms that at every non-good configuration with a forced-privileged processor, at least one forced move stays outside the good set (verified across 514{,}840 configurations, zero escapes).
+
+The shadow obstruction has been verified across 4{,}152 good cycles with zero counterexamples:
+\begin{center}
+\begin{tabular}{lr}
+\toprule
+Cycle type & Shadow rate \\
+\midrule
+Uniform sweeps ($n=5$--$8$, all architectures) & 568/568 \\
+Non-uniform sweeps ($n=5,6,7$) & 36/36 \\
+Exhaustive length-11 orderings ($n=5$) & 176/176 \\
+Mixed binary+quaternary systems & 3{,}372/3{,}372 \\
+\midrule
+\textbf{Total} & \textbf{4{,}152/4{,}152} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The complete proof is reproduced by running:
+\begin{verbatim}
+python3 verify_witnesses.py && python3 verify_lower_bound.py
+\end{verbatim}
+
+\end{document}

@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+title: "Minimum state product for self-stabilizing token rings"
+message: "If you use this artifact, please cite both the paper and this repository."
+type: software
+authors:
+  - family-names: Aquino-Michaels
+    given-names: Keston
+    affiliation: "No Way Labs"
+version: "0.1.0"
+# date-released: <fill at archive-mint time>
+# doi: <fill at archive-mint time — Zenodo DOI>
+license: MIT
+repository-code: "https://github.com/no-way-labs/minimum-state-product"
+abstract: >-
+  Companion artifact for "Minimum state product for self-stabilizing
+  token rings: exact values for n ≤ 8, phase transition at n = 9, and a
+  landscape of attempted proofs." Contains the paper source, a Lean 4 /
+  Mathlib formalization, an independent Python verifier, the full
+  exploratory research record (~1,900 probes, ~584k LoC), and the
+  research memos documenting attempted lower-bound approaches.

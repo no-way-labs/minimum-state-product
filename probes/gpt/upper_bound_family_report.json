@@ -1,0 +1,482 @@
+{
+  "interior_333_processors": [],
+  "target_orientation_matches": {
+    "5": {
+      "matches_rotation_or_reflection": true,
+      "target": [
+        2,
+        2,
+        2,
+        4,
+        3
+      ]
+    },
+    "6": {
+      "matches_rotation_or_reflection": true,
+      "target": [
+        2,
+        2,
+        2,
+        4,
+        3,
+        3
+      ]
+    },
+    "7": {
+      "matches_rotation_or_reflection": false,
+      "target": [
+        2,
+        2,
+        2,
+        4,
+        3,
+        3,
+        3
+      ]
+    },
+    "8": {
+      "matches_rotation_or_reflection": false,
+      "target": [
+        2,
+        2,
+        2,
+        4,
+        3,
+        3,
+        3,
+        3
+      ]
+    }
+  },
+  "triple_groups": {
+    "(2, 2, 2)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 5,
+          "processor": 1
+        },
+        {
+          "n": 6,
+          "processor": 1
+        },
+        {
+          "n": 7,
+          "processor": 2
+        }
+      ]
+    },
+    "(2, 2, 3)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 5,
+          "processor": 2
+        },
+        {
+          "n": 7,
+          "processor": 3
+        },
+        {
+          "n": 8,
+          "processor": 1
+        }
+      ]
+    },
+    "(2, 2, 4)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 6,
+          "processor": 2
+        }
+      ]
+    },
+    "(2, 3, 2)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 8,
+          "processor": 7
+        }
+      ]
+    },
+    "(2, 3, 4)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 5,
+          "processor": 3
+        },
+        {
+          "n": 7,
+          "processor": 4
+        },
+        {
+          "n": 8,
+          "processor": 2
+        }
+      ]
+    },
+    "(2, 4, 3)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 6,
+          "processor": 3
+        }
+      ]
+    },
+    "(3, 2, 2)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 6,
+          "processor": 0
+        },
+        {
+          "n": 7,
+          "processor": 1
+        },
+        {
+          "n": 8,
+          "processor": 0
+        }
+      ]
+    },
+    "(3, 2, 3)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 8,
+          "processor": 6
+        }
+      ]
+    },
+    "(3, 3, 2)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 6,
+          "processor": 5
+        },
+        {
+          "n": 7,
+          "processor": 0
+        },
+        {
+          "n": 8,
+          "processor": 5
+        }
+      ]
+    },
+    "(3, 4, 2)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 5,
+          "processor": 4
+        }
+      ]
+    },
+    "(3, 4, 3)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 7,
+          "processor": 5
+        },
+        {
+          "n": 8,
+          "processor": 3
+        }
+      ]
+    },
+    "(4, 2, 2)": {
+      "all_same_after_canonicalization": true,
+      "occurrences": [
+        {
+          "n": 5,
+          "processor": 0
+        }
+      ]
+    },
+    "(4, 3, 3)": {
+      "all_same_after_canonicalization": false,
+      "occurrences": [
+        {
+          "n": 6,
+          "processor": 4
+        },
+        {
+          "n": 7,
+          "processor": 6
+        },
+        {
+          "n": 8,
+          "processor": 4
+        }
+      ]
+    }
+  },
+  "witnesses": {
+    "5": {
+      "state_counts": [
+        2,
+        2,
+        2,
+        3,
+        4
+      ],
+      "triples": [
+        {
+          "processor": 0,
+          "triple": [
+            4,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 1,
+          "triple": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 2,
+          "triple": [
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "processor": 3,
+          "triple": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "processor": 4,
+          "triple": [
+            3,
+            4,
+            2
+          ]
+        }
+      ]
+    },
+    "6": {
+      "state_counts": [
+        2,
+        2,
+        2,
+        4,
+        3,
+        3
+      ],
+      "triples": [
+        {
+          "processor": 0,
+          "triple": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 1,
+          "triple": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 2,
+          "triple": [
+            2,
+            2,
+            4
+          ]
+        },
+        {
+          "processor": 3,
+          "triple": [
+            2,
+            4,
+            3
+          ]
+        },
+        {
+          "processor": 4,
+          "triple": [
+            4,
+            3,
+            3
+          ]
+        },
+        {
+          "processor": 5,
+          "triple": [
+            3,
+            3,
+            2
+          ]
+        }
+      ]
+    },
+    "7": {
+      "state_counts": [
+        3,
+        2,
+        2,
+        2,
+        3,
+        4,
+        3
+      ],
+      "triples": [
+        {
+          "processor": 0,
+          "triple": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "processor": 1,
+          "triple": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 2,
+          "triple": [
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 3,
+          "triple": [
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "processor": 4,
+          "triple": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "processor": 5,
+          "triple": [
+            3,
+            4,
+            3
+          ]
+        },
+        {
+          "processor": 6,
+          "triple": [
+            4,
+            3,
+            3
+          ]
+        }
+      ]
+    },
+    "8": {
+      "state_counts": [
+        2,
+        2,
+        3,
+        4,
+        3,
+        3,
+        2,
+        3
+      ],
+      "triples": [
+        {
+          "processor": 0,
+          "triple": [
+            3,
+            2,
+            2
+          ]
+        },
+        {
+          "processor": 1,
+          "triple": [
+            2,
+            2,
+            3
+          ]
+        },
+        {
+          "processor": 2,
+          "triple": [
+            2,
+            3,
+            4
+          ]
+        },
+        {
+          "processor": 3,
+          "triple": [
+            3,
+            4,
+            3
+          ]
+        },
+        {
+          "processor": 4,
+          "triple": [
+            4,
+            3,
+            3
+          ]
+        },
+        {
+          "processor": 5,
+          "triple": [
+            3,
+            3,
+            2
+          ]
+        },
+        {
+          "processor": 6,
+          "triple": [
+            3,
+            2,
+            3
+          ]
+        },
+        {
+          "processor": 7,
+          "triple": [
+            2,
+            3,
+            2
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "n_seeds": 726,
+  "by_n": {
+    "5": {
+      "n_seeds": 249,
+      "n_seeds_CDO_satisfied": 249,
+      "n_seeds_CDO_violated": 0
+    },
+    "6": {
+      "n_seeds": 270,
+      "n_seeds_CDO_satisfied": 270,
+      "n_seeds_CDO_violated": 0
+    },
+    "7": {
+      "n_seeds": 207,
+      "n_seeds_CDO_satisfied": 207,
+      "n_seeds_CDO_violated": 0
+    }
+  },
+  "global": {
+    "n_seeds_CDO_satisfied": 726,
+    "n_seeds_CDO_violated": 0,
+    "n_timed_out_seeds": 726,
+    "hit_time_cap": false,
+    "verdict": "GREEN"
+  },
+  "violators": []
+}

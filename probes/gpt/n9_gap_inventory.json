@@ -1,0 +1,2862 @@
+[
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 8832,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      23
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 8960,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      5,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 8960,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      14
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 8960,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      7,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 8960,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      35
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 5,
+    "linear_orientations": 630,
+    "necklaces": 70,
+    "product": 9072,
+    "safe_necklaces_case2": 65,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 10,
+    "linear_orientations": 1260,
+    "necklaces": 140,
+    "product": 9216,
+    "safe_necklaces_case2": 130,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4,
+      4
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 9216,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 9216,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      4,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9216,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      16
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9216,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9216,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      6,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9216,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9216,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      6,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9216,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      24
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9216,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      18
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9216,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9216,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      8,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 9216,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      36
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9408,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      7,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 9472,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      37
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9504,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 9600,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      5,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9600,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      5,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9600,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      5,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9600,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      25
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9600,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      15
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 3,
+    "blocked_necklaces_case2": 0,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9720,
+    "safe_necklaces_case2": 56,
+    "state_counts": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9728,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      19
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 9728,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      38
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 9792,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      17
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9856,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      7,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 9984,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      13
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9984,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      26
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 9984,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      13
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 9984,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      39
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 10080,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      5,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10240,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 10240,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10240,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      5,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10240,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      20
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10240,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      16
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10240,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      8,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 10240,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      40
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 3,
+    "blocked_necklaces_case2": 0,
+    "linear_orientations": 1260,
+    "necklaces": 140,
+    "product": 10368,
+    "safe_necklaces_case2": 140,
+    "state_counts": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      4,
+      4
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 5,
+    "linear_orientations": 630,
+    "necklaces": 70,
+    "product": 10368,
+    "safe_necklaces_case2": 65,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 20,
+    "linear_orientations": 2520,
+    "necklaces": 280,
+    "product": 10368,
+    "safe_necklaces_case2": 260,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10368,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 10368,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 24,
+    "linear_orientations": 756,
+    "necklaces": 84,
+    "product": 10368,
+    "safe_necklaces_case2": 60,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      6,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 10368,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      18
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10368,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      6,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10368,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      27
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 4,
+    "linear_orientations": 36,
+    "necklaces": 4,
+    "product": 10368,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      9,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 10496,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      41
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10560,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      5,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 10752,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      4,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10752,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      14
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10752,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      7,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 10752,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      6,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10752,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      28
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10752,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      21
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10752,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      14
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10752,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      7,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 10752,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      42
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 10,
+    "linear_orientations": 1260,
+    "necklaces": 140,
+    "product": 10800,
+    "safe_necklaces_case2": 130,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      5,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 10880,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      17
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 10944,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      19
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 11008,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      43
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11136,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      29
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 11200,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      5,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11232,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      13
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 11264,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11264,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      22
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11264,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      8,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 11264,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      44
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 30,
+    "linear_orientations": 3780,
+    "necklaces": 420,
+    "product": 11520,
+    "safe_necklaces_case2": 390,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      4,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 11520,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 11520,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      5,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 96,
+    "linear_orientations": 3024,
+    "necklaces": 336,
+    "product": 11520,
+    "safe_necklaces_case2": 240,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      5,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 11520,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      20
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11520,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      15
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11520,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      5,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11520,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      6,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11520,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      5,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 11520,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      6,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11520,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      30
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11520,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      18
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11520,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      15
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11520,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      9,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 11520,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      45
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11648,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      7,
+      13
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 2,
+    "blocked_necklaces_case2": 0,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 11664,
+    "safe_necklaces_case2": 28,
+    "state_counts": [
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3,
+      4
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 3,
+    "blocked_necklaces_case2": 0,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 11664,
+    "safe_necklaces_case2": 56,
+    "state_counts": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 5,
+    "linear_orientations": 630,
+    "necklaces": 70,
+    "product": 11664,
+    "safe_necklaces_case2": 65,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11776,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      23
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 11776,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      46
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 11904,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      31
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12000,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      5,
+      5,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 12032,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      47
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 20,
+    "linear_orientations": 2520,
+    "necklaces": 280,
+    "product": 12096,
+    "safe_necklaces_case2": 260,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      4,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12096,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      14
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 12096,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      6,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12096,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      21
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12096,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      7,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12160,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      19
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 5,
+    "linear_orientations": 630,
+    "necklaces": 70,
+    "product": 12288,
+    "safe_necklaces_case2": 65,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      4,
+      4,
+      4
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 12288,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      4,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12288,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      4,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12288,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      16
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12288,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      8,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12288,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12288,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      6,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12288,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      32
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12288,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      24
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12288,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      16
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12288,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      8,
+      12
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 12288,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      48
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12480,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      5,
+      13
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12544,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      7,
+      7
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12544,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      7,
+      14
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 12544,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      49
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 12672,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      4,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12672,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      22
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12672,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      6,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12672,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      33
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12672,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      9,
+      11
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 24,
+    "linear_orientations": 756,
+    "necklaces": 84,
+    "product": 12800,
+    "safe_necklaces_case2": 60,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      4,
+      5,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12800,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      5,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 18,
+    "linear_orientations": 252,
+    "necklaces": 28,
+    "product": 12800,
+    "safe_necklaces_case2": 10,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      5,
+      8
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12800,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      4,
+      25
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 12800,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      5,
+      20
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 4,
+    "linear_orientations": 36,
+    "necklaces": 4,
+    "product": 12800,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      10,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 12800,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      50
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 3,
+    "blocked_necklaces_case2": 0,
+    "linear_orientations": 2520,
+    "necklaces": 280,
+    "product": 12960,
+    "safe_necklaces_case2": 280,
+    "state_counts": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      4,
+      5
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 5,
+    "linear_orientations": 630,
+    "necklaces": 70,
+    "product": 12960,
+    "safe_necklaces_case2": 65,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      10
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 4,
+    "blocked_necklaces_case2": 20,
+    "linear_orientations": 2520,
+    "necklaces": 280,
+    "product": 12960,
+    "safe_necklaces_case2": 260,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      5,
+      6
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 16,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 12960,
+    "safe_necklaces_case2": 40,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      15
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 5,
+    "blocked_necklaces_case2": 48,
+    "linear_orientations": 1512,
+    "necklaces": 168,
+    "product": 12960,
+    "safe_necklaces_case2": 120,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      3,
+      5,
+      9
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": false,
+    "binary_count": 6,
+    "blocked_necklaces_case2": 36,
+    "linear_orientations": 504,
+    "necklaces": 56,
+    "product": 13056,
+    "safe_necklaces_case2": 20,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      4,
+      17
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 13056,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      3,
+      34
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 7,
+    "blocked_necklaces_case2": 8,
+    "linear_orientations": 72,
+    "necklaces": 8,
+    "product": 13056,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      6,
+      17
+    ]
+  },
+  {
+    "all_necklaces_blocked_case2": true,
+    "binary_count": 8,
+    "blocked_necklaces_case2": 1,
+    "linear_orientations": 9,
+    "necklaces": 1,
+    "product": 13056,
+    "safe_necklaces_case2": 0,
+    "state_counts": [
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      2,
+      51
+    ]
+  }
+]

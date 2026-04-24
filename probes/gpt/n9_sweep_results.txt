@@ -1,0 +1,32 @@
+
+============================================================
+n=9 sweep started at 2026-03-08 17:16:41
+============================================================
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3) (custom target), product=7776, 56 orientations
+------------------------------------------------------------
+Processing orientation range 16-16 out of 56
+
+  [16/56] 2,2,3,3,3,2,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3): no witness in orientations 16-16
+
+
+Requested orientation range exhausted without witness.
+
+============================================================
+n=9 sweep started at 2026-03-08 17:39:53
+============================================================
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3) (custom target), product=7776, 56 orientations
+------------------------------------------------------------
+Processing orientation range 17-17 out of 56
+
+  [17/56] 2,2,3,3,3,2,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3): no witness in orientations 17-17
+
+
+Requested orientation range exhausted without witness.

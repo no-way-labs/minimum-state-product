@@ -1,0 +1,58 @@
+{
+  "n": 5,
+  "ms": [
+    2,
+    2,
+    2,
+    3,
+    3
+  ],
+  "graph": {
+    "configCount": 72,
+    "directedEdgeCount": 504,
+    "undirectedEdgeCount": 252,
+    "perConfigDegree": 7,
+    "ruleKeyCount": 68
+  },
+  "search": {
+    "search_mode": "exhaustive",
+    "nodes": 1557,
+    "forced_assignments": 9798,
+    "branch_choices": 1556,
+    "best_assigned": 56,
+    "timed_out": false,
+    "sampling_attempts": 0,
+    "sampling_successes": 0,
+    "elapsedSec": 0.40389620792120695,
+    "timeLimitSec": 180.0
+  },
+  "countsAllCycles": {
+    "goodCycles": 0,
+    "hasEntryConflict": 0,
+    "noEntryConflict": 0,
+    "proc1Isolated": 0,
+    "proc1NotIsolated": 0,
+    "proc1SweepAndIsolated": 0,
+    "proc1SweepAndIsolatedWithMinGap": 0,
+    "proc1SweepAndIsolatedOddParity": 0,
+    "proc1SweepAndIsolatedEvenParity": 0,
+    "proc1SweepAndIsolatedOddDispatchable": 0,
+    "proc1SweepAndIsolatedOddNonDispatchable": 0
+  },
+  "countsNoEntryConflictSubset": {
+    "goodCycles": 0,
+    "hasEntryConflict": 0,
+    "noEntryConflict": 0,
+    "proc1Isolated": 0,
+    "proc1NotIsolated": 0,
+    "proc1SweepAndIsolated": 0,
+    "proc1SweepAndIsolatedWithMinGap": 0,
+    "proc1SweepAndIsolatedOddParity": 0,
+    "proc1SweepAndIsolatedEvenParity": 0,
+    "proc1SweepAndIsolatedOddDispatchable": 0,
+    "proc1SweepAndIsolatedOddNonDispatchable": 0
+  },
+  "sorryBranchCount": 0,
+  "sorryBranchCycles": [],
+  "cycleSummaries": []
+}

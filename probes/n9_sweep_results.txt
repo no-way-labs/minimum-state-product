@@ -1,0 +1,431 @@
+
+============================================================
+n=9 sweep started at 2026-03-08 08:10:28
+============================================================
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3) (single-quaternary, product 7776), product=7776, 56 orientations
+------------------------------------------------------------
+
+  [1/56] 2,2,2,3,3,3,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [2/56] 2,2,2,3,3,3,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [3/56] 2,2,2,3,3,3,4,3,3
+  screened=10984 survivors=0 elapsed=600.0s dead
+
+  [4/56] 2,2,2,3,3,4,3,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [5/56] 2,2,2,3,4,3,3,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [6/56] 2,2,2,4,3,3,3,3,3
+  screened=8535 survivors=0 elapsed=600.0s dead
+
+  [7/56] 2,2,3,2,3,3,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [8/56] 2,2,3,2,3,3,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [9/56] 2,2,3,2,3,3,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [10/56] 2,2,3,2,3,4,3,3,3
+  screened=7619 survivors=0 elapsed=600.0s dead
+
+  [11/56] 2,2,3,2,4,3,3,3,3
+  screened=9442 survivors=0 elapsed=600.0s dead
+
+  [12/56] 2,2,3,3,2,3,3,3,4
+
+============================================================
+n=9 sweep started at 2026-03-08 10:10:29
+============================================================
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3) (single-quaternary, product 7776), product=7776, 56 orientations
+------------------------------------------------------------
+
+  [12/56] 2,2,3,3,2,3,3,3,4
+
+============================================================
+n=9 sweep started at 2026-03-08 13:00:48
+============================================================
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3) (single-quaternary, product 7776), product=7776, 56 orientations
+------------------------------------------------------------
+
+  [12/56] 2,2,3,3,2,3,3,3,4
+  screened=9030 survivors=0 elapsed=600.0s dead
+
+  [13/56] 2,2,3,3,2,3,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [14/56] 2,2,3,3,2,3,4,3,3
+  screened=10230 survivors=0 elapsed=600.0s dead
+
+  [15/56] 2,2,3,3,2,4,3,3,3
+  screened=9674 survivors=0 elapsed=600.0s dead
+
+  [16/56] 2,2,3,3,3,2,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [17/56] 2,2,3,3,3,2,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [18/56] 2,2,3,3,3,2,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [19/56] 2,2,3,3,3,3,2,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [20/56] 2,2,3,3,3,3,2,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [21/56] 2,2,3,3,3,3,3,2,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [22/56] 2,2,3,3,3,3,4,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [23/56] 2,2,3,3,3,4,2,3,3
+  screened=7832 survivors=0 elapsed=600.0s dead
+
+  [24/56] 2,2,3,3,3,4,3,2,3
+  screened=3830 survivors=0 elapsed=600.0s dead
+
+  [25/56] 2,2,3,3,4,2,3,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [26/56] 2,2,3,3,4,3,2,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [27/56] 2,2,3,3,4,3,3,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [28/56] 2,2,3,4,2,3,3,3,3
+  screened=270 survivors=0 elapsed=600.0s dead
+
+  [29/56] 2,2,3,4,3,2,3,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [30/56] 2,2,3,4,3,3,2,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [31/56] 2,2,3,4,3,3,3,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [32/56] 2,2,4,2,3,3,3,3,3
+  screened=1453 survivors=0 elapsed=600.0s dead
+
+  [33/56] 2,2,4,3,2,3,3,3,3
+  screened=3362 survivors=0 elapsed=600.0s dead
+
+  [34/56] 2,2,4,3,3,2,3,3,3
+  screened=4892 survivors=0 elapsed=600.0s dead
+
+  [35/56] 2,2,4,3,3,3,2,3,3
+  screened=4872 survivors=0 elapsed=600.0s dead
+
+  [36/56] 2,2,4,3,3,3,3,2,3
+  screened=8784 survivors=0 elapsed=600.0s dead
+
+  [37/56] 2,3,2,3,2,3,3,3,4
+  screened=25344 survivors=0 elapsed=600.0s dead
+
+  [38/56] 2,3,2,3,2,3,3,4,3
+  screened=8848 survivors=0 elapsed=600.0s dead
+
+  [39/56] 2,3,2,3,2,3,4,3,3
+  screened=16800 survivors=0 elapsed=600.0s dead
+
+  [40/56] 2,3,2,3,2,4,3,3,3
+  screened=18215 survivors=0 elapsed=600.0s dead
+
+  [41/56] 2,3,2,3,3,2,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [42/56] 2,3,2,3,3,2,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [43/56] 2,3,2,3,3,2,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [44/56] 2,3,2,3,3,3,2,3,4
+  screened=22725 survivors=0 elapsed=600.0s dead
+
+  [45/56] 2,3,2,3,3,3,2,4,3
+  screened=15518 survivors=0 elapsed=600.0s dead
+
+  [46/56] 2,3,2,3,3,3,3,2,4
+  screened=27985 survivors=0 elapsed=600.0s dead
+
+  [47/56] 2,3,2,3,3,4,2,3,3
+  screened=13118 survivors=0 elapsed=600.0s dead
+
+  [48/56] 2,3,2,3,4,2,3,3,3
+  screened=26009 survivors=0 elapsed=600.0s dead
+
+  [49/56] 2,3,2,3,4,3,2,3,3
+  screened=22213 survivors=0 elapsed=600.0s dead
+
+  [50/56] 2,3,2,4,2,3,3,3,3
+  screened=1782 survivors=0 elapsed=600.0s dead
+
+  [51/56] 2,3,2,4,3,2,3,3,3
+  screened=18316 survivors=0 elapsed=600.0s dead
+
+  [52/56] 2,3,2,4,3,3,2,3,3
+  screened=14304 survivors=0 elapsed=600.0s dead
+
+  [53/56] 2,3,3,2,3,3,2,3,4
+  screened=1332 survivors=0 elapsed=600.0s dead
+
+  [54/56] 2,3,3,2,3,3,2,4,3
+  screened=3721 survivors=0 elapsed=600.0s dead
+
+  [55/56] 2,3,3,2,3,3,3,2,4
+  screened=1868 survivors=0 elapsed=600.0s dead
+
+  [56/56] 2,3,3,2,4,2,3,3,3
+  screened=8534 survivors=0 elapsed=600.0s dead
+
+Multiset (2, 2, 2, 4, 3, 3, 3, 3, 3): ALL ORIENTATIONS DEAD
+
+Multiset (2, 2, 2, 4, 4, 3, 3, 3, 3) (two-quaternary, product 10368), product=10368, 140 orientations
+------------------------------------------------------------
+
+  [1/140] 2,2,2,3,3,3,3,4,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [2/140] 2,2,2,3,3,3,4,3,4
+  screened=23428 survivors=0 elapsed=600.0s dead
+
+  [3/140] 2,2,2,3,3,3,4,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [4/140] 2,2,2,3,3,4,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [5/140] 2,2,2,3,3,4,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [6/140] 2,2,2,3,3,4,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [7/140] 2,2,2,3,4,3,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [8/140] 2,2,2,3,4,3,3,4,3
+  screened=2022 survivors=20 elapsed=481.0s dead
+
+  [9/140] 2,2,2,3,4,3,4,3,3
+  screened=20497 survivors=0 elapsed=600.0s dead
+
+  [10/140] 2,2,2,3,4,4,3,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [11/140] 2,2,2,4,3,3,3,3,4
+  screened=6228 survivors=0 elapsed=600.0s dead
+
+  [12/140] 2,2,2,4,3,3,3,4,3
+  screened=4575 survivors=0 elapsed=600.1s dead
+
+  [13/140] 2,2,2,4,3,3,4,3,3
+  screened=5720 survivors=0 elapsed=600.0s dead
+
+  [14/140] 2,2,2,4,3,4,3,3,3
+  screened=5140 survivors=0 elapsed=600.0s dead
+
+  [15/140] 2,2,2,4,4,3,3,3,3
+  screened=1317 survivors=0 elapsed=600.0s dead
+
+  [16/140] 2,2,3,2,3,3,3,4,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [17/140] 2,2,3,2,3,3,4,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [18/140] 2,2,3,2,3,3,4,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [19/140] 2,2,3,2,3,4,3,3,4
+  screened=0 survivors=0 elapsed=600.1s dead
+
+  [20/140] 2,2,3,2,3,4,3,4,3
+  screened=3571 survivors=0 elapsed=600.1s dead
+
+  [21/140] 2,2,3,2,3,4,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [22/140] 2,2,3,2,4,3,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [23/140] 2,2,3,2,4,3,3,4,3
+  screened=0 survivors=0 elapsed=600.1s dead
+
+  [24/140] 2,2,3,2,4,3,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [25/140] 2,2,3,2,4,4,3,3,3
+  screened=760 survivors=0 elapsed=600.0s dead
+
+  [26/140] 2,2,3,3,2,3,3,4,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [27/140] 2,2,3,3,2,3,4,3,4
+  screened=5484 survivors=0 elapsed=600.0s dead
+
+  [28/140] 2,2,3,3,2,3,4,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [29/140] 2,2,3,3,2,4,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [30/140] 2,2,3,3,2,4,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [31/140] 2,2,3,3,2,4,4,3,3
+  screened=4122 survivors=0 elapsed=600.0s dead
+
+  [32/140] 2,2,3,3,3,2,3,4,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [33/140] 2,2,3,3,3,2,4,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [34/140] 2,2,3,3,3,2,4,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [35/140] 2,2,3,3,3,3,2,4,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [36/140] 2,2,3,3,3,3,4,2,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [37/140] 2,2,3,3,3,4,2,3,4
+  screened=3586 survivors=0 elapsed=600.0s dead
+
+  [38/140] 2,2,3,3,3,4,2,4,3
+  screened=13268 survivors=0 elapsed=600.0s dead
+
+  [39/140] 2,2,3,3,3,4,3,2,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [40/140] 2,2,3,3,3,4,4,2,3
+  screened=19471 survivors=0 elapsed=600.0s dead
+
+  [41/140] 2,2,3,3,4,2,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [42/140] 2,2,3,3,4,2,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [43/140] 2,2,3,3,4,2,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [44/140] 2,2,3,3,4,3,2,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [45/140] 2,2,3,3,4,3,2,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [46/140] 2,2,3,3,4,3,3,2,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [47/140] 2,2,3,3,4,3,4,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [48/140] 2,2,3,3,4,4,2,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [49/140] 2,2,3,3,4,4,3,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [50/140] 2,2,3,4,2,3,3,3,4
+  screened=4464 survivors=0 elapsed=600.0s dead
+
+  [51/140] 2,2,3,4,2,3,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [52/140] 2,2,3,4,2,3,4,3,3
+  screened=1652 survivors=20 elapsed=57.6s dead
+
+  [53/140] 2,2,3,4,2,4,3,3,3
+  screened=17420 survivors=0 elapsed=600.0s dead
+
+  [54/140] 2,2,3,4,3,2,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [55/140] 2,2,3,4,3,2,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [56/140] 2,2,3,4,3,2,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [57/140] 2,2,3,4,3,3,2,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [58/140] 2,2,3,4,3,3,2,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [59/140] 2,2,3,4,3,3,3,2,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [60/140] 2,2,3,4,3,3,4,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [61/140] 2,2,3,4,3,4,2,3,3
+  screened=22146 survivors=0 elapsed=600.0s dead
+
+  [62/140] 2,2,3,4,3,4,3,2,3
+  screened=19806 survivors=0 elapsed=600.0s dead
+
+  [63/140] 2,2,3,4,4,2,3,3,3
+  screened=6828 survivors=0 elapsed=600.0s dead
+
+  [64/140] 2,2,3,4,4,3,2,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [65/140] 2,2,3,4,4,3,3,2,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [66/140] 2,2,4,2,3,3,3,3,4
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [67/140] 2,2,4,2,3,3,3,4,3
+  screened=20364 survivors=0 elapsed=600.0s dead
+
+  [68/140] 2,2,4,2,3,3,4,3,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [69/140] 2,2,4,2,3,4,3,3,3
+  screened=2432 survivors=0 elapsed=600.0s dead
+
+  [70/140] 2,2,4,2,4,3,3,3,3
+  screened=5432 survivors=0 elapsed=600.0s dead
+
+  [71/140] 2,2,4,3,2,3,3,3,4
+  screened=2309 survivors=0 elapsed=600.0s dead
+
+  [72/140] 2,2,4,3,2,3,3,4,3
+  screened=0 survivors=0 elapsed=600.0s dead
+
+  [73/140] 2,2,4,3,2,3,4,3,3
+  screened=1380 survivors=20 elapsed=105.9s dead
+
+  [74/140] 2,2,4,3,2,4,3,3,3
+  screened=16080 survivors=0 elapsed=600.0s dead
+
+  [75/140] 2,2,4,3,3,2,3,3,4
+  screened=8715 survivors=0 elapsed=600.0s dead
+
+  [76/140] 2,2,4,3,3,2,3,4,3
+  screened=17117 survivors=0 elapsed=600.0s dead
+
+  [77/140] 2,2,4,3,3,2,4,3,3
+  screened=12705 survivors=0 elapsed=600.0s dead
+
+  [78/140] 2,2,4,3,3,3,2,3,4

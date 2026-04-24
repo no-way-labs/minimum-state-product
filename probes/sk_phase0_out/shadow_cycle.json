@@ -1,0 +1,606 @@
+[
+  {
+    "label": "A_n5",
+    "n": 5,
+    "ms": [
+      2,
+      2,
+      2,
+      2,
+      3
+    ],
+    "L": 10,
+    "k": 10,
+    "k_equals_L": true,
+    "firing_mode_primary": "unrelated",
+    "firing_shift_primary": null,
+    "C_movers": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "sc_pseq": [
+      2,
+      1,
+      4,
+      0,
+      3,
+      2,
+      1,
+      4,
+      0,
+      3
+    ],
+    "start_desc": {
+      "start": [
+        0,
+        1,
+        0,
+        0,
+        1
+      ],
+      "start_min_hamming_to_C": 1,
+      "start_argmin_C_indices": [
+        9
+      ],
+      "start_diff_coords_per_argmin": {
+        "9": [
+          1
+        ]
+      },
+      "vertex_hamming_distances_to_C": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "hamming_histogram": {
+        "1": 10
+      }
+    },
+    "num_length_L_cycles_found": 123,
+    "enum_elapsed_s": 0.0033190250396728516,
+    "firing_mode_hist_all_L_cycles": {
+      "unrelated": 123
+    },
+    "cyclic_shifts_seen": [],
+    "reverse_shifts_seen": [],
+    "start_min_H_hist_all_L_cycles": {
+      "1": 123
+    }
+  },
+  {
+    "label": "E_n6_3bin",
+    "n": 6,
+    "ms": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3
+    ],
+    "L": 17,
+    "k": 17,
+    "k_equals_L": true,
+    "firing_mode_primary": "unrelated",
+    "firing_shift_primary": null,
+    "C_movers": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      4,
+      5,
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      5
+    ],
+    "sc_pseq": [
+      2,
+      4,
+      4,
+      3,
+      2,
+      1,
+      3,
+      2,
+      5,
+      0,
+      4,
+      3,
+      2,
+      1,
+      3,
+      5,
+      0
+    ],
+    "start_desc": {
+      "start": [
+        1,
+        0,
+        0,
+        2,
+        0,
+        0
+      ],
+      "start_min_hamming_to_C": 1,
+      "start_argmin_C_indices": [
+        1,
+        6
+      ],
+      "start_diff_coords_per_argmin": {
+        "1": [
+          3
+        ],
+        "6": [
+          1
+        ]
+      },
+      "vertex_hamming_distances_to_C": [
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1
+      ],
+      "hamming_histogram": {
+        "1": 7,
+        "2": 10
+      }
+    },
+    "num_length_L_cycles_found": 5000,
+    "enum_elapsed_s": 0.0415959358215332,
+    "firing_mode_hist_all_L_cycles": {
+      "unrelated": 5000
+    },
+    "cyclic_shifts_seen": [],
+    "reverse_shifts_seen": [],
+    "start_min_H_hist_all_L_cycles": {
+      "1": 5000
+    }
+  },
+  {
+    "label": "B_n7_3bin",
+    "n": 7,
+    "ms": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3
+    ],
+    "L": 18,
+    "k": 18,
+    "k_equals_L": true,
+    "firing_mode_primary": "unrelated",
+    "firing_shift_primary": null,
+    "C_movers": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      5,
+      6,
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "sc_pseq": [
+      2,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      3,
+      2,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1,
+      0,
+      3,
+      6
+    ],
+    "start_desc": {
+      "start": [
+        1,
+        0,
+        0,
+        2,
+        0,
+        1,
+        1
+      ],
+      "start_min_hamming_to_C": 2,
+      "start_argmin_C_indices": [
+        9,
+        11,
+        16
+      ],
+      "start_diff_coords_per_argmin": {
+        "9": [
+          1,
+          4
+        ],
+        "11": [
+          0,
+          4
+        ],
+        "16": [
+          0,
+          3
+        ]
+      },
+      "vertex_hamming_distances_to_C": [
+        2,
+        2,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        3,
+        2,
+        3,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "hamming_histogram": {
+        "2": 15,
+        "3": 3
+      }
+    },
+    "num_length_L_cycles_found": 5000,
+    "enum_elapsed_s": 0.08542990684509277,
+    "firing_mode_hist_all_L_cycles": {
+      "unrelated": 5000
+    },
+    "cyclic_shifts_seen": [],
+    "reverse_shifts_seen": [],
+    "start_min_H_hist_all_L_cycles": {
+      "1": 5000
+    }
+  },
+  {
+    "label": "C_n8_3bin",
+    "n": 8,
+    "ms": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "L": 23,
+    "k": 23,
+    "k_equals_L": true,
+    "firing_mode_primary": "unrelated",
+    "firing_shift_primary": null,
+    "C_movers": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      3,
+      4,
+      5,
+      5,
+      6,
+      7,
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "sc_pseq": [
+      0,
+      2,
+      3,
+      2,
+      1,
+      3,
+      4,
+      3,
+      2,
+      4,
+      3,
+      2,
+      3,
+      5,
+      5,
+      4,
+      7,
+      0,
+      1,
+      6,
+      5,
+      7,
+      6
+    ],
+    "start_desc": {
+      "start": [
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "start_min_hamming_to_C": 1,
+      "start_argmin_C_indices": [
+        2
+      ],
+      "start_diff_coords_per_argmin": {
+        "2": [
+          7
+        ]
+      },
+      "vertex_hamming_distances_to_C": [
+        1,
+        1,
+        2,
+        2,
+        2,
+        1,
+        1,
+        2,
+        2,
+        3,
+        2,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2
+      ],
+      "hamming_histogram": {
+        "1": 11,
+        "2": 11,
+        "3": 1
+      }
+    },
+    "num_length_L_cycles_found": 5000,
+    "enum_elapsed_s": 0.17488312721252441,
+    "firing_mode_hist_all_L_cycles": {
+      "unrelated": 5000
+    },
+    "cyclic_shifts_seen": [],
+    "reverse_shifts_seen": [],
+    "start_min_H_hist_all_L_cycles": {
+      "1": 5000
+    }
+  },
+  {
+    "label": "D_n9_3bin",
+    "n": 9,
+    "ms": [
+      2,
+      2,
+      2,
+      3,
+      3,
+      3,
+      3,
+      3,
+      3
+    ],
+    "L": 25,
+    "k": 25,
+    "k_equals_L": true,
+    "firing_mode_primary": "unrelated",
+    "firing_shift_primary": null,
+    "C_movers": [
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      3,
+      4,
+      5,
+      5,
+      6,
+      7,
+      8,
+      0,
+      1,
+      2,
+      3,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "sc_pseq": [
+      1,
+      0,
+      3,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      4,
+      3,
+      2,
+      1,
+      0,
+      3,
+      2,
+      8,
+      7,
+      6,
+      5,
+      5,
+      4,
+      3,
+      2
+    ],
+    "start_desc": {
+      "start": [
+        0,
+        1,
+        0,
+        1,
+        0,
+        2,
+        0,
+        1,
+        0
+      ],
+      "start_min_hamming_to_C": 3,
+      "start_argmin_C_indices": [
+        5,
+        11,
+        13,
+        15
+      ],
+      "start_diff_coords_per_argmin": {
+        "5": [
+          0,
+          5,
+          7
+        ],
+        "11": [
+          0,
+          4,
+          7
+        ],
+        "13": [
+          0,
+          4,
+          6
+        ],
+        "15": [
+          4,
+          6,
+          8
+        ]
+      },
+      "vertex_hamming_distances_to_C": [
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3,
+        4,
+        3,
+        4,
+        3,
+        4,
+        4,
+        3,
+        3
+      ],
+      "hamming_histogram": {
+        "3": 20,
+        "4": 5
+      }
+    },
+    "num_length_L_cycles_found": 5000,
+    "enum_elapsed_s": 0.3266258239746094,
+    "firing_mode_hist_all_L_cycles": {
+      "unrelated": 5000
+    },
+    "cyclic_shifts_seen": [],
+    "reverse_shifts_seen": [],
+    "start_min_H_hist_all_L_cycles": {
+      "1": 5000
+    }
+  }
+]

@@ -1,0 +1,33 @@
+{
+  "per_n": {
+    "3": {
+      "elapsed_s": 0.0,
+      "multisets_count": 0,
+      "orientations_count": 0,
+      "sub_threshold_witnesses_count": 0,
+      "total_candidate_cycles": 0,
+      "total_completions_tried": 0,
+      "total_rejections": 0
+    },
+    "4": {
+      "elapsed_s": 0.214,
+      "multisets_count": 1,
+      "orientations_count": 1,
+      "sub_threshold_witnesses_count": 0,
+      "total_candidate_cycles": 16,
+      "total_completions_tried": 4096,
+      "total_rejections": 4096
+    },
+    "5": {
+      "elapsed_s": 0.36,
+      "multisets_count": 1,
+      "orientations_count": 1,
+      "note": "Only the all-binary orientation ships pre-generated; remaining 5 dihedral orbit representatives are regenerable via the C worker (see probes/exhaustive_search/REJECTION_STREAM.md).",
+      "sub_threshold_witnesses_count": 0,
+      "total_candidate_cycles": 32,
+      "total_completions_tried": 32768,
+      "total_rejections": 32768
+    }
+  },
+  "schema_version": 1
+}

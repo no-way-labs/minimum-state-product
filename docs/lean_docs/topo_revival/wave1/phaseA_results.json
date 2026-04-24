@@ -1,0 +1,64 @@
+{
+  "runtime_s": 1.5,
+  "corpus": {
+    "n_records": 10,
+    "sub": 8,
+    "at": 2,
+    "records": [
+      {"class": "sub", "n": 5, "ms": [2,2,2,2,2], "L": 10, "nV": 22, "nE": 40, "nF_tri": 0, "nF_sq": 20},
+      {"class": "sub", "n": 5, "ms": [2,2,2,4,2], "L": 14, "nV": 50, "nE": 146, "nF_tri": 37, "nF_sq": 133},
+      {"class": "sub", "n": 5, "ms": [2,2,5,2,2], "L": 18, "nV": 62, "nE": 208, "nF_tri": 97, "nF_sq": 201},
+      {"class": "at",  "n": 5, "ms": [2,3,3,3,3], "L": 31, "nV": 131, "nE": 496, "nF_tri": 126, "nF_sq": 642},
+      {"class": "sub", "n": 6, "ms": [2,2,2,2,2,2], "L": 12, "nV": 52, "nE": 132, "nF_tri": 0, "nF_sq": 120},
+      {"class": "sub", "n": 6, "ms": [2,2,2,7,2,2], "L": 21, "nV": 203, "nE": 1047, "nF_tri": 920, "nF_sq": 1690},
+      {"class": "sub", "n": 6, "ms": [2,3,2,2,5,2], "L": 21, "nV": 219, "nE": 1024, "nF_tri": 450, "nF_sq": 1733},
+      {"class": "at",  "n": 6, "ms": [2,3,3,3,3,3], "L": 22, "nV": 464, "nE": 2464, "nF_tri": 723, "nF_sq": 5270},
+      {"class": "sub", "n": 7, "ms": [2,2,2,2,2,2,2], "L": 14, "nV": 114, "nE": 364, "nF_tri": 0, "nF_sq": 462},
+      {"class": "sub", "n": 7, "ms": [2,3,3,3,2,2,3], "L": 17, "nV": 631, "nE": 3397, "nF_tri": 808, "nF_sq": 7580}
+    ]
+  },
+  "P1_pi1": {
+    "note": "Tietze-reduced presentation of pi_1(NG(C)), plus rational Betti numbers. Records >200 vertices skipped.",
+    "b1_sub": {"0": 5},
+    "b1_at":  {"0": 1},
+    "pi1_reduced_sub": [[0, 0], [0, 0], [0, 0], [0, 0], [0, 0]],
+    "pi1_reduced_at":  [[0, 0]],
+    "verdict": "RED",
+    "reason": "pi_1 Tietze-reduces to (0 gens, 0 rels) on every tested record in both sub and at classes. b_1 = 0 universally. Matches E2's null result — no commutator-based fillings."
+  },
+  "P2_linking": {
+    "note": "Ad-hoc Lambda[q,q'] = #(adjacent mover-class transitions q->q') - reverse. Resulting matrix is antisymmetric by construction.",
+    "det_sub": [0, 0, 0, 0, 0, 0, 0, 0],
+    "det_at":  [0, 0],
+    "rank_sub": [4, 4, 4, 4, 4, 6, 6, 6],
+    "rank_at":  [4, 4],
+    "verdict": "RED",
+    "reason": "det Lambda = 0 on every record. Implementation is rank-deficient antisymmetric (A - A^T on a cyclic ring), so zero-det is structurally forced. Even rank does not split by (sub,at); rank depends on (n, L) buckets only (n=5: rank 4, n=6: rank 4, n=7: rank 6). Fails pre-commit SURVIVES condition by both named tripwires (det=0 identically AND det depends only on (n,L))."
+  },
+  "P3_zeta_f": {
+    "note": "Orbit-length multiset of the canonical forced-total-f map (f defined via lex-first move, fix elsewhere). Reported on NG only.",
+    "orbit_multiset_sub": [
+      [[1, 2], [10, 8]],
+      [[1, 27]],
+      [[1, 14]],
+      [[12, 19]],
+      [[1, 97]],
+      [[1, 99]],
+      [[1, 2], [14, 52]],
+      [[1, 342], [17, 43]]
+    ],
+    "orbit_multiset_at": [
+      [[1, 55]],
+      [[1, 277]]
+    ],
+    "verdict": "RED",
+    "reason": "Sub-threshold records split into two camps: pure-binary multisets (ms=[2,...,2]) exhibit period-L orbits in NG, other multisets exhibit only fixed points. Both at-threshold records (Sol3v1 proxies, ms=[2,3,...,3]) also exhibit only fixed points. The signal is driven by multiset composition (pure-binary vs non-binary), NOT by threshold status. Reclassified RED: confounded statistic."
+  },
+  "P6_cheeger": {
+    "note": "Spectral Cheeger lower bound h >= lambda_2 / 2 of undirected symmetrization of forced-NG digraph.",
+    "fiedler_sub": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+    "fiedler_at":  [0.0, 0.0],
+    "verdict": "RED",
+    "reason": "lambda_2 = 0 on every record in both classes — forced-NG graph has >=2 connected components uniformly, so Cheeger constant is zero regardless of threshold. Probe gives no discriminating signal. Note: this reproduces the coverage-inversion pattern §0.6 predicted — sub-threshold forced-NG has MORE edges (coverage 1.1-1.8 vs ~1.0 at-threshold) but is still disconnected because forced successors cluster on local orbits rather than mixing globally."
+  }
+}

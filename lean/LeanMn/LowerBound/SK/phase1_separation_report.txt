@@ -1,0 +1,227 @@
+Phase 1 separation report  (97 records)
+Source: lean/LeanMn/LowerBound/SK/currencies_97.csv
+================================================================================
+
+Convention: 'margin' is the signed gap between min and max across the
+two buckets in the chosen direction. margin > 0 means strict separation;
+margin <= 0 means overlap (margin = -overlap_width).
+AUC = fraction of (valid, sub) pairs ordered consistently with direction.
+
+n values: [5, 6, 7, 8, 9, 10]
+valid count: 10
+sub count: 87
+
+--------------------------------------------------------------------------------
+Q = product
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8      96.000    108.000    6.000      32.000     80.000     +16.000 valid>sub 1.000
+    6   2   7     288.000    324.000   18.000      64.000    240.000     +48.000 valid>sub 1.000
+    7   2   4     864.000    972.000   54.000     128.000    720.000    +144.000 valid>sub 1.000
+    8   2  59    2592.000   2916.000  162.000     256.000   2560.000     +32.000 valid>sub 1.000
+    9   1   9    8748.000   8748.000    0.000    7776.000   7776.000    +972.000 valid>sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 5/5, overlap n's: 0,  mean AUC = 1.000,  mean rel-margin (when sep) = 0.113,  valid-saturation: k=2, CV=1.048
+
+--------------------------------------------------------------------------------
+Q = log2_product
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       6.585      6.755    0.085       5.000      6.322      +0.263 valid>sub 1.000
+    6   2   7       8.170      8.340    0.085       6.000      7.907      +0.263 valid>sub 1.000
+    7   2   4       9.755      9.925    0.085       7.000      9.492      +0.263 valid>sub 1.000
+    8   2  59      11.340     11.510    0.085       8.000     11.322      +0.018 valid>sub 1.000
+    9   1   9      13.095     13.095    0.000      12.925     12.925      +0.170 valid>sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 5/5, overlap n's: 0,  mean AUC = 1.000,  mean rel-margin (when sep) = 0.022,  valid-saturation: k=1, CV=0.030
+
+--------------------------------------------------------------------------------
+Q = L
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8      13.000     18.000    2.500      10.000     18.000      -5.000 valid>sub 0.594
+    6   2   7      16.000     35.000    9.500      12.000     22.000      -6.000 valid>sub 0.571
+    7   2   4      19.000     52.000   16.500      14.000     17.000      +2.000 valid>sub 1.000
+    8   2  59      22.000     55.000   16.500      16.000     47.000     -25.000 valid>sub 0.754
+    9   1   9      25.000     25.000    0.000      39.000     53.000     +14.000 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.784,  mean rel-margin (when sep) = 0.151,  valid-saturation: k=1, CV=0.228
+
+--------------------------------------------------------------------------------
+Q = kappa_mov
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8      13.000     18.000    2.500      10.000     18.000      -5.000 valid>sub 0.594
+    6   2   7      16.000     30.000    7.000      12.000     22.000      -6.000 valid>sub 0.571
+    7   2   4      19.000     35.000    8.000      14.000     17.000      +2.000 valid>sub 1.000
+    8   2  59      22.000     38.000    8.000      16.000     45.000     -22.000 valid<sub 0.322
+    9   1   9      25.000     25.000    0.000      39.000     47.000     +14.000 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.697,  mean rel-margin (when sep) = 0.178,  valid-saturation: k=1, CV=0.128
+
+--------------------------------------------------------------------------------
+Q = kappa_tot
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8      39.000     51.000    6.000      30.000     50.000     -11.000 valid>sub 0.625
+    6   2   7      48.000     82.000   17.000      36.000     62.000     -14.000 valid>sub 0.571
+    7   2   4      57.000     99.000   21.000      42.000     51.000      +6.000 valid>sub 1.000
+    8   2  59      66.000    108.000   21.000      48.000    117.000     -51.000 valid>sub 0.712
+    9   1   9      75.000     75.000    0.000     107.000    133.000     +32.000 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.782,  mean rel-margin (when sep) = 0.151,  valid-saturation: k=1, CV=0.114
+
+--------------------------------------------------------------------------------
+Q = H_pos_sum
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       6.339      6.420    0.041       5.000      6.024      +0.315 valid>sub 1.000
+    6   2   7       7.843      7.902    0.030       6.000      7.125      +0.718 valid>sub 1.000
+    7   2   4       8.734      9.259    0.262       7.000      7.700      +1.034 valid>sub 1.000
+    8   2  59       9.235     10.671    0.718       8.000     10.323      -1.088 valid>sub 0.856
+    9   1   9      12.080     12.080    0.000      10.077     12.533      -0.453 valid>sub 0.556
+   10   1   0    (insufficient data)
+  → strict-separation n's: 3/5, overlap n's: 2,  mean AUC = 0.882,  mean rel-margin (when sep) = 0.084,  valid-saturation: k=1, CV=0.026
+
+--------------------------------------------------------------------------------
+Q = H_pos_avg
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       1.268      1.284    0.008       1.000      1.205      +0.063 valid>sub 1.000
+    6   2   7       1.307      1.317    0.005       1.000      1.188      +0.120 valid>sub 1.000
+    7   2   4       1.248      1.323    0.037       1.000      1.100      +0.148 valid>sub 1.000
+    8   2  59       1.154      1.334    0.090       1.000      1.290      -0.136 valid>sub 0.856
+    9   1   9       1.342      1.342    0.000       1.120      1.393      -0.050 valid>sub 0.556
+   10   1   0    (insufficient data)
+  → strict-separation n's: 3/5, overlap n's: 2,  mean AUC = 0.882,  mean rel-margin (when sep) = 0.084,  valid-saturation: k=0, CV=0.026
+
+--------------------------------------------------------------------------------
+Q = H_mover
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       2.197      2.295    0.049       2.113      2.322      -0.125 valid>sub 0.438
+    6   2   7       2.258      2.561    0.152       2.371      2.585      -0.190 valid<sub 0.571
+    7   2   4       2.468      2.786    0.159       2.749      2.807      -0.037 valid<sub 0.625
+    8   2  59       2.671      2.981    0.155       2.326      3.000      -0.329 valid>sub 0.415
+    9   1   9       3.152      3.152    0.000       2.717      3.147      +0.006 valid>sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 1/5, overlap n's: 4,  mean AUC = 0.610,  mean rel-margin (when sep) = 0.002,  valid-saturation: k=1, CV=0.095
+
+--------------------------------------------------------------------------------
+Q = H_joint
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       5.056      5.390    0.167       4.693      5.268      -0.211 valid>sub 0.875
+    6   2   7       5.220      5.785    0.282       4.837      5.444      -0.224 valid>sub 0.643
+    7   2   4       5.351      5.934    0.292       4.956      5.124      +0.227 valid>sub 1.000
+    8   2  59       5.462      5.900    0.219       5.061      6.047      -0.585 valid>sub 0.814
+    9   1   9       5.561      5.561    0.000       5.714      6.169      +0.153 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.866,  mean rel-margin (when sep) = 0.032,  valid-saturation: k=0, CV=0.029
+
+--------------------------------------------------------------------------------
+Q = L_over_n
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       2.600      3.600    0.500       2.000      3.600      -1.000 valid>sub 0.594
+    6   2   7       2.667      5.833    1.583       2.000      3.667      -1.000 valid>sub 0.571
+    7   2   4       2.714      7.429    2.357       2.000      2.429      +0.286 valid>sub 1.000
+    8   2  59       2.750      6.875    2.062       2.000      5.875      -3.125 valid>sub 0.754
+    9   1   9       2.778      2.778    0.000       4.333      5.889      +1.556 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.784,  mean rel-margin (when sep) = 0.151,  valid-saturation: k=0, CV=0.228
+
+--------------------------------------------------------------------------------
+Q = L_over_n2
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       0.520      0.720    0.100       0.400      0.720      -0.200 valid>sub 0.594
+    6   2   7       0.444      0.972    0.264       0.333      0.611      -0.167 valid>sub 0.571
+    7   2   4       0.388      1.061    0.337       0.286      0.347      +0.041 valid>sub 1.000
+    8   2  59       0.344      0.859    0.258       0.250      0.734      -0.391 valid>sub 0.754
+    9   1   9       0.309      0.309    0.000       0.481      0.654      +0.173 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 2/5, overlap n's: 3,  mean AUC = 0.784,  mean rel-margin (when sep) = 0.106,  valid-saturation: k=0, CV=0.253
+
+--------------------------------------------------------------------------------
+Q = kappa_mov_over_L
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       1.000      1.000    0.000       1.000      1.000      +0.000 valid>sub 0.500
+    6   2   7       0.857      1.000    0.071       1.000      1.000      +0.000 valid<sub 0.750
+    7   2   4       0.673      1.000    0.163       1.000      1.000      +0.000 valid<sub 0.750
+    8   2  59       0.691      1.000    0.155       0.787      1.000      -0.213 valid<sub 0.669
+    9   1   9       1.000      1.000    0.000       0.811      1.000      +0.000 valid>sub 0.944
+   10   1   0    (insufficient data)
+  → strict-separation n's: 0/5, overlap n's: 5,  mean AUC = 0.723,  mean rel-margin (when sep) = 0.000,  valid-saturation: k=0, CV=0.077
+
+--------------------------------------------------------------------------------
+Q = kappa_mov_over_nL
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       0.200      0.200    0.000       0.200      0.200      +0.000 valid>sub 0.500
+    6   2   7       0.143      0.167    0.012       0.167      0.167      +0.000 valid<sub 0.750
+    7   2   4       0.096      0.143    0.023       0.143      0.143      +0.000 valid<sub 0.750
+    8   2  59       0.086      0.125    0.019       0.098      0.125      -0.027 valid<sub 0.669
+    9   1   9       0.111      0.111    0.000       0.090      0.111      +0.000 valid>sub 0.944
+   10   1   0    (insufficient data)
+  → strict-separation n's: 0/5, overlap n's: 5,  mean AUC = 0.723,  mean rel-margin (when sep) = 0.000,  valid-saturation: k=0, CV=0.255
+
+--------------------------------------------------------------------------------
+Q = Hpos_over_log2prod
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       0.950      0.963    0.006       0.833      1.000      -0.050 valid>sub 0.562
+    6   2   7       0.940      0.967    0.013       0.864      1.000      -0.060 valid>sub 0.786
+    7   2   4       0.895      0.933    0.019       0.811      1.000      -0.105 valid>sub 0.750
+    8   2  59       0.814      0.927    0.056       0.707      1.000      -0.186 valid>sub 0.653
+    9   1   9       0.922      0.922    0.000       0.780      0.970      -0.047 valid>sub 0.444
+   10   1   0    (insufficient data)
+  → strict-separation n's: 0/5, overlap n's: 5,  mean AUC = 0.639,  mean rel-margin (when sep) = 0.000,  valid-saturation: k=0, CV=0.034
+
+--------------------------------------------------------------------------------
+Q = Hpos_over_nlog23
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       0.800      0.810    0.005       0.631      0.760      +0.040 valid>sub 1.000
+    6   2   7       0.825      0.831    0.003       0.631      0.749      +0.076 valid>sub 1.000
+    7   2   4       0.787      0.835    0.024       0.631      0.694      +0.093 valid>sub 1.000
+    8   2  59       0.728      0.842    0.057       0.631      0.814      -0.086 valid>sub 0.856
+    9   1   9       0.847      0.847    0.000       0.707      0.879      -0.032 valid>sub 0.556
+   10   1   0    (insufficient data)
+  → strict-separation n's: 3/5, overlap n's: 2,  mean AUC = 0.882,  mean rel-margin (when sep) = 0.070,  valid-saturation: k=0, CV=0.026
+
+--------------------------------------------------------------------------------
+Q = coverage
+--------------------------------------------------------------------------------
+    n  #v  #s       v_min      v_max    v_std       s_min      s_max      margin       dir   AUC
+    5   2   8       0.120      0.188    0.034       0.156      0.312      -0.031 valid<sub 0.938
+    6   2   7       0.049      0.122    0.036       0.087      0.188      -0.034 valid<sub 0.643
+    7   2   4       0.020      0.060    0.020       0.024      0.109      -0.037 valid<sub 0.625
+    8   2  59       0.008      0.021    0.007       0.006      0.062      -0.015 valid<sub 0.610
+    9   1   9       0.003      0.003    0.000       0.005      0.007      +0.002 valid<sub 1.000
+   10   1   0    (insufficient data)
+  → strict-separation n's: 1/5, overlap n's: 4,  mean AUC = 0.763,  mean rel-margin (when sep) = 0.002,  valid-saturation: k=0, CV=0.930
+
+================================================================================
+RANKING vs ∏mᵢ baseline
+================================================================================
+baseline product: AUC=1.0, strict_n=5, sat_CV=1.0481
+
+currency                    AUC  strict_n  rel_margin   sat_CV      verdict_vs_prod
+product                   1.000         5       0.113    1.048                 sat↓
+log2_product              1.000         5       0.022    0.030                 sat↑
+L                         0.784         2       0.151    0.228       AUC↓ sat↑ sep↓
+kappa_mov                 0.697         2       0.177    0.128       AUC↓ sat↑ sep↓
+kappa_tot                 0.782         2       0.151    0.114       AUC↓ sat↑ sep↓
+H_pos_sum                 0.882         3       0.084    0.026       AUC↓ sat↑ sep↓
+H_pos_avg                 0.882         3       0.084    0.026       AUC↓ sat↑ sep↓
+H_mover                   0.610         1       0.002    0.095       AUC↓ sat↑ sep↓
+H_joint                   0.866         2       0.032    0.029       AUC↓ sat↑ sep↓
+L_over_n                  0.784         2       0.151    0.228       AUC↓ sat↑ sep↓
+L_over_n2                 0.784         2       0.106    0.253       AUC↓ sat↑ sep↓
+kappa_mov_over_L          0.723         0       0.000    0.077       AUC↓ sat↑ sep↓
+kappa_mov_over_nL         0.723         0       0.000    0.255       AUC↓ sat↑ sep↓
+Hpos_over_log2prod        0.639         0       0.000    0.034       AUC↓ sat↑ sep↓
+Hpos_over_nlog23          0.882         3       0.070    0.026       AUC↓ sat↑ sep↓
+coverage                  0.763         1       0.002    0.930       AUC↓ sat↑ sep↓

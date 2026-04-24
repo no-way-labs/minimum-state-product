@@ -1,0 +1,161 @@
+{
+  "grand_full_hits": 0,
+  "by_n": {
+    "5": {
+      "seeds": 249,
+      "cycles": 2241,
+      "partial": 249,
+      "full": 0
+    },
+    "6": {
+      "seeds": 270,
+      "cycles": 2268,
+      "partial": 252,
+      "full": 0
+    },
+    "7": {
+      "seeds": 207,
+      "cycles": 1863,
+      "partial": 207,
+      "full": 0
+    }
+  },
+  "stats_per_ms": [
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 63,
+      "cycles_found": 567,
+      "seeds_with_cycles": 63,
+      "partial_hits": 63,
+      "full_hits": 0,
+      "time_spent": 0.4529848098754883,
+      "n": 5
+    },
+    {
+      "ms": [
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 90,
+      "cycles_found": 810,
+      "seeds_with_cycles": 90,
+      "partial_hits": 90,
+      "full_hits": 0,
+      "time_spent": 6.481782913208008,
+      "n": 5
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        4
+      ],
+      "seeds_tried": 96,
+      "cycles_found": 864,
+      "seeds_with_cycles": 96,
+      "partial_hits": 96,
+      "full_hits": 0,
+      "time_spent": 1.2362792491912842,
+      "n": 5
+    },
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 90,
+      "cycles_found": 810,
+      "seeds_with_cycles": 90,
+      "partial_hits": 90,
+      "full_hits": 0,
+      "time_spent": 1.5906429290771484,
+      "n": 6
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 63,
+      "cycles_found": 567,
+      "seeds_with_cycles": 63,
+      "partial_hits": 63,
+      "full_hits": 0,
+      "time_spent": 0.8413050174713135,
+      "n": 6
+    },
+    {
+      "ms": [
+        2,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 117,
+      "cycles_found": 891,
+      "seeds_with_cycles": 99,
+      "partial_hits": 99,
+      "full_hits": 0,
+      "time_spent": 46.334028005599976,
+      "n": 6
+    },
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 117,
+      "cycles_found": 1053,
+      "seeds_with_cycles": 117,
+      "partial_hits": 117,
+      "full_hits": 0,
+      "time_spent": 8.819154977798462,
+      "n": 7
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "seeds_tried": 90,
+      "cycles_found": 810,
+      "seeds_with_cycles": 90,
+      "partial_hits": 90,
+      "full_hits": 0,
+      "time_spent": 1.9579801559448242,
+      "n": 7
+    }
+  ],
+  "hits": []
+}

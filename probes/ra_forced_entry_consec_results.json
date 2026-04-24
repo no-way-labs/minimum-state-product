@@ -1,0 +1,9862 @@
+{
+  "ms": [
+    2,
+    2,
+    2,
+    3,
+    4
+  ],
+  "product": 96,
+  "good_cycle_length": 18,
+  "good_config_count": 30,
+  "start_config": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "good_cycle": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      2,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      2,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      2
+    ],
+    [
+      0,
+      0,
+      1,
+      2,
+      2
+    ],
+    [
+      0,
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      3
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      3
+    ]
+  ],
+  "forced_entry_steps": [
+    {
+      "step": 0,
+      "config": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "proc": 0,
+      "context": [
+        0,
+        0,
+        0
+      ],
+      "output_state": 1,
+      "next_config": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 1,
+      "config": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "proc": 1,
+      "context": [
+        1,
+        0,
+        0
+      ],
+      "output_state": 1,
+      "next_config": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 2,
+      "config": [
+        1,
+        1,
+        0,
+        0,
+        0
+      ],
+      "proc": 2,
+      "context": [
+        1,
+        0,
+        0
+      ],
+      "output_state": 1,
+      "next_config": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ]
+    },
+    {
+      "step": 3,
+      "config": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "proc": 3,
+      "context": [
+        1,
+        0,
+        0
+      ],
+      "output_state": 1,
+      "next_config": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "step": 4,
+      "config": [
+        1,
+        1,
+        1,
+        1,
+        0
+      ],
+      "proc": 4,
+      "context": [
+        1,
+        0,
+        1
+      ],
+      "output_state": 1,
+      "next_config": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "step": 5,
+      "config": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "proc": 0,
+      "context": [
+        1,
+        1,
+        1
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "step": 6,
+      "config": [
+        0,
+        1,
+        1,
+        1,
+        1
+      ],
+      "proc": 1,
+      "context": [
+        0,
+        1,
+        1
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "step": 7,
+      "config": [
+        0,
+        0,
+        1,
+        1,
+        1
+      ],
+      "proc": 2,
+      "context": [
+        0,
+        1,
+        1
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "step": 8,
+      "config": [
+        0,
+        0,
+        0,
+        1,
+        1
+      ],
+      "proc": 3,
+      "context": [
+        0,
+        1,
+        1
+      ],
+      "output_state": 2,
+      "next_config": [
+        0,
+        0,
+        0,
+        2,
+        1
+      ]
+    },
+    {
+      "step": 9,
+      "config": [
+        0,
+        0,
+        0,
+        2,
+        1
+      ],
+      "proc": 2,
+      "context": [
+        0,
+        0,
+        2
+      ],
+      "output_state": 1,
+      "next_config": [
+        0,
+        0,
+        1,
+        2,
+        1
+      ]
+    },
+    {
+      "step": 10,
+      "config": [
+        0,
+        0,
+        1,
+        2,
+        1
+      ],
+      "proc": 3,
+      "context": [
+        1,
+        2,
+        1
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "step": 11,
+      "config": [
+        0,
+        0,
+        1,
+        0,
+        1
+      ],
+      "proc": 4,
+      "context": [
+        0,
+        1,
+        0
+      ],
+      "output_state": 2,
+      "next_config": [
+        0,
+        0,
+        1,
+        0,
+        2
+      ]
+    },
+    {
+      "step": 12,
+      "config": [
+        0,
+        0,
+        1,
+        0,
+        2
+      ],
+      "proc": 3,
+      "context": [
+        1,
+        0,
+        2
+      ],
+      "output_state": 2,
+      "next_config": [
+        0,
+        0,
+        1,
+        2,
+        2
+      ]
+    },
+    {
+      "step": 13,
+      "config": [
+        0,
+        0,
+        1,
+        2,
+        2
+      ],
+      "proc": 4,
+      "context": [
+        2,
+        2,
+        0
+      ],
+      "output_state": 3,
+      "next_config": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ]
+    },
+    {
+      "step": 14,
+      "config": [
+        0,
+        0,
+        1,
+        2,
+        3
+      ],
+      "proc": 3,
+      "context": [
+        1,
+        2,
+        3
+      ],
+      "output_state": 1,
+      "next_config": [
+        0,
+        0,
+        1,
+        1,
+        3
+      ]
+    },
+    {
+      "step": 15,
+      "config": [
+        0,
+        0,
+        1,
+        1,
+        3
+      ],
+      "proc": 2,
+      "context": [
+        0,
+        1,
+        1
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "step": 16,
+      "config": [
+        0,
+        0,
+        0,
+        1,
+        3
+      ],
+      "proc": 3,
+      "context": [
+        0,
+        1,
+        3
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        0,
+        0,
+        3
+      ]
+    },
+    {
+      "step": 17,
+      "config": [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "proc": 4,
+      "context": [
+        0,
+        3,
+        0
+      ],
+      "output_state": 0,
+      "next_config": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "unique_forced_entry_count": 17,
+  "duplicate_forced_entries": [
+    {
+      "proc": 2,
+      "context": [
+        0,
+        1,
+        1
+      ],
+      "output_state": 0,
+      "steps": [
+        7,
+        15
+      ]
+    }
+  ],
+  "base_config_results": [
+    {
+      "proc": 0,
+      "delta": 1,
+      "shift_label": "+1",
+      "start_config": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "start_in_good_cycle": true,
+      "reachable_count": 18,
+      "edge_count": 18,
+      "has_cycle": true,
+      "return_to_start_length": 18,
+      "all_bad_reachable": false,
+      "good_cycle_configs": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "shortest_good_cycle_depth": 0,
+      "branch_count": 0,
+      "first_branch_depth": null,
+      "terminal_count": 0,
+      "first_terminal_depth": null,
+      "has_terminal": false,
+      "terminal_configs": [],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 17,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "distance": 16,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "distance": 15,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 10,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "distance": 11,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "distance": 14,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "distance": 12,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "distance": 13,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 2,
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 3,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 4,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 5,
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 6,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 7,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 8,
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 9,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 10,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 11,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 12,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 13,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 14,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 15,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 16,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 17,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 18,
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "event": "revisit",
+          "revisit_step": 0
+        }
+      ],
+      "classification": "returns_to_start_via_good_cycle"
+    },
+    {
+      "proc": 0,
+      "delta": -1,
+      "shift_label": "-1",
+      "start_config": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "start_in_good_cycle": true,
+      "reachable_count": 18,
+      "edge_count": 18,
+      "has_cycle": true,
+      "return_to_start_length": 18,
+      "all_bad_reachable": false,
+      "good_cycle_configs": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "shortest_good_cycle_depth": 0,
+      "branch_count": 0,
+      "first_branch_depth": null,
+      "terminal_count": 0,
+      "first_terminal_depth": null,
+      "has_terminal": false,
+      "terminal_configs": [],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 17,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "distance": 16,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "distance": 15,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 10,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "distance": 11,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "distance": 14,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "distance": 12,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "distance": 13,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 2,
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 3,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 4,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 5,
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 6,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 7,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 8,
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 9,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 10,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 11,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 12,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 13,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 14,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 15,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 16,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 17,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 18,
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "event": "revisit",
+          "revisit_step": 0
+        }
+      ],
+      "classification": "returns_to_start_via_good_cycle"
+    },
+    {
+      "proc": 1,
+      "delta": 1,
+      "shift_label": "+1",
+      "start_config": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 19,
+      "edge_count": 25,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 8,
+      "first_branch_depth": 1,
+      "terminal_count": 2,
+      "first_terminal_depth": 9,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 5,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            0,
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            1,
+            2,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "distance": 6,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 42,
+        "min_terminal_depth": 9,
+        "max_terminal_depth": 9,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 1,
+      "delta": -1,
+      "shift_label": "-1",
+      "start_config": [
+        0,
+        1,
+        0,
+        0,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 19,
+      "edge_count": 25,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 8,
+      "first_branch_depth": 1,
+      "terminal_count": 2,
+      "first_terminal_depth": 9,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 5,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            0,
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            1,
+            2,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "distance": 6,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            0,
+            1,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                6
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 42,
+        "min_terminal_depth": 9,
+        "max_terminal_depth": 9,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 2,
+      "delta": 1,
+      "shift_label": "+1",
+      "start_config": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 16,
+      "edge_count": 21,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 7,
+      "first_branch_depth": 0,
+      "terminal_count": 2,
+      "first_terminal_depth": 7,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            0,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1,
+            2,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 26,
+        "min_terminal_depth": 7,
+        "max_terminal_depth": 7,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 2,
+      "delta": -1,
+      "shift_label": "-1",
+      "start_config": [
+        0,
+        0,
+        1,
+        0,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 16,
+      "edge_count": 21,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 7,
+      "first_branch_depth": 0,
+      "terminal_count": 2,
+      "first_terminal_depth": 7,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            0,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            0,
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1,
+            2,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 26,
+        "min_terminal_depth": 7,
+        "max_terminal_depth": 7,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 3,
+      "delta": 1,
+      "shift_label": "+1",
+      "start_config": [
+        0,
+        0,
+        0,
+        1,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 11,
+      "edge_count": 13,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 4,
+      "first_branch_depth": 1,
+      "terminal_count": 2,
+      "first_terminal_depth": 5,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          1,
+          0,
+          2,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 2,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            1,
+            2
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 5,
+          "privileged": [
+            0,
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0,
+            1,
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                1,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            1,
+            1
+          ],
+          "distance": 3,
+          "privileged": [
+            0,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            },
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            1
+          ],
+          "distance": 4,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            1,
+            0,
+            0,
+            1,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            1,
+            4
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 6,
+        "min_terminal_depth": 5,
+        "max_terminal_depth": 5,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            1,
+            0,
+            2,
+            1
+          ],
+          [
+            1,
+            0,
+            1,
+            0,
+            1
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 3,
+      "delta": -1,
+      "shift_label": "-1",
+      "start_config": [
+        0,
+        0,
+        0,
+        2,
+        0
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 5,
+      "edge_count": 5,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 2,
+      "first_branch_depth": 0,
+      "terminal_count": 2,
+      "first_terminal_depth": 2,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          1,
+          0,
+          1,
+          2,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          2,
+          0
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "distance": 0,
+          "privileged": [
+            0,
+            2,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            2,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            1,
+            2,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                1,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            0,
+            1,
+            2,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            2,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            3
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            0,
+            2,
+            3
+          ],
+          "match_count": 2,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            },
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                0
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "event": "branch"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 3,
+        "min_terminal_depth": 2,
+        "max_terminal_depth": 2,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            1,
+            0,
+            1,
+            2,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            2,
+            0
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 4,
+      "delta": 1,
+      "shift_label": "+1",
+      "start_config": [
+        0,
+        0,
+        0,
+        0,
+        1
+      ],
+      "start_in_good_cycle": false,
+      "reachable_count": 2,
+      "edge_count": 1,
+      "has_cycle": false,
+      "return_to_start_length": null,
+      "all_bad_reachable": true,
+      "good_cycle_configs": [],
+      "shortest_good_cycle_depth": null,
+      "branch_count": 0,
+      "first_branch_depth": null,
+      "terminal_count": 1,
+      "first_terminal_depth": 1,
+      "has_terminal": true,
+      "terminal_configs": [
+        [
+          0,
+          0,
+          0,
+          0,
+          2
+        ]
+      ],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "distance": 0,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "in_good_cycle": false
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "distance": 1,
+          "privileged": [
+            3
+          ],
+          "match_count": 0,
+          "matches": [],
+          "in_good_cycle": false
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            1
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            2
+          ],
+          "in_good_cycle": false,
+          "privileged": [
+            3
+          ],
+          "match_count": 0,
+          "matches": [],
+          "event": "stuck"
+        }
+      ],
+      "acyclic_path_summary": {
+        "path_count": 1,
+        "min_terminal_depth": 1,
+        "max_terminal_depth": 1,
+        "hits_good_cycle": false,
+        "terminal_configs": [
+          [
+            0,
+            0,
+            0,
+            0,
+            2
+          ]
+        ]
+      },
+      "classification": "all_bad_acyclic_and_stuck"
+    },
+    {
+      "proc": 4,
+      "delta": -1,
+      "shift_label": "-1",
+      "start_config": [
+        0,
+        0,
+        0,
+        0,
+        3
+      ],
+      "start_in_good_cycle": true,
+      "reachable_count": 18,
+      "edge_count": 18,
+      "has_cycle": true,
+      "return_to_start_length": 18,
+      "all_bad_reachable": false,
+      "good_cycle_configs": [
+        [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          0,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          0,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          0,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          3
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          2
+        ],
+        [
+          0,
+          0,
+          1,
+          2,
+          3
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "shortest_good_cycle_depth": 0,
+      "branch_count": 0,
+      "first_branch_depth": null,
+      "terminal_count": 0,
+      "first_terminal_depth": null,
+      "has_terminal": false,
+      "terminal_configs": [],
+      "nodes": [
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 1,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "distance": 0,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "distance": 9,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "distance": 17,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "distance": 10,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "distance": 12,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "distance": 13,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "distance": 8,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "distance": 16,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "distance": 11,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "distance": 14,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "distance": 15,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 7,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "distance": 2,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "distance": 3,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "distance": 4,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "distance": 5,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        },
+        {
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "distance": 6,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "in_good_cycle": true
+        }
+      ],
+      "trace_until_nonunique": [
+        {
+          "step": 0,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 1,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                0,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                0
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 2,
+          "config": [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                1
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 3,
+          "config": [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                2
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 4,
+          "config": [
+            1,
+            1,
+            1,
+            0,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                0
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                0
+              ],
+              "cycle_steps": [
+                3
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 5,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            0
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                1,
+                0,
+                1
+              ],
+              "output_state": 1,
+              "next_config": [
+                1,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                4
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 6,
+          "config": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            0
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 0,
+              "context": [
+                1,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                1,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                5
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 7,
+          "config": [
+            0,
+            1,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            1
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 1,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                6
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 8,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                1
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 9,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                0,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                8
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 10,
+          "config": [
+            0,
+            0,
+            0,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                0,
+                2
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                1
+              ],
+              "cycle_steps": [
+                9
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 11,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                1
+              ],
+              "cycle_steps": [
+                10
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 12,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            1
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                1,
+                0
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                0,
+                2
+              ],
+              "cycle_steps": [
+                11
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 13,
+          "config": [
+            0,
+            0,
+            1,
+            0,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                0,
+                2
+              ],
+              "output_state": 2,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                2
+              ],
+              "cycle_steps": [
+                12
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 14,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            2
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                2,
+                2,
+                0
+              ],
+              "output_state": 3,
+              "next_config": [
+                0,
+                0,
+                1,
+                2,
+                3
+              ],
+              "cycle_steps": [
+                13
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 15,
+          "config": [
+            0,
+            0,
+            1,
+            2,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                1,
+                2,
+                3
+              ],
+              "output_state": 1,
+              "next_config": [
+                0,
+                0,
+                1,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                14
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 16,
+          "config": [
+            0,
+            0,
+            1,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            2
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 2,
+              "context": [
+                0,
+                1,
+                1
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                1,
+                3
+              ],
+              "cycle_steps": [
+                7,
+                15
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 17,
+          "config": [
+            0,
+            0,
+            0,
+            1,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            3
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 3,
+              "context": [
+                0,
+                1,
+                3
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "cycle_steps": [
+                16
+              ]
+            }
+          ],
+          "event": "advance"
+        },
+        {
+          "step": 18,
+          "config": [
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "in_good_cycle": true,
+          "privileged": [
+            4
+          ],
+          "match_count": 1,
+          "matches": [
+            {
+              "proc": 4,
+              "context": [
+                0,
+                3,
+                0
+              ],
+              "output_state": 0,
+              "next_config": [
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "cycle_steps": [
+                17
+              ]
+            }
+          ],
+          "event": "revisit",
+          "revisit_step": 0
+        }
+      ],
+      "classification": "returns_to_start_via_good_cycle"
+    }
+  ],
+  "all_phase_sweep": {
+    "num_cycle_phases": 18,
+    "total_cases": 180,
+    "classification_counts": {
+      "returns_to_start_via_good_cycle": 58,
+      "all_bad_acyclic_and_stuck": 96,
+      "reaches_cycle_without_returning_to_start": 26
+    },
+    "by_proc_shift": {
+      "q0_plus1": {
+        "returns_to_start_via_good_cycle": 4,
+        "all_bad_acyclic_and_stuck": 14
+      },
+      "q0_minus1": {
+        "returns_to_start_via_good_cycle": 4,
+        "all_bad_acyclic_and_stuck": 14
+      },
+      "q1_plus1": {
+        "all_bad_acyclic_and_stuck": 8,
+        "returns_to_start_via_good_cycle": 4,
+        "reaches_cycle_without_returning_to_start": 6
+      },
+      "q1_minus1": {
+        "all_bad_acyclic_and_stuck": 8,
+        "returns_to_start_via_good_cycle": 4,
+        "reaches_cycle_without_returning_to_start": 6
+      },
+      "q2_plus1": {
+        "all_bad_acyclic_and_stuck": 8,
+        "returns_to_start_via_good_cycle": 8,
+        "reaches_cycle_without_returning_to_start": 2
+      },
+      "q2_minus1": {
+        "all_bad_acyclic_and_stuck": 8,
+        "returns_to_start_via_good_cycle": 8,
+        "reaches_cycle_without_returning_to_start": 2
+      },
+      "q3_plus1": {
+        "all_bad_acyclic_and_stuck": 7,
+        "returns_to_start_via_good_cycle": 8,
+        "reaches_cycle_without_returning_to_start": 3
+      },
+      "q3_minus1": {
+        "all_bad_acyclic_and_stuck": 7,
+        "returns_to_start_via_good_cycle": 8,
+        "reaches_cycle_without_returning_to_start": 3
+      },
+      "q4_plus1": {
+        "all_bad_acyclic_and_stuck": 9,
+        "reaches_cycle_without_returning_to_start": 4,
+        "returns_to_start_via_good_cycle": 5
+      },
+      "q4_minus1": {
+        "returns_to_start_via_good_cycle": 5,
+        "all_bad_acyclic_and_stuck": 13
+      }
+    },
+    "closed_all_bad_cases": []
+  }
+}

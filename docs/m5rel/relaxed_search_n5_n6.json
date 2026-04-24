@@ -1,0 +1,113 @@
+{
+  "results": [
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prod": 32,
+      "n": 5,
+      "budget": 2000000,
+      "hits": 0,
+      "reason_hist": {
+        "liveness_fail": 1085742,
+        "no_single_priv": 713234,
+        "no_closed_cycle": 0,
+        "unfair_or_bad_cycle": 201024
+      },
+      "elapsed_seconds": 93.4,
+      "hit_records_preview": []
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        3
+      ],
+      "prod": 48,
+      "n": 5,
+      "budget": 2000000,
+      "hits": 0,
+      "reason_hist": {
+        "liveness_fail": 1084916,
+        "no_single_priv": 729879,
+        "no_closed_cycle": 0,
+        "unfair_or_bad_cycle": 185205
+      },
+      "elapsed_seconds": 135.76,
+      "hit_records_preview": []
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3
+      ],
+      "prod": 72,
+      "n": 5,
+      "budget": 800000,
+      "hits": 0,
+      "reason_hist": {
+        "liveness_fail": 436569,
+        "no_single_priv": 299566,
+        "no_closed_cycle": 0,
+        "unfair_or_bad_cycle": 63865
+      },
+      "elapsed_seconds": 77.47,
+      "hit_records_preview": []
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "prod": 64,
+      "n": 6,
+      "budget": 500000,
+      "hits": 0,
+      "reason_hist": {
+        "liveness_fail": 243279,
+        "no_single_priv": 203181,
+        "no_closed_cycle": 0,
+        "unfair_or_bad_cycle": 53540
+      },
+      "elapsed_seconds": 46.57,
+      "hit_records_preview": []
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        3
+      ],
+      "prod": 96,
+      "n": 6,
+      "budget": 200000,
+      "hits": 0,
+      "reason_hist": {
+        "liveness_fail": 97387,
+        "no_single_priv": 82465,
+        "no_closed_cycle": 0,
+        "unfair_or_bad_cycle": 20148
+      },
+      "elapsed_seconds": 27.07,
+      "hit_records_preview": []
+    }
+  ],
+  "total_hits": 0,
+  "total_trials": 5500000
+}

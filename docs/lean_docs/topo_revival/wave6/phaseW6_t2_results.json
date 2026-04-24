@@ -1,0 +1,563 @@
+{
+  "verdict": "GREEN",
+  "message": "100% of subclass records feasible without c_self; restricted theorem path opens. Attempt analytical proof.",
+  "subclass_feas_no_cself": 16,
+  "subclass_total": 16,
+  "nonsubclass_feas_no_cself": 3,
+  "nonsubclass_total": 3,
+  "rows": [
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "n": 5,
+      "L": 10,
+      "product": 32,
+      "n_vert": 30,
+      "n_edge": 40,
+      "edge_hist": {
+        "c_right": 20,
+        "transport": 20
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 30,
+      "supp_no_cself": 30,
+      "obj_all": 30.0,
+      "obj_no_cself": 30.0,
+      "nE_no_cself": 40
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        4
+      ],
+      "n": 5,
+      "L": 10,
+      "product": 64,
+      "n_vert": 30,
+      "n_edge": 40,
+      "edge_hist": {
+        "c_right": 20,
+        "transport": 20
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 30,
+      "supp_no_cself": 30,
+      "obj_all": 30.0,
+      "obj_no_cself": 30.0,
+      "nE_no_cself": 40
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        2
+      ],
+      "n": 5,
+      "L": 14,
+      "product": 48,
+      "n_vert": 48,
+      "n_edge": 60,
+      "edge_hist": {
+        "c_right": 24,
+        "transport": 28,
+        "c_self": 4,
+        "c_left": 4
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 14,
+      "supp_no_cself": 14,
+      "obj_all": 14.0,
+      "obj_no_cself": 14.0,
+      "nE_no_cself": 56
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        4,
+        2
+      ],
+      "n": 5,
+      "L": 14,
+      "product": 64,
+      "n_vert": 58,
+      "n_edge": 60,
+      "edge_hist": {
+        "c_right": 23,
+        "transport": 34,
+        "c_self": 2,
+        "c_left": 1
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 14,
+      "supp_no_cself": 14,
+      "obj_all": 14.0,
+      "obj_no_cself": 14.0,
+      "nE_no_cself": 58
+    },
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        2,
+        2
+      ],
+      "n": 5,
+      "L": 14,
+      "product": 48,
+      "n_vert": 48,
+      "n_edge": 60,
+      "edge_hist": {
+        "c_right": 24,
+        "c_self": 4,
+        "transport": 28,
+        "c_left": 4
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 14,
+      "supp_no_cself": 14,
+      "obj_all": 14.0,
+      "obj_no_cself": 14.0,
+      "nE_no_cself": 56
+    },
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        3,
+        2
+      ],
+      "n": 5,
+      "L": 16,
+      "product": 72,
+      "n_vert": 68,
+      "n_edge": 76,
+      "edge_hist": {
+        "c_right": 25,
+        "c_left": 10,
+        "c_self": 5,
+        "transport": 36
+      },
+      "longest_ter_run": 2,
+      "subclass_W5": false,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 16,
+      "supp_no_cself": 16,
+      "obj_all": 16.0,
+      "obj_no_cself": 16.0,
+      "nE_no_cself": 71
+    },
+    {
+      "ms": [
+        2,
+        2,
+        5,
+        2,
+        2
+      ],
+      "n": 5,
+      "L": 18,
+      "product": 80,
+      "n_vert": 80,
+      "n_edge": 83,
+      "edge_hist": {
+        "c_right": 30,
+        "c_self": 6,
+        "transport": 42,
+        "c_left": 5
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 18,
+      "supp_no_cself": 18,
+      "obj_all": 18.0,
+      "obj_no_cself": 18.0,
+      "nE_no_cself": 77
+    },
+    {
+      "ms": [
+        2,
+        3,
+        2,
+        2,
+        3
+      ],
+      "n": 5,
+      "L": 14,
+      "product": 72,
+      "n_vert": 48,
+      "n_edge": 60,
+      "edge_hist": {
+        "transport": 28,
+        "c_right": 24,
+        "c_left": 4,
+        "c_self": 4
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 14,
+      "supp_no_cself": 14,
+      "obj_all": 14.0,
+      "obj_no_cself": 14.0,
+      "nE_no_cself": 56
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "n": 6,
+      "L": 12,
+      "product": 64,
+      "n_vert": 48,
+      "n_edge": 60,
+      "edge_hist": {
+        "c_right": 24,
+        "transport": 36
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 36,
+      "supp_no_cself": 36,
+      "obj_all": 36.0,
+      "obj_no_cself": 36.0,
+      "nE_no_cself": 60
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        6,
+        2
+      ],
+      "n": 6,
+      "L": 20,
+      "product": 192,
+      "n_vert": 120,
+      "n_edge": 119,
+      "edge_hist": {
+        "c_right": 31,
+        "transport": 80,
+        "c_self": 6,
+        "c_left": 2
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 40,
+      "supp_no_cself": 40,
+      "obj_all": 40.0,
+      "obj_no_cself": 40.0,
+      "nE_no_cself": 113
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        5,
+        2,
+        2
+      ],
+      "n": 6,
+      "L": 20,
+      "product": 160,
+      "n_vert": 112,
+      "n_edge": 124,
+      "edge_hist": {
+        "c_right": 38,
+        "transport": 72,
+        "c_self": 9,
+        "c_left": 5
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 40,
+      "supp_no_cself": 40,
+      "obj_all": 40.0,
+      "obj_no_cself": 40.0,
+      "nE_no_cself": 115
+    },
+    {
+      "ms": [
+        2,
+        2,
+        3,
+        3,
+        3,
+        2
+      ],
+      "n": 6,
+      "L": 22,
+      "product": 216,
+      "n_vert": 134,
+      "n_edge": 145,
+      "edge_hist": {
+        "c_right": 34,
+        "c_left": 13,
+        "c_self": 11,
+        "transport": 87
+      },
+      "longest_ter_run": 3,
+      "subclass_W5": false,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 22,
+      "supp_no_cself": 22,
+      "obj_all": 22.0,
+      "obj_no_cself": 22.0,
+      "nE_no_cself": 134
+    },
+    {
+      "ms": [
+        2,
+        3,
+        3,
+        2,
+        3,
+        2
+      ],
+      "n": 6,
+      "L": 22,
+      "product": 216,
+      "n_vert": 134,
+      "n_edge": 168,
+      "edge_hist": {
+        "transport": 88,
+        "c_right": 39,
+        "c_self": 25,
+        "c_left": 16
+      },
+      "longest_ter_run": 2,
+      "subclass_W5": false,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 22,
+      "supp_no_cself": 22,
+      "obj_all": 22.0,
+      "obj_no_cself": 22.0,
+      "nE_no_cself": 143
+    },
+    {
+      "ms": [
+        2,
+        5,
+        2,
+        3,
+        2,
+        2
+      ],
+      "n": 6,
+      "L": 21,
+      "product": 240,
+      "n_vert": 138,
+      "n_edge": 145,
+      "edge_hist": {
+        "transport": 92,
+        "c_right": 38,
+        "c_left": 5,
+        "c_self": 10
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 42,
+      "supp_no_cself": 42,
+      "obj_all": 42.0,
+      "obj_no_cself": 42.0,
+      "nE_no_cself": 135
+    },
+    {
+      "ms": [
+        3,
+        2,
+        2,
+        4,
+        2,
+        2
+      ],
+      "n": 6,
+      "L": 17,
+      "product": 192,
+      "n_vert": 105,
+      "n_edge": 105,
+      "edge_hist": {
+        "c_right": 27,
+        "transport": 73,
+        "c_self": 4,
+        "c_left": 1
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 34,
+      "supp_no_cself": 34,
+      "obj_all": 34.0,
+      "obj_no_cself": 34.0,
+      "nE_no_cself": 101
+    },
+    {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "n": 7,
+      "L": 14,
+      "product": 128,
+      "n_vert": 70,
+      "n_edge": 84,
+      "edge_hist": {
+        "c_right": 28,
+        "transport": 56
+      },
+      "longest_ter_run": 0,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 56,
+      "supp_no_cself": 56,
+      "obj_all": 56.0,
+      "obj_no_cself": 56.0,
+      "nE_no_cself": 84
+    },
+    {
+      "ms": [
+        2,
+        3,
+        2,
+        2,
+        5,
+        2,
+        3
+      ],
+      "n": 7,
+      "L": 17,
+      "product": 720,
+      "n_vert": 128,
+      "n_edge": 125,
+      "edge_hist": {
+        "c_right": 29,
+        "transport": 96
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 68,
+      "supp_no_cself": 68,
+      "obj_all": 68.0,
+      "obj_no_cself": 68.0,
+      "nE_no_cself": 125
+    },
+    {
+      "ms": [
+        2,
+        4,
+        2,
+        3,
+        2,
+        2,
+        3
+      ],
+      "n": 7,
+      "L": 17,
+      "product": 576,
+      "n_vert": 128,
+      "n_edge": 125,
+      "edge_hist": {
+        "c_right": 29,
+        "transport": 96
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 68,
+      "supp_no_cself": 68,
+      "obj_all": 68.0,
+      "obj_no_cself": 68.0,
+      "nE_no_cself": 125
+    },
+    {
+      "ms": [
+        3,
+        2,
+        2,
+        2,
+        2,
+        3,
+        4
+      ],
+      "n": 7,
+      "L": 16,
+      "product": 576,
+      "n_vert": 108,
+      "n_edge": 110,
+      "edge_hist": {
+        "c_right": 28,
+        "transport": 82
+      },
+      "longest_ter_run": 1,
+      "subclass_W5": true,
+      "feas_all": true,
+      "feas_no_cself": true,
+      "supp_all": 64,
+      "supp_no_cself": 64,
+      "obj_all": 64.0,
+      "obj_no_cself": 64.0,
+      "nE_no_cself": 110
+    }
+  ],
+  "runtime_s": 11.713466167449951
+}

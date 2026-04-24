@@ -1,0 +1,29 @@
+{
+  "n": 5,
+  "M_n": 96,
+  "num_position_tuples_checked": 26,
+  "num_canonical_multisets_checked": 5,
+  "num_ms_with_cycles": 26,
+  "total_cycles": 5032,
+  "cycles_rescued_by_iteration": 5032,
+  "cycles_all_j_fail": 0,
+  "count_le_4_distribution": {
+    "10": 245,
+    "11": 568,
+    "12": 545,
+    "13": 317,
+    "14": 632,
+    "15": 658,
+    "16": 723,
+    "17": 431,
+    "18": 262,
+    "19": 186,
+    "20": 263,
+    "21": 202
+  },
+  "min_excl_distribution": {
+    "3": 5032
+  },
+  "failure_witnesses_first_5": [],
+  "verdict": "GREEN"
+}

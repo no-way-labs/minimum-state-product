@@ -1,0 +1,372 @@
+#!/usr/bin/env python3
+"""
+Full n=9 analysis: compute FutureFc for all 8748 configs, identify CF
+transitions, and verify the bridge theorem (CF boundary-changing → in 617-edge DAG).
+
+Also: find a 6-tuple-level function that captures the CF/gap distinction.
+"""
+import sys, os
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'claude'))
+from cup2_theorem import build_system
+from collections import deque, Counter
+
+n = 9
+hn4 = True  # n >= 4
+
+# Build CUP-2 system
+ms, tables = build_system(n)
+assert ms == [2,3,3,3,3,3,3,3,2], f"Unexpected ms: {ms}"
+N = 1
+for m in ms:
+    N *= m
+print(f"n={n}, ms={ms}, N={N}")
+
+# === Enumerate all configs ===
+
+def idx_to_config(idx):
+    """Convert index to config tuple."""
+    c = []
+    for m in reversed(ms):
+        c.append(idx % m)
+        idx //= m
+    return tuple(reversed(c))
+
+def config_to_idx(c):
+    """Convert config tuple to index."""
+    idx = 0
+    for j in range(n):
+        idx = idx * ms[j] + c[j]
+    return idx
+
+# Verify bijection
+for i in range(N):
+    assert config_to_idx(idx_to_config(i)) == i
+
+# === Build transition function ===
+
+def move(c, pos):
+    """Apply CUP-2 move at position pos."""
+    L = c[(pos - 1) % n]
+    S = c[pos]
+    R = c[(pos + 1) % n]
+    new_val = tables[pos](L, S, R)
+    c2 = list(c)
+    c2[pos] = new_val
+    return tuple(c2)
+
+def fc(c):
+    """Frontier count."""
+    return sum(1 for j in range(n) if c[j] != c[(j+1)%n])
+
+def is_bad(c):
+    """Config is bad (not legitimate)."""
+    return fc(c) > 0
+
+# === Build bad-step graph (forward: bad config -> bad configs reachable in one step) ===
+
+print("Building bad-step graph...")
+# A bad step: c -> c' where c is bad, c' = move(c, p) for some p, and c' != c
+bad_adj = {}  # idx -> [idx]
+bad_configs = []
+
+for i in range(N):
+    c = idx_to_config(i)
+    if not is_bad(c):
+        continue
+    bad_configs.append(i)
+    succs = []
+    for p in range(n):
+        c2 = move(c, p)
+        if c2 != c:
+            succs.append(config_to_idx(c2))
+    bad_adj[i] = succs
+
+print(f"Bad configs: {len(bad_configs)}")
+total_edges = sum(len(v) for v in bad_adj.values())
+print(f"Bad-step edges: {total_edges}")
+
+# === Compute FutureFc for each bad config ===
+
+# FutureFc(c) = max{fc(d) : d bad-reachable from c}
+# We use reverse BFS: for each fc level, mark all configs that can reach it.
+
+print("Computing FutureFc...")
+
+# First compute max reachable fc via BFS from each config
+# More efficient: reverse the graph, then BFS from high-fc configs
+rev_adj = {i: [] for i in bad_configs}
+for i in bad_configs:
+    for j in bad_adj[i]:
+        if j in rev_adj:
+            rev_adj[j].append(i)
+
+# Initialize FutureFc with own fc
+future_fc = {}
+for i in bad_configs:
+    future_fc[i] = fc(idx_to_config(i))
+
+# BFS from configs with highest fc, propagating backward
+# Actually, simpler: for each config, BFS forward and track max fc
+# But that's O(N^2). Better: reverse BFS from high fc configs.
+
+# Sort configs by fc descending
+configs_by_fc = sorted(bad_configs, key=lambda i: fc(idx_to_config(i)), reverse=True)
+max_fc_val = fc(idx_to_config(configs_by_fc[0]))
+print(f"Max fc among bad configs: {max_fc_val}")
+
+# For each fc level f (descending), BFS backward from configs with fc >= f
+# to mark all configs that can reach fc level f.
+# FutureFc(c) = max f such that c can reach some config with fc = f.
+
+# Efficient approach: initialize all to own fc, then propagate backward
+# through reverse edges: if future_fc[j] > future_fc[i] and i -> j in rev_adj:
+# update future_fc[i] = future_fc[j]
+
+# Bellman-Ford style, but max propagation on DAG... not a DAG.
+# Use iterative relaxation.
+
+changed = True
+iterations = 0
+while changed:
+    changed = False
+    iterations += 1
+    for j in bad_configs:
+        for i in rev_adj[j]:
+            if future_fc[j] > future_fc[i]:
+                future_fc[i] = future_fc[j]
+                changed = True
+    if iterations > 100:
+        print(f"WARNING: FutureFc did not converge after {iterations} iterations")
+        break
+
+print(f"FutureFc converged in {iterations} iterations")
+ff_dist = Counter(future_fc.values())
+print(f"FutureFc distribution: {dict(sorted(ff_dist.items()))}")
+
+# === 6-tuple encoding ===
+
+def encode6(c0, c1, c2, cN3, cN2, cN1):
+    return ((((c0*3 + c1)*3 + c2)*3 + cN3)*3 + cN2)*2 + cN1
+
+def boundary6(c):
+    return encode6(c[0], c[1], c[2], c[n-3], c[n-2], c[n-1])
+
+# === Identify CF transitions and project to 6-tuple ===
+
+print("\nIdentifying CF transitions...")
+
+cf_transitions_6tuple = set()  # (src_6tuple, dst_6tuple) for CF boundary-changing transitions
+gap_cf_violations = []  # CF boundary-changing transitions NOT in 617-edge DAG
+
+# 617-edge DAG
+dag_edges = set()
+dag_edge_list = [
+    (0, 6), (0, 162), (1, 0), (1, 7), (2, 164), (3, 1), (3, 9), (4, 166), (6, 8), (6, 168), (7, 6), (7, 9), (8, 170), (9, 11), (10, 16), (10, 172), (11, 17), (12, 174), (13, 12), (14, 176),
+    (16, 4), (16, 178), (17, 5), (18, 24), (18, 180), (19, 18), (19, 25), (20, 182), (21, 19), (21, 27), (22, 184), (24, 26), (24, 186), (25, 24), (25, 27), (26, 188), (27, 29), (28, 34), (28, 190), (29, 35),
+    (30, 192), (31, 30), (32, 194), (34, 22), (34, 196), (35, 23), (36, 0), (36, 42), (36, 198), (37, 1), (37, 36), (37, 43), (38, 2), (38, 200), (39, 3), (39, 37), (39, 45), (40, 4), (40, 202), (41, 5),
+    (42, 6), (42, 44), (42, 204), (43, 7), (43, 42), (43, 45), (44, 8), (44, 206), (45, 9), (45, 47), (46, 10), (46, 52), (46, 208), (47, 11), (47, 53), (48, 12), (48, 210), (49, 13), (49, 48), (50, 14),
+    (50, 212), (51, 15), (52, 16), (52, 40), (52, 214), (53, 17), (53, 41), (54, 0), (54, 60), (54, 72), (54, 216), (55, 61), (55, 73), (56, 2), (56, 74), (56, 218), (57, 55), (57, 63), (57, 75), (58, 59),
+    (58, 76), (59, 77), (60, 6), (60, 62), (60, 78), (60, 222), (61, 63), (61, 79), (62, 8), (62, 80), (62, 224), (63, 65), (63, 81), (64, 65), (64, 70), (64, 82), (65, 71), (65, 83), (66, 12), (66, 84),
+    (66, 228), (67, 85), (68, 14), (68, 86), (68, 230), (69, 87), (70, 58), (70, 71), (70, 88), (71, 59), (71, 89), (72, 78), (72, 90), (72, 234), (73, 79), (73, 91), (74, 92), (74, 236), (75, 73), (75, 81),
+    (75, 93), (76, 77), (76, 94), (77, 95), (78, 80), (78, 96), (78, 240), (79, 81), (79, 97), (80, 98), (80, 242), (81, 83), (81, 99), (82, 83), (82, 88), (82, 100), (83, 89), (83, 101), (84, 102), (84, 246),
+    (85, 103), (86, 104), (86, 248), (87, 105), (88, 76), (88, 89), (88, 106), (89, 77), (89, 107), (90, 36), (90, 96), (90, 252), (91, 97), (92, 38), (93, 91), (93, 99), (94, 40), (94, 95), (96, 42), (96, 98),
+    (96, 258), (97, 99), (98, 44), (98, 260), (99, 101), (100, 46), (100, 101), (100, 106), (101, 107), (102, 48), (104, 50), (106, 52), (106, 94), (106, 107), (107, 95), (108, 0), (108, 114), (108, 144), (109, 115), (110, 2),
+    (110, 146), (111, 109), (111, 117), (112, 113), (114, 6), (114, 116), (114, 150), (115, 117), (116, 8), (116, 152), (117, 119), (118, 119), (118, 124), (119, 125), (120, 12), (120, 156), (122, 14), (122, 158), (124, 112), (124, 125),
+    (125, 113), (126, 108), (126, 132), (126, 144), (127, 109), (127, 133), (128, 110), (128, 146), (129, 111), (129, 127), (129, 135), (130, 112), (130, 131), (131, 113), (132, 114), (132, 134), (132, 150), (133, 115), (133, 135), (134, 116),
+    (134, 152), (135, 117), (135, 137), (136, 118), (136, 137), (136, 142), (137, 119), (137, 143), (138, 120), (138, 156), (139, 121), (140, 122), (140, 158), (141, 123), (142, 124), (142, 130), (142, 143), (142, 160), (143, 125), (143, 131),
+    (144, 36), (144, 150), (145, 37), (145, 144), (145, 151), (146, 38), (147, 39), (147, 145), (147, 153), (148, 40), (149, 41), (150, 42), (150, 152), (151, 43), (151, 150), (151, 153), (152, 44), (153, 45), (153, 155), (154, 46),
+    (154, 160), (155, 47), (155, 161), (156, 48), (157, 49), (157, 156), (158, 50), (159, 51), (160, 52), (160, 148), (161, 53), (161, 149), (162, 168), (162, 216), (163, 1), (163, 162), (163, 169), (163, 217), (164, 218), (165, 3),
+    (165, 163), (165, 171), (165, 219), (166, 220), (167, 5), (167, 221), (168, 170), (168, 222), (169, 7), (169, 168), (169, 171), (169, 223), (170, 171), (170, 224), (171, 9), (171, 173), (171, 225), (172, 178), (172, 226), (173, 11),
+    (173, 179), (173, 227), (174, 228), (175, 13), (175, 174), (175, 229), (176, 230), (177, 15), (177, 231), (178, 166), (178, 232), (179, 17), (179, 167), (179, 233), (180, 186), (181, 19), (181, 180), (181, 187), (183, 21), (183, 181),
+    (183, 189), (185, 23), (186, 188), (187, 25), (187, 186), (187, 189), (188, 189), (189, 27), (189, 191), (190, 196), (191, 29), (191, 197), (193, 31), (193, 192), (195, 33), (196, 184), (197, 35), (197, 185), (198, 162), (198, 204),
+    (198, 252), (199, 37), (199, 163), (199, 198), (199, 205), (199, 253), (200, 164), (201, 39), (201, 165), (201, 199), (201, 207), (201, 255), (202, 166), (203, 41), (203, 167), (203, 257), (204, 168), (204, 206), (204, 258), (205, 43),
+    (205, 169), (205, 204), (205, 207), (205, 259), (206, 170), (206, 207), (206, 260), (207, 45), (207, 171), (207, 209), (207, 261), (208, 172), (208, 214), (209, 47), (209, 173), (209, 215), (209, 263), (210, 174), (211, 49), (211, 175),
+    (211, 210), (211, 265), (212, 176), (213, 51), (213, 177), (213, 267), (214, 178), (214, 202), (215, 53), (215, 179), (215, 203), (215, 269), (216, 222), (216, 234), (217, 216), (217, 223), (217, 235), (218, 236), (219, 217), (219, 225),
+    (219, 237), (220, 238), (221, 239), (222, 224), (222, 240), (223, 222), (223, 225), (223, 241), (224, 225), (224, 242), (225, 227), (225, 243), (226, 232), (226, 244), (227, 233), (227, 245), (228, 246), (229, 228), (229, 247), (230, 248),
+    (231, 249), (232, 220), (232, 250), (233, 221), (233, 251), (234, 240), (234, 252), (235, 234), (235, 241), (235, 253), (236, 254), (237, 235), (237, 243), (237, 255), (238, 239), (238, 256), (239, 257), (240, 242), (240, 258), (241, 240),
+    (241, 243), (241, 259), (242, 243), (242, 260), (243, 245), (243, 261), (244, 240), (244, 245), (244, 250), (244, 262), (245, 251), (245, 263), (246, 264), (247, 246), (247, 265), (248, 266), (249, 267), (250, 238), (250, 251), (250, 268),
+    (251, 239), (251, 269), (252, 258), (252, 306), (253, 252), (253, 259), (253, 307), (254, 308), (255, 253), (255, 261), (255, 309), (256, 257), (256, 310), (257, 311), (258, 260), (258, 312), (259, 258), (259, 261), (259, 313), (260, 261),
+    (260, 314), (261, 263), (261, 315), (262, 258), (262, 263), (262, 268), (262, 316), (263, 269), (263, 317), (264, 318), (265, 319), (266, 320), (267, 321), (268, 256), (268, 269), (268, 322), (269, 257), (269, 323), (270, 276), (271, 109),
+    (271, 270), (271, 277), (273, 111), (273, 271), (273, 279), (274, 275), (275, 113), (276, 278), (277, 115), (277, 276), (277, 279), (278, 279), (279, 117), (279, 281), (280, 276), (280, 281), (280, 286), (281, 119), (281, 287), (283, 121),
+    (285, 123), (286, 274), (286, 287), (287, 125), (287, 275), (288, 270), (288, 294), (289, 127), (289, 271), (289, 288), (289, 295), (290, 272), (291, 129), (291, 273), (291, 289), (291, 297), (292, 274), (292, 293), (293, 131), (293, 275),
+    (294, 276), (294, 296), (295, 133), (295, 277), (295, 294), (295, 297), (296, 278), (296, 297), (297, 135), (297, 279), (297, 299), (298, 280), (298, 294), (298, 299), (298, 304), (299, 137), (299, 281), (299, 305), (300, 282), (301, 139),
+    (301, 283), (302, 284), (303, 141), (303, 285), (304, 286), (304, 292), (304, 305), (305, 143), (305, 287), (305, 293), (306, 312), (307, 145), (307, 306), (307, 313), (309, 147), (309, 307), (309, 315), (310, 311), (311, 149), (312, 314),
+    (313, 151), (313, 312), (313, 315), (314, 315), (315, 153), (315, 317), (316, 312), (316, 317), (316, 322), (317, 155), (317, 323), (319, 157), (321, 159), (322, 310), (322, 323), (323, 161), (323, 311),
+]
+for (a, b) in dag_edge_list:
+    dag_edges.add((a, b))
+
+# Count CF transitions and check bridge theorem
+cf_count = 0
+cf_boundary_changing = 0
+cf_boundary_fixed = 0
+cf_in_dag = 0
+cf_not_in_dag = 0
+
+# Also track: for each 6-tuple edge, what FutureFc values appear
+cf_6tuple_edges = set()
+non_cf_6tuple_edges = set()
+
+for i in bad_configs:
+    c = idx_to_config(i)
+    for p in range(n):
+        c2 = move(c, p)
+        if c2 == c:
+            continue
+        j = config_to_idx(c2)
+        if j not in future_fc:
+            continue  # c2 is good (fc=0), not a bad step preserving FutureFc
+
+        # This is a bad step from c to c2
+        if future_fc[j] == future_fc[i]:
+            # CF transition
+            cf_count += 1
+            b_src = boundary6(c)
+            b_dst = boundary6(c2)
+            if b_src != b_dst:
+                cf_boundary_changing += 1
+                cf_6tuple_edges.add((b_src, b_dst))
+                if (b_src, b_dst) in dag_edges:
+                    cf_in_dag += 1
+                else:
+                    cf_not_in_dag += 1
+                    gap_cf_violations.append((i, j, p, b_src, b_dst, future_fc[i]))
+            else:
+                cf_boundary_fixed += 1
+        else:
+            # FutureFc drops
+            b_src = boundary6(c)
+            b_dst = boundary6(c2)
+            if b_src != b_dst:
+                non_cf_6tuple_edges.add((b_src, b_dst))
+
+print(f"\nCF transitions (constant FutureFc): {cf_count}")
+print(f"  Boundary-changing: {cf_boundary_changing}")
+print(f"    In 617-edge DAG:     {cf_in_dag}")
+print(f"    NOT in DAG (BRIDGE VIOLATIONS): {cf_not_in_dag}")
+print(f"  Boundary-fixed:    {cf_boundary_fixed}")
+
+print(f"\nUnique CF 6-tuple edges: {len(cf_6tuple_edges)}")
+print(f"Unique non-CF 6-tuple edges: {len(non_cf_6tuple_edges)}")
+
+# Check overlap
+overlap = cf_6tuple_edges & non_cf_6tuple_edges
+print(f"Overlap (both CF and non-CF for same 6-tuple edge): {len(overlap)}")
+
+if gap_cf_violations:
+    print(f"\n*** BRIDGE THEOREM FAILS: {len(gap_cf_violations)} violations ***")
+    for (i, j, p, bs, bd, ff) in gap_cf_violations[:10]:
+        c = idx_to_config(i)
+        c2 = idx_to_config(j)
+        print(f"  config {c} --(pos {p})--> {c2}")
+        print(f"    6-tuple: {bs} -> {bd}  FutureFc={ff}")
+else:
+    print(f"\n*** BRIDGE THEOREM VERIFIED at n={n}: ALL CF boundary-changing transitions are in the 617-edge DAG ***")
+
+# === Check: what FutureFc levels exist at each 6-tuple state? ===
+
+print("\n--- FutureFc by 6-tuple state ---")
+ff_by_state = {}
+for i in bad_configs:
+    c = idx_to_config(i)
+    b = boundary6(c)
+    if b not in ff_by_state:
+        ff_by_state[b] = set()
+    ff_by_state[b].add(future_fc[i])
+
+multi_ff_states = {s: ffs for s, ffs in ff_by_state.items() if len(ffs) > 1}
+print(f"States with multiple FutureFc levels: {len(multi_ff_states)} / {len(ff_by_state)}")
+if multi_ff_states:
+    for s in sorted(multi_ff_states.keys())[:10]:
+        print(f"  State {s}: FutureFc values = {sorted(multi_ff_states[s])}")
+
+# === Compute max FutureFc per 6-tuple state ===
+
+max_ff_by_state = {}
+for s, ffs in ff_by_state.items():
+    max_ff_by_state[s] = max(ffs)
+
+# Check: does max_ff_by_state decrease on all 1368 boundary transitions?
+print("\n--- Checking max_ff descent on all boundary transitions ---")
+
+# Generate all boundary transitions (reuse from gap_analysis)
+def TBotVal(L, S, R):
+    t = {(0,0,0):1,(0,0,1):1,(0,0,2):0,(0,1,0):1,(0,1,1):1,(0,1,2):1,(1,0,0):0,(1,0,1):1,(1,0,2):0,(1,1,0):0,(1,1,1):1,(1,1,2):0}
+    return t.get((L,S,R), 0)
+def TLowVal(L, S, R):
+    t = {(0,0,0):0,(0,0,1):0,(0,0,2):0,(0,1,0):0,(0,1,1):1,(0,1,2):0,(0,2,0):0,(0,2,1):2,(0,2,2):0,(1,0,0):1,(1,0,1):1,(1,0,2):1,(1,1,0):1,(1,1,1):1,(1,1,2):2,(1,2,0):0,(1,2,1):1,(1,2,2):2}
+    return t.get((L,S,R), 0)
+def TMidVal2(L, S, R):
+    t = {(0,0,0):0,(0,0,1):0,(0,0,2):0,(0,1,0):0,(0,1,1):1,(0,1,2):0,(0,2,0):0,(0,2,1):2,(0,2,2):0,(1,0,0):1,(1,0,1):1,(1,0,2):1,(1,1,0):1,(1,1,1):1,(1,1,2):2,(1,2,0):0,(1,2,1):1,(1,2,2):2,(2,0,0):0,(2,0,1):0,(2,0,2):2,(2,1,0):1,(2,1,1):2,(2,1,2):2,(2,2,0):0,(2,2,1):2,(2,2,2):2}
+    return t.get((L,S,R), 0)
+def THighVal2(L, S, R):
+    t = {(0,0,0):0,(0,0,1):0,(0,1,0):0,(0,1,1):0,(0,2,0):0,(0,2,1):0,(1,0,0):1,(1,0,1):1,(1,1,0):1,(1,1,1):2,(1,2,0):0,(1,2,1):2,(2,0,0):0,(2,0,1):2,(2,1,0):0,(2,1,1):2,(2,2,0):2,(2,2,1):2}
+    return t.get((L,S,R), 0)
+def TTopVal2(L, S, R):
+    t = {(0,0,0):0,(0,0,1):0,(0,1,0):0,(0,1,1):0,(1,0,0):0,(1,0,1):1,(1,1,0):1,(1,1,1):1,(2,0,0):1,(2,0,1):1,(2,1,0):1,(2,1,1):1}
+    return t.get((L,S,R), 0)
+
+def encode6t(c0,c1,c2,cN3,cN2,cN1):
+    return ((((c0*3+c1)*3+c2)*3+cN3)*3+cN2)*2+cN1
+
+sixStateRankVals = [14, 15, 5, 16, 9, 0, 13, 14, 12, 3, 14, 2, 5, 6, 5, 0, 10, 1, 8, 9, 1, 10, 1, 0, 7, 8, 6, 3, 3, 2, 1, 2, 1, 0, 2, 1, 15, 16, 6, 17, 10, 1, 14, 15, 13, 4, 15, 3, 6, 7, 6, 1, 11, 2, 18, 7, 9, 8, 13, 2, 17, 6, 16, 5, 18, 4, 9, 2, 9, 2, 14, 3, 17, 6, 8, 7, 12, 1, 16, 5, 15, 4, 17, 3, 8, 1, 8, 1, 13, 2, 16, 5, 7, 6, 11, 0, 15, 4, 14, 3, 16, 2, 7, 0, 7, 0, 12, 1, 17, 5, 8, 6, 1, 0, 16, 4, 15, 3, 3, 2, 8, 0, 8, 0, 2, 1, 18, 6, 9, 7, 2, 1, 17, 5, 16, 4, 14, 3, 9, 1, 9, 1, 13, 2, 16, 17, 7, 18, 11, 2, 15, 16, 14, 5, 16, 4, 7, 8, 7, 2, 12, 3, 13, 22, 4, 23, 8, 7, 12, 21, 11, 10, 13, 9, 4, 13, 4, 7, 9, 8, 7, 10, 0, 11, 0, 1, 6, 9, 5, 4, 2, 3, 0, 3, 0, 1, 1, 2, 14, 23, 5, 24, 9, 8, 13, 22, 12, 11, 14, 10, 5, 14, 5, 8, 10, 9, 12, 21, 3, 22, 7, 6, 11, 20, 10, 9, 12, 8, 3, 12, 3, 6, 8, 7, 11, 20, 2, 21, 6, 5, 10, 19, 9, 8, 11, 7, 2, 11, 2, 5, 7, 6, 10, 19, 1, 20, 5, 4, 9, 18, 8, 7, 10, 6, 1, 10, 1, 4, 6, 5, 7, 8, 0, 9, 2, 1, 6, 7, 5, 4, 7, 3, 0, 1, 0, 1, 3, 2, 8, 9, 1, 10, 3, 2, 7, 8, 6, 5, 8, 4, 1, 2, 1, 2, 4, 3, 9, 18, 0, 19, 4, 3, 8, 17, 7, 6, 9, 5, 0, 9, 0, 3, 5, 4]
+
+all_bdry_trans = set()
+for c0 in range(2):
+    for c1 in range(3):
+        for c2 in range(3):
+            for cN3 in range(3):
+                for cN2 in range(3):
+                    for cN1 in range(2):
+                        src = encode6t(c0,c1,c2,cN3,cN2,cN1)
+                        new_c0 = TBotVal(cN1, c0, c1)
+                        dst = encode6t(new_c0,c1,c2,cN3,cN2,cN1)
+                        if src != dst: all_bdry_trans.add((src, dst))
+                        new_c1 = TLowVal(c0, c1, c2)
+                        dst = encode6t(c0,new_c1,c2,cN3,cN2,cN1)
+                        if src != dst: all_bdry_trans.add((src, dst))
+                        for c3 in range(3):
+                            new_c2 = TMidVal2(c1, c2, c3)
+                            dst = encode6t(c0,c1,new_c2,cN3,cN2,cN1)
+                            if src != dst: all_bdry_trans.add((src, dst))
+                        for cn4 in range(3):
+                            new_cN3 = TMidVal2(cn4, cN3, cN2)
+                            dst = encode6t(c0,c1,c2,new_cN3,cN2,cN1)
+                            if src != dst: all_bdry_trans.add((src, dst))
+                        new_cN2 = THighVal2(cN3, cN2, cN1)
+                        dst = encode6t(c0,c1,c2,cN3,new_cN2,cN1)
+                        if src != dst: all_bdry_trans.add((src, dst))
+                        new_cN1 = TTopVal2(cN2, cN1, c0)
+                        dst = encode6t(c0,c1,c2,cN3,cN2,new_cN1)
+                        if src != dst: all_bdry_trans.add((src, dst))
+
+# Fill in max_ff for states not in ff_by_state (states with no bad configs... unlikely)
+for s in range(324):
+    if s not in max_ff_by_state:
+        max_ff_by_state[s] = 0
+
+max_ff_violations = 0
+for (a, b) in all_bdry_trans:
+    fa, fb = max_ff_by_state.get(a, 0), max_ff_by_state.get(b, 0)
+    ra, rb = sixStateRankVals[a], sixStateRankVals[b]
+    # lex check: (fb, rb) < (fa, ra)
+    if fb < fa:
+        pass
+    elif fb == fa and rb < ra:
+        pass
+    else:
+        max_ff_violations += 1
+
+print(f"max_ff lex violations: {max_ff_violations} / {len(all_bdry_trans)}")
+
+# Also check: do constant-max_ff transitions match the 617-edge set?
+const_maxff = set()
+for (a, b) in all_bdry_trans:
+    if max_ff_by_state.get(a, 0) == max_ff_by_state.get(b, 0):
+        const_maxff.add((a, b))
+
+print(f"Constant max_ff boundary transitions: {len(const_maxff)}")
+print(f"  In DAG: {len(const_maxff & dag_edges)}")
+print(f"  Not in DAG: {len(const_maxff - dag_edges)}")
+
+print("\nDONE")

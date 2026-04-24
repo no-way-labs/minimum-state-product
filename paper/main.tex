@@ -1,0 +1,3454 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+% Explicit glyph-to-Unicode map so every renderer resolves lowercase u
+% etc.\ via Unicode and not only via the subsetted glyph index.  Safe
+% under pdflatex; ignored by lualatex / xelatex.
+\input{glyphtounicode}
+\pdfgentounicode=1
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathtools}
+\usepackage{microtype}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+\usepackage{cleveref}
+\crefname{conjecture}{Conjecture}{Conjectures}
+\Crefname{conjecture}{Conjecture}{Conjectures}
+\crefname{observation}{Observation}{Observations}
+\Crefname{observation}{Observation}{Observations}
+\crefname{section}{\S}{\S\S}
+\Crefname{section}{\S}{\S\S}
+\crefname{subsection}{\S}{\S\S}
+\Crefname{subsection}{\S}{\S\S}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{conjecture}[theorem]{Conjecture}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\Mn}{M_n}
+\newcommand{\Bn}{B_n}
+\newcommand{\NGset}{\mathrm{NG}}
+\newcommand{\SK}{\mathrm{SK}}
+\newcommand{\detOf}{\mathrm{detOf}}
+\newcommand{\peelTube}{\mathrm{peelTube}}
+\newcommand{\valid}{\mathrm{valid}}
+\newcommand{\Config}{\mathrm{Config}}
+\newcommand{\stateProduct}{\mathrm{stateProduct}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+\title{Minimum State Products on Dijkstra's Token Ring:\\
+       Exact Values for $3 \le n \le 9$ and a Large-$n$ Conjecture
+       Supported through $n = 10$}
+
+\author{Keston Aquino-Michaels\\
+        \emph{No Way Labs}}
+
+\date{v1.0, \today}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+\noindent\textbf{Headline.} We determine the exact minimum state
+product $\Mn$ for $n \in \{3, \ldots, 9\}$ in Dijkstra's
+central-daemon model, unconditional at $n \in \{3, 4\}$, and
+conditional for $n \in \{5, \ldots, 9\}$ on the replayable
+lower-bound certificates of \cref{app:exhaust}, and conjecture
+$\Mn = 4 \cdot 3^{n-2}$ for all $n \ge 9$.  Between $n = 8$ and
+$n = 9$ the ratio $\Mn / M_{n-1}$ breaks from $3$ to $27/8$: a
+small-$n$ absorber family saturates the bound through $n = 8$, the
+ternary-strip family saturates at $n = 9$, and no witness from
+either family extends past its crossover point
+(\cref{obs:ratio-crossover,thm:non-extension}).
+
+\medskip\noindent\textbf{Evidence.} The upper bound is realized
+through $n = 10$ by a Lean 4 / Mathlib formalization of the
+ternary-strip witness CUP-2, with a Python-verified sibling
+construction (CLB) extending
+through $n = 18$.  The lower bound is backed through $n = 9$ by
+the replayable exhaustive-search procedure of \cref{app:exhaust},
+with worked-example certificates shipped at small $n$ and the
+full per-orientation stream regenerable via the shipped driver.  Structural
+detectors on a $97$-record stratified corpus separate valid
+witnesses from sub-threshold candidates: a circulation linear
+program on the lifted-defect graph separates $93$ of $97$ records,
+and a strict upgrade, the \emph{sink kernel} of the forced-move
+digraph on non-good configurations (Axis C), a structural
+certificate that rules out valid rule-table completions of
+candidate cycles, separates all $97$.  Sink-kernel nonemptiness
+on every tested sub-threshold record combined with a general
+monotonicity lemma in $\detOf$ yields a one-sided sub-threshold
+certificate on those records.  Under the relaxed-connectedness
+convention of the 1985 Stanford seminar~\cite{HaddadKnuth1985}, an
+SMT encoding newly certifies $M_5^{\mathrm{rel}} = M_5 = 96$
+(\cref{sec:main-relaxed}), the first case at $n \ge 5$ in which
+$M_n^{\mathrm{rel}} = M_n$.
+
+\medskip\noindent\textbf{What remains.} A uniform-in-$n$
+analytical lower bound is open; the mechanism of the ratio
+crossover at $n = 9$ is open (the 1985 ARG LCM bound is ruled
+out on both scope and insensitivity grounds; see
+\cref{sec:lower-arg}; the handle ``ARG'' comes from the unsigned
+Stanford seminar notes~\cite[\S2--\S3]{HaddadKnuth1985});
+transport of the large-$n$ bounds to the relaxed-connectedness
+convention is open beyond $n = 5$.  A systematic catalog of failed
+analytical routes (\cref{sec:landscape}) locates the obstruction at
+the joint interaction of the good cycle, its mover sequence, and
+the determined rule-table entries.
+\end{abstract}
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% =====================================================================
+
+\subsection{Dijkstra's self-stabilization and the product-minimization question}\label{sec:intro-dijkstra}
+
+In 1974 Dijkstra~\cite{Dijkstra1974} posed a now-canonical problem in
+distributed computing: design $n$ ring processors, each with only
+local visibility of its two neighbors, whose joint dynamics under a
+non-deterministic central daemon converges to mutual exclusion from
+\emph{any} initial configuration.  A processor $P_i$ has $m_i$ states
+and a local transition function
+$f_i : \mathrm{Fin}(m_{i-1}) \times \mathrm{Fin}(m_i) \times \mathrm{Fin}(m_{i+1}) \to \mathrm{Fin}(m_i)$.
+$P_i$ is \emph{privileged} at a configuration $c = (c_0, \ldots, c_{n-1})$
+when $f_i(c_{i-1}, c_i, c_{i+1}) \ne c_i$.  A valid \emph{self-stabilizing}
+system satisfies six properties: liveness, mutual exclusion, closure,
+convergence, fairness, and legitimate-state connectedness (defined
+precisely in \cref{sec:prelim}).
+
+Dijkstra exhibited three solutions: a $K$-state uniform construction
+($K \ge n$, product $K^n$; Dijkstra's original statement uses $N + 1$
+machines and requires $K > N$, which becomes $K \ge n$ for an
+$n$-processor ring), a 4-state non-uniform construction (with
+the post-1985 caveat that as printed it solves the line, not the ring;
+see~\cite{HaddadKnuth1985}), and a 3-state uniform construction with
+product $3^n$.  In the winter 1985 Stanford problem
+seminar~\cite{HaddadKnuth1985}, Knuth posed the optimization question
+exhibited here as our main problem: minimize the state-count product
+$m_0 m_1 \cdots m_{n-1}$ over all valid systems on $n$ processors.
+Write $\Mn$ for that minimum.  The 1985 seminar pinned $\Mn$ into the
+gap $2^n < \Mn \le 3^n$ for $n > 4$, with $\Mn^{1/n}$ growth rate
+unsettled.  Knuth recorded two specific asymptotic questions: is
+$\limsup_n \Mn^{1/n} < 3$, and is $\liminf_n \Mn^{1/n} > 2$?
+Forty years later both are still open.
+
+\subsection{Contributions of this paper}\label{sec:intro-contrib}
+
+\paragraph{Results.}
+\begin{enumerate}[leftmargin=*]
+\item Exact values of $\Mn$ for $n \in \{3, \ldots, 9\}$ in the
+central-daemon model ($n \in \{3, 4\}$ unconditional; $n \in \{5,
+\ldots, 9\}$ conditional on the replayable lower-bound certificates
+of~\cref{app:exhaust}), with the upper bound Lean-checked through
+$n = 10$ and the lower bound established by exhaustive computation
+through $n = 9$.
+\item Non-extension of each witness family past its crossover
+point: the small-$n$ absorber family $(2^3, 4, 3^{n-4})$ fails at
+every $n = 9$ multiset, and the ternary-strip family sits at
+$\Mn$ only at $n = 9$ (\cref{thm:non-extension}).  The arithmetic
+$\Mn / M_{n-1}$ break from $3$ to $27/8$ is then a corollary of
+the exact values.
+\item Ruling out ARG's 1985 LCM bound\footnote{``ARG'' is the
+unsigned handle under which the bound appears in the 1985 Stanford
+seminar notes~\cite[\S2--\S3]{HaddadKnuth1985}; we use the
+seminar's label throughout.} as the mechanism of the
+$n = 9$ crossover: ARG's hypothesis excludes every adjacent-binary
+witness that realizes $\Mn$ for $n \in \{4, \ldots, 8\}$, and ARG's
+LCM functional is constant or strictly nested between $n = 8$ and
+$n = 9$ on the non-adjacent orientations it does cover
+(\cref{sec:lower-arg}).
+\item The conjecture $\Mn = 4 \cdot 3^{n-2}$ for $n \ge 9$.  It is
+established at $n = 9$ (\cref{thm:exact-values}); at $n \in \{10,
+11\}$ the upper bound is Lean-checked (through $n = 10$) or
+Python-verified CLB (through $n = 18$) and the lower bound is
+supported by Axis~C per-probe but \emph{not} proved per-multiset:
+all $320$ tested $n = 10$ sub-threshold probes fire Axis~C on
+every $(291$-multiset$)$ sub-threshold class, and all $585$ tested
+$n = 11$ probes fire across $563$ of $564$ sub-threshold
+multisets (one SMT-budget UNKNOWN); per-probe firing under the
+DFS $+$ SMT pipeline does not by itself rule out every candidate
+good cycle on every multiset, see the scope caveat of
+\cref{sec:detector-axis-c}.  At $n \ge 12$ the conjecture is a
+conjecture: the formula $4 \cdot 3^{n-2}$ is realized as an
+\emph{upper} bound through $n = 18$ (Lean through $n = 10$,
+Python-verified CLB through $n = 18$), making it a plausible
+candidate target for the lower bound, but the only direct
+lower-bound evidence past $n = 11$ is extrapolation from
+corpus-level detector separation on $n \in \{5, \ldots, 10\}$ and
+the two full-layer sweeps at $n = 10, 11$.  If
+the conjecture is true it forces $\Mn^{1/n} \to 3$ and would
+resolve a connected-model variant of Knuth's 1985 asymptotic
+questions (\cref{cor:asymptotic}); the unqualified 1985 questions
+were posed under the relaxed-connectedness convention and their
+resolution requires additional transport results
+(\cref{sec:open-relaxed-vs-connected}).
+\item A z3 SMT certificate that $M_5^{\mathrm{rel}} = M_5 = 96$
+(\cref{thm:m5rel}): none of the five $n = 5$ sub-threshold
+multisets admits a relaxed-valid rule table.  This is the first
+case at $n \ge 5$ in which $M_n^{\mathrm{rel}} = M_n$; at $n = 6$,
+seven of twelve sub-threshold multisets are UNSAT-certified with
+the remaining five returning z3 UNKNOWN within a $3600\,\mathrm{s}$
+budget per multiset
+(\cref{sec:open-relaxed-vs-connected}).
+\item A corpus-level ``currency null'' result
+(\cref{obs:currency-null}): on the $97$-record stratified corpus,
+no dynamical currency (mover-pattern period $T_\mu$,
+$\detOf$-coverage $\kappa$, entropy $H$) separates valid from
+sub-threshold more cleanly than $\prod m_i$ does, and at $n = 9$
+every candidate dynamical currency \emph{flips direction}.  This
+rules out the natural reformulation ``lower-bound a different
+quantity.''
+\end{enumerate}
+
+\paragraph{Methods.}
+\begin{enumerate}[leftmargin=*,resume]
+\item The CLB ternary-strip witness family on the state vector
+$(2, 3, \ldots, 3, 2)$, Python-verified for $n \in \{5, \ldots, 18\}$.
+\item A second ternary-strip witness CUP-2 on the same state
+vector, Lean 4 / Mathlib formalized for $n \in \{4, \ldots, 10\}$.
+\item Structural detectors on candidate good cycles: the
+circulation-LP detector separates $93$ of $97$ records in a
+stratified corpus (the four failures at the $n = 9$ non-adjacent
+$\{2^3, 3^5, 4\}$ orientations); the sink-kernel upgrade (Axis C,
+\cref{sec:detector-axis-c}) separates all $97$ on the tested
+corpus and, combined with a general $\detOf$-monotonicity lemma,
+supplies a one-sided sub-threshold certificate on each tested
+record.  The corpus spans $n \in \{5, \ldots, 10\}$ on both
+sides; the $n = 10$ sub-threshold side is further confirmed by an
+extended two-tool (DFS $+$ SMT) sweep that fires Axis C on every
+probe the pipeline surfaced, $320 / 320$ probes across every one
+of the $291$ $n = 10$ sub-threshold multisets (this is a per-probe
+statement, not a per-multiset completeness claim; see the scope
+caveat in \cref{sec:detector-axis-c}).
+\end{enumerate}
+
+A systematic diagnostic catalog of failed analytical lower-bound
+approaches across five invariant families (\cref{sec:landscape})
+accompanies these contributions as a service to the community.
+
+\subsection{Why this paper}\label{sec:intro-why}
+
+In 1985, Knuth~\cite{HaddadKnuth1985} asked how small the product of
+state-counts can be on a self-stabilizing ring.  Forty years later,
+the question is still open in both directions: Dijkstra's $3^n$ is
+the best known upper bound, and the 1985 seminar's $2^n$ is the
+best known lower bound.  This paper closes the gap exactly for
+$n \le 9$ and proposes $4 \cdot 3^{n-2}$ as the answer for
+$n \ge 9$.
+
+\paragraph{Why now.}  Four tooling shifts make the $n \le 9$
+frontier tractable in 2026 in a way it was not in 1985 or 2005.
+First, modern SMT solvers dispatch rule-table feasibility on
+sub-threshold multisets in seconds to hours where exhaustive
+rule-table enumeration requires $10^{10}$--$10^{12}$ candidates
+per multiset (\cref{sec:main-relaxed,sec:open-relaxed-vs-connected}).
+Second, Lean 4 / Mathlib now supports finite per-$n$ rank-table
+convergence certificates sealed by \texttt{native\_decide} at
+state-counts up to $26244$ (\cref{app:lean}).  Third, consumer
+compute makes exhaustive lower-bound search at $n = 9$
+(tens of thousands of multiset/orientation classes) a
+hours-to-days job rather than a decades job.  Fourth, and what
+changes the feasible \emph{shape} of the inquiry rather than only
+its speed, frontier LLMs (Claude Opus, GPT-5.4) run as
+specialist research agents under a residue-prompt protocol
+(\texttt{docs/residue\_prompt\_v2.md}) and an RA/PA/LE division
+of labour (\texttt{docs/ra\_le\_workflow.md}), letting a single
+human orchestrator run, log, and cross-check the probe volume
+required to chart the failed-approach landscape catalogued in
+\cref{sec:landscape,app:landscape-detail}: $\sim\!2{,}100$ Python
+research probes ($\sim\!633{,}000$ lines) carrying $721$ logged
+explorations across $30$ chronological logs, plus the
+$\sim\!29{,}000$-line Lean formalization and the $\sim\!79{,}000$
+lines of Lean \texttt{attic/} preserving failed routes.  The probe
+volume is load-bearing: the detector hierarchy of
+\cref{sec:detector-axis-c} and the obstruction catalog of
+\cref{sec:landscape} both require exhausting a \emph{space} of
+candidates, not verifying a single one, and that space could not
+have been swept at this density by unassisted human enumeration in
+the available calendar time.  None of these four shifts was
+available to the 1985 seminar; none has previously been applied
+to this problem.
+
+To our knowledge, no prior work has determined $\Mn$ exactly beyond
+$M_4$ in the central-daemon model; identified the sharp ratio
+crossover at $n = 9$ (in the sense of \cref{rem:phase-scope});
+produced machine-verified constructions at this scale; documented
+a systematic analytical-obstruction catalog; or produced structural
+detectors separating the $n \le 10$ sub-threshold corpus from the
+valid-witness corpus with a one-sided certificate via sink-kernel
+monotonicity on the forced-NG digraph
+(\cref{sec:detector-axis-c}).
+
+\subsection{Companion repository}\label{sec:intro-repo}
+
+This paper ships alongside a companion repository (release tag and
+Zenodo DOI to be pinned at submission; see
+\cref{app:exhaust-artifact}).  All Lean modules, Python probes,
+the exhaustive-search driver, SMT encodings, and data artifacts
+referenced in the body are in that tree; the paths indexed in
+\cref{app:manifest} are relative to the release tag.  The repo
+root contains \texttt{REVIEWER.md}, which maps each theorem and
+conjecture in this paper to a single reproduction command.
+Toolchain versions (Lean 4, Mathlib revision, Python, z3) are
+pinned: Lean and Mathlib via \texttt{lean-toolchain} and
+\texttt{lakefile.lean}; Python and z3 via \texttt{requirements.txt};
+the pinned toolchain rebuilds every claim end-to-end from a clean
+clone.  The reader should treat the paper and the repo as halves
+of a single object.
+
+\subsection{Paper structure}\label{sec:intro-structure}
+
+\Cref{sec:prelim} fixes notation and the model.  \Cref{sec:main} states
+\cref{thm:exact-values,obs:ratio-crossover,thm:non-extension} and
+Conjectures~\ref{conj:ub-allN}--\ref{conj:lb-allN}.
+\Cref{sec:upper} presents the upper-bound constructions, \cref{sec:lower}
+presents the exact lower bounds and the phase-transition certification,
+and \cref{sec:detector} describes the circulation detector and the
+empirical evidence behind the large-$n$ conjecture.
+\Cref{sec:landscape} catalogs the failed analytical approaches,
+\cref{sec:open} lists open questions, \cref{sec:related} surveys
+related work, and \cref{sec:conclusion} concludes.  Appendices contain
+Lean theorem statements, the formal construction of the detector,
+the exhaustive-verification methodology with replayable certificates,
+extended discussion of the failed approaches, and small-$n$ witness data.
+
+% =====================================================================
+\section{Preliminaries}\label{sec:prelim}
+% =====================================================================
+
+\subsection{The ring model}\label{sec:prelim-ring}
+
+A \emph{ring} consists of $n$ processors $P_0, \ldots, P_{n-1}$ with
+state counts $\mathbf{m} = (m_0, \ldots, m_{n-1})$, each $m_i \ge 2$,
+and local transition functions
+\[
+   f_i : \mathrm{Fin}(m_{i-1}) \times \mathrm{Fin}(m_i) \times \mathrm{Fin}(m_{i+1}) \to \mathrm{Fin}(m_i),
+   \qquad i \in \{0, \ldots, n-1\},
+\]
+with indices modulo $n$. A \emph{configuration} is a tuple
+$c = (c_0, \ldots, c_{n-1}) \in \Config(\mathbf{m}) := \prod_i \mathrm{Fin}(m_i)$.
+Processor $P_i$ is \emph{privileged} at $c$ when
+$f_i(c_{i-1}, c_i, c_{i+1}) \ne c_i$.  A \emph{move} from $c$ at a
+privileged $P_i$ replaces $c_i$ by $f_i(c_{i-1}, c_i, c_{i+1})$ and
+leaves the other coordinates unchanged.  Under the \emph{central daemon}
+the next-step move is one privileged $P_i$ chosen non-deterministically.
+
+\subsection{Model convention}\label{sec:prelim-model}
+
+\textbf{Convention.} Throughout this paper, \emph{validity} means
+Dijkstra's central-daemon model with the six properties of
+\cref{sec:prelim-five} (liveness, mutual exclusion, closure, convergence,
+fairness, legitimate-state connectedness).  The connectedness property
+is the one carried over from Dijkstra's original 1974
+paper~\cite[\S3]{Dijkstra1974}, which required that for any two
+legitimate states there exist a sequence of moves transferring one to
+the other.  Under this requirement the legitimate states form a single
+orbit under the unique good move, so the Gray-code multi-cycle
+constructions studied in the 1985 seminar do not qualify.
+
+This is a model choice, not a correction.  Historical references to
+$M_4 = 16$~\cite[p.~70]{HaddadKnuth1985} should be read under the
+\emph{relaxed-connectedness convention} of the 1985 seminar (credit
+due to Knuth), in which Dijkstra's legitimate-state connectedness
+requirement was dropped and the good configurations were allowed to
+split into several disjoint good cycles; in the central-daemon model
+of this paper (which retains Dijkstra's connectedness), $M_4 = 24$
+(\cref{thm:exact-values}).  Later references to the same convention
+use \emph{relaxed-connectedness} or \emph{1985 convention} without
+further qualifier.
+
+\subsection{The six validity properties}\label{sec:prelim-five}
+
+A system $(\mathbf{m}, f_0, \ldots, f_{n-1})$ is \emph{valid} when:
+\begin{enumerate}[leftmargin=*,label=(\arabic*)]
+\item \textbf{Liveness.} In every configuration at least one processor is privileged.
+\item \textbf{Mutual exclusion.} In every \emph{good} configuration
+(see~below) exactly one processor is privileged.
+\item \textbf{Closure.} The unique move from a good configuration leads
+to another good configuration.
+\item \textbf{Convergence.} No daemon schedule starting from any bad
+configuration cycles back to itself; equivalently, every execution
+reaches a good configuration in finitely many steps.
+\item \textbf{Fairness.} Every cycle of moves through good configurations
+fires every processor at least once.
+\item \textbf{Legitimate-state connectedness.} For any two good
+configurations $g, h$ there is a sequence of good moves leading from
+$g$ to $h$.  Equivalently (given the preceding properties), the good
+configurations form a single directed cycle under the unique good
+move.
+\end{enumerate}
+Configurations are partitioned by the designer into \emph{good} (mutual
+exclusion holds, the designer's certificate of correct service) and
+\emph{bad} (transient).  Property~(6) is Dijkstra's original
+legitimate-state connectedness
+requirement~\cite[\S3]{Dijkstra1974}.  The 1985 Stanford
+seminar~\cite[p.~70]{HaddadKnuth1985} worked with a relaxed version
+of property (6) in which the legitimate states were allowed to
+split into several disjoint good cycles; under that convention
+the $M_4 = 16$ Gray-code construction (which splits the $16$
+legitimate states into two disjoint $8$-cycles) is admissible.
+This paper retains Dijkstra's original connectedness requirement,
+under which $M_4 = 24$ (\cref{thm:M4-eq-24}).
+
+\subsection{Dijkstra's three solutions}\label{sec:prelim-dijkstra}
+
+Dijkstra's $K$-state uniform construction~\cite{Dijkstra1974} achieves
+product $K^n$ for $K \ge n$ (Dijkstra's original statement uses $N+1$
+machines and requires $K > N$; translating to a ring of $n = N + 1$
+processors gives $K \ge n$).  His 4-state non-uniform construction
+achieves product $4^{n-1}$ on a line; as the 1985 seminar
+documented~\cite[p.~76]{HaddadKnuth1985}, this construction does not
+close into a ring without modification.  Dijkstra's 3-state uniform
+construction (Solution 3) achieves product $3^n$, with the convergence
+proof appearing only in 1986~\cite{Dijkstra1986}.  Solution 3 is the
+only one of the three whose product matches the trivial uniform
+$\Mn^{1/n} \to 3$ asymptotic without further analysis.
+
+\subsection{The state-product minimum $\Mn$}\label{sec:prelim-Mn}
+
+We write
+\[
+   \Mn \,:=\, \min \Bigl\{ \textstyle\prod_{i=0}^{n-1} m_i \,:\, (\mathbf{m}, f_0, \ldots, f_{n-1}) \text{ is valid in the sense of \cref{sec:prelim-five}} \Bigr\}
+\]
+for $n \ge 3$, where validity includes the legitimate-state
+connectedness property~(6).  The connected-model analogues of
+Knuth's two open questions~\cite[p.~68]{HaddadKnuth1985} ask whether
+$\limsup_n \Mn^{1/n} < 3$ and whether $\liminf_n \Mn^{1/n} > 2$; the
+original 1985 questions were posed under the relaxed-connectedness
+convention of \cref{sec:prelim-model}, and transporting any bound
+from the connected model to that convention is an open problem
+(\cref{sec:open-relaxed-vs-connected}).
+
+\subsection{Two distinct length quantities}\label{sec:prelim-lengths}
+
+Two quantities associated with the good cycle of a valid system both
+deserve to be called ``length.''  We will keep them rigidly distinct:
+
+\begin{definition}\label{def:lengths}
+The \emph{good-configuration count} $L$ is the number of distinct
+configurations on the good cycle.  The \emph{mover-pattern period}
+$T_\mu$ is the period of the cyclic sequence of firing processor
+indices around the good cycle.
+\end{definition}
+
+These are not in general equal.  Both ternary-strip constructions of
+\cref{sec:upper} have $T_\mu = 3n - 2$, but the CLB construction has
+$L = n^2 - 2n + 8$ while the CUP-2 construction has
+$L = (n+2)(n+3)/2 - 5$.
+
+\subsection{Sub-threshold terminology}\label{sec:prelim-subthreshold}
+
+We will repeatedly compare a candidate state-count vector against the
+proved or conjectured target product at each $n$.
+
+\begin{definition}\label{def:Bn}
+For $n \ge 5$ define
+\[
+   \Bn \,:=\, \begin{cases}
+       32 \cdot 3^{\,n-4} & \text{if } 5 \le n \le 8 \quad (\text{the proved exact value } \Mn),\\[2pt]
+       4 \cdot 3^{\,n-2}  & \text{if } n \ge 9      \quad (\text{the proved exact value } \Mn \text{ at } n = 9; \text{ the large-}n\text{ conjectured target}).
+   \end{cases}
+\]
+\end{definition}
+
+\begin{definition}\label{def:record}
+A \emph{detector record} is a pair $(\mathbf{m}, gc)$ where
+$\mathbf{m}$ is a state-count vector and $gc$ is a candidate good cycle
+on $\mathbf{m}$ (a closed sequence of distinct configurations with
+exactly one privileged processor at each step and fairness).  For
+\emph{valid-system records}, $gc$ is the good cycle of a verified
+valid system.  For \emph{candidate records} no valid extension is
+assumed.
+\end{definition}
+
+\begin{definition}\label{def:thresholds}
+A detector record $(\mathbf{m}, gc)$ is
+\begin{itemize}[leftmargin=*]
+\item \emph{sub-threshold} if $\prod_i m_i < \Bn$;
+\item a \emph{$\Bn$-threshold witness} if it is a valid-system record with $\prod_i m_i = \Bn$ (proved sharp only when $\Bn = \Mn$ has been established);
+\item a \emph{valid super-threshold witness} if it is a valid-system record with $\prod_i m_i > \Bn$.
+\end{itemize}
+\end{definition}
+
+We avoid the unqualified phrase ``sharp valid witness'' for any record
+where the lower bound has not been proved.
+
+\subsection{Structural objects used later}\label{sec:prelim-objects}
+
+The lower-bound discussion of \cref{sec:detector,sec:landscape} requires
+several derived objects, defined here in summary form (full Lean-level
+definitions are in the source repository under
+\texttt{LeanMn/LowerBound/}, with a glossary in the supplementary
+lower-bound history memo listed in \cref{app:manifest}).
+
+\begin{itemize}[leftmargin=*]
+\item Given a candidate good cycle $gc = [c_0, \ldots, c_{L-1}]$, the
+\emph{determined dictionary} $\detOf(gc)$ is the partial rule table read
+off the cycle: for each context $(i, l, s, r)$ realized at some step
+$k$, $\detOf(gc)$ records $c_{k+1}(i)$.  Stay-entries (where $c_{k+1}(i) = c_k(i)$)
+and move-entries (where they differ) are tracked separately.
+\item $\NGset(gc)$ denotes the set of \emph{non-good configurations}
+(those not appearing on $gc$).
+\item The \emph{Hamming-1 tube} $T_{N_1}(gc)$ is the set of
+configurations at Hamming distance exactly $1$ from some
+$c_k$ that are also \emph{value-consistent} with $gc$
+(every coordinate value appears at the corresponding position somewhere on $gc$).
+\item The \emph{forced graph} on a set $S \subseteq \NGset(gc)$ has edges
+$c \to c'$ whenever $c$ has a forced successor $c' \in S$ under
+$\detOf(gc)$.
+\item The \emph{sink kernel} $\SK(gc)$ is the fixed point of iteratively
+removing sinks (vertices with no out-edge) from the forced graph on
+$\NGset(gc)$.
+\item The \emph{lifted-defect graph} on $gc$ has vertex set
+$V_{\mathrm{lift}}(gc) = \{(k, q, a) : a \ne c_k(q),\ c_k[q := a] \in T_{N_1}(gc)\}$
+with the edge taxonomy of \cref{sec:detector}.
+\end{itemize}
+
+% =====================================================================
+\section{Main results}\label{sec:main}
+% =====================================================================
+
+\Cref{tab:scales} summarizes the four independent scales at which
+the results of this section are grounded; every later subsection is
+a claim made at one of these scales.
+
+\begin{table}[ht]
+\centering
+\caption{Scales of evidence.  ``Established'' means an exhaustive,
+replayable certificate exists; ``Lean-checked'' means a sorry-free
+Lean 4 / Mathlib proof on finite-per-$n$ tables discharged by
+\texttt{native\_decide}; ``Python-verified'' means
+\texttt{verify\_system} passes on the stored witness; ``Axis
+C-supported'' means the sink-kernel detector fires on every tested
+sub-threshold record.  The four columns anchor every later
+reference.}\label{tab:scales}
+\begin{tabular}{l l l}
+\toprule
+scale & what it establishes & range\\\midrule
+exhaustive LB certificate      & $\Mn \ge \Bn$                   & $n \in \{3, \ldots, 9\}$\\
+Lean-checked UB witness        & $\Mn \le 4 \cdot 3^{n-2}$ (ternary-strip) & $n \in \{4, \ldots, 10\}$\\
+                               & $\Mn \le 32 \cdot 3^{n-4}$ (absorber)     & $n \in \{5, 6, 7, 8\}$\\
+Python-verified UB witness     & $\Mn \le 4 \cdot 3^{n-2}$ (CLB)           & $n \in \{5, \ldots, 18\}$\\
+Axis-C sub-threshold certificate & $\Mn \ge \Bn$ on tested records       & $n \in \{5, \ldots, 10\}$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Exact values}\label{sec:main-exact}
+
+\begin{theorem}[Exact values, central-daemon model]\label{thm:exact-values}
+In Dijkstra's central-daemon model of \cref{sec:prelim-five}, the
+minimum state product takes the values
+\[
+\begin{array}{c|c|l}
+n & \Mn & \text{factorization}\\\hline
+3 & 8     & 2^3\\
+4 & 24    & 2^3 \cdot 3\\
+5 & 96    & 2^5 \cdot 3\\
+6 & 288   & 2^5 \cdot 3^2\\
+7 & 864   & 2^5 \cdot 3^3\\
+8 & 2592  & 2^5 \cdot 3^4\\
+9 & 8748  & 2^2 \cdot 3^7
+\end{array}
+\]
+Each row combines an upper-bound witness with a lower-bound
+certificate (\cref{sec:upper,sec:lower}).  The upper bounds for
+$n \in \{4, \ldots, 10\}$ are Lean-checked
+(\cref{thm:upper-bound-cert,thm:upper-bound-small,thm:M4-eq-24}).
+The lower bounds are certificate-backed as follows: $n = 3$ by
+trivial enumeration (no sub-threshold multisets exist); $n = 4$
+analytically by \cref{thm:M4-eq-24}; $n \in \{5, \ldots, 8\}$ by
+the exhaustive-search procedure of \cref{app:exhaust}, whose
+driver is shipped and whose per-orientation rejection stream is
+pre-generated for $n \in \{3, 4\}$ and the $n = 5$ all-binary
+orientation, and regenerable from a clean clone for any other
+orientation (\cref{app:exhaust-artifact,app:exhaust-repro}); and
+$n = 9$ by the targeted absorber-specific computational
+probes of \cref{sec:lower-exhaustive} on the $3$ multisets at
+product $7776$ and the $24$ multisets at products in
+$(7776, 8748)$.  The rows $n \in \{4, \ldots, 9\}$ are sharp;
+sharpness at $n = 10$ is conjectural (\cref{sec:main-conj}).
+\end{theorem}
+
+\paragraph{Certificate-backing status.} The $n = 3$ row is
+unconditional (trivial enumeration); $n = 4$ is unconditional via
+\cref{thm:M4-eq-24}.  For $n \in \{5, \ldots, 9\}$, the $\ge$
+direction of \cref{thm:exact-values} is backed by the exhaustive
+search of \cref{app:exhaust}.  The deterministic coverage manifest
+(C1 + C2, overall hash \texttt{f684ed53216a0d7f}) ships for every
+$n \in \{3, \ldots, 9\}$ under \texttt{artifacts/rejections/} in
+the release tag (\cref{app:exhaust-artifact}); the
+per-certificate rejection stream ships in full for
+$n \in \{3, 4\}$ and for the all-binary orientation at $n = 5$
+as a worked example of the search mechanism.  Per-cert streams
+for the remaining $n = 5$ orientations and for all
+$n \in \{6, \ldots, 9\}$ are regenerable from a clean clone with
+the driver of \cref{app:exhaust-repro} (the full stream at
+worst-case multisets is prohibitive in disk size, which is why
+it is not pre-generated); see the reproduction map in
+\texttt{REVIEWER.md} (\cref{sec:intro-repo}).
+
+\subsection{The ratio crossover at $n = 9$}\label{sec:main-phase}
+
+Given \cref{thm:exact-values}, the ratio
+identity is arithmetic.
+
+\begin{observation}[Ratio crossover]\label{obs:ratio-crossover}
+Conditional on the same replayable certificates as
+\cref{thm:exact-values}, the consecutive ratios are
+\[
+   \frac{M_5}{M_4} = 4, \qquad
+   \frac{M_n}{M_{n-1}} = 3 \text{ for } n \in \{6, 7, 8\}, \qquad
+   \frac{M_9}{M_8} = \frac{27}{8}.
+\]
+Both endpoints of the constant-$3$ plateau are structural: $M_5/M_4
+= 4$ is the absorber family turning on (quaternary enters at
+$n = 5$), and $M_9/M_8 = 27/8$ is the absorber family turning off.
+\end{observation}
+
+The non-trivial statement is that neither witness family realizes
+$\Mn$ past its own crossover point: the small-$n$ absorber
+multiset $(2^3, 4, 3^{n-4})$ (\cref{sec:upper-small}) fails at every
+$n = 9$ multiset, and the ternary-strip formula $4 \cdot 3^{n-2}$
+is sharp only at $n = 9$ among currently proved exact values.
+
+\begin{theorem}[Non-extension of each family]\label{thm:non-extension}
+Conditional on the replayable lower-bound certificates of
+\cref{app:exhaust}:
+\begin{enumerate}[leftmargin=*]
+\item For every multiset $\mathbf{m}$ at $n = 9$ with $\prod m_i =
+32 \cdot 3^{\,9-4} = 7776$, namely the three small-$n$
+absorber shapes $\{2^3, 3^5, 4\}$, $\{2^4, 3^4, 6\}$, and
+$\{2^5, 3^3, 9\}$ (\cref{tab:n9-7776}), no valid rule table
+exists (\cref{sec:lower-exhaustive}).
+\item The ternary-strip product $4 \cdot 3^{n-2}$ is sharp at
+$n = 9$ (\cref{thm:exact-values}) and realized by verified
+witnesses at $n \in \{4, \ldots, 10\}$ via CUP-2
+(\cref{thm:upper-bound-cert}); at $n \le 8$
+it is strictly above $\Mn$ by a factor of $\frac{4\cdot 3^{n-2}}{32\cdot 3^{n-4}} = 9/8$.
+\end{enumerate}
+Sharpness of the ternary-strip product at $n = 10$ is conjectural.
+\end{theorem}
+
+\begin{remark}[Terminology]\label{rem:phase-scope}
+We informally refer to the crossover of
+\cref{obs:ratio-crossover,thm:non-extension} as a \emph{phase
+transition}.  The term is used only in this informal sense; we do
+\emph{not} claim to have identified a structural mechanism that
+\emph{causes} the break at $n = 9$ specifically.  A uniform
+mechanistic explanation is open (\cref{sec:lower-arg}), and in
+particular ARG's 1985 LCM bound does not account for it.
+\end{remark}
+
+\subsection{The large-$n$ conjecture}\label{sec:main-conj}
+
+\begin{conjecture}[Upper bound, all $n \ge 9$]\label{conj:ub-allN}
+For every $n \ge 9$ there exists a valid rule table on the
+ternary-strip state vector $(2, 3, 3, \ldots, 3, 2)$, giving the upper
+bound $\Mn \,\le\, 4 \cdot 3^{\,n-2}$.  The CLB and CUP-2 rule tables of
+\cref{sec:upper} are two candidate families realizing this state vector
+in the verified finite ranges.
+\end{conjecture}
+
+Status: Lean-checked for $n \in \{4, \ldots, 10\}$ via CUP-2
+(\cref{thm:upper-bound-cert}); Python-verified for
+$n \in \{5, \ldots, 18\}$ via the CLB construction.  For $n \ge 19$
+only Dijkstra's classical
+$\Mn \le 3^n$~\cite{Dijkstra1974} is currently available, a
+factor $9/4 \approx 2.25$ looser than the conjectured
+$4 \cdot 3^{n-2}$.
+
+\begin{conjecture}[Lower bound, all $n \ge 9$]\label{conj:lb-allN}
+Every valid system on $n \ge 9$ processors has
+$\prod_i m_i \,\ge\, 4 \cdot 3^{\,n-2}$.
+\end{conjecture}
+
+Status of \cref{conj:lb-allN}, stratified by regime:
+
+\begin{itemize}[leftmargin=*]
+\item $n = 9$ is \textbf{established} by exhaustive computation
+(\cref{thm:exact-values,sec:lower-exhaustive}): every sub-target
+product class is eliminated by a replayable certificate shipped
+with the release tag (\cref{app:exhaust-artifact}).
+\item $n \in \{10, 11\}$ is \textbf{Axis~C-supported, not proved}:
+no exhaustive certificate search has been run, but the DFS $+$ SMT
+sweep fires Axis C on all $320$ tested probes across the $291$
+sub-threshold multisets at $n = 10$ and on all $585$ probes
+across $563$ of $564$ sub-threshold multisets at $n = 11$ (one
+SMT-budget UNKNOWN), which eliminates each of them under
+sink-kernel monotonicity \emph{on the tested records}
+(\cref{sec:detector-axis-c}).
+\item $n \ge 12$ is \textbf{conjecture}.  Supporting evidence is
+(a) two Lean- and Python-verified witness families realizing
+$4 \cdot 3^{n-2}$ (through $n = 10$ and $n = 18$ respectively), and
+(b) corpus-level detector separation on $10$ valid witnesses and
+$87$ sub-threshold candidates spanning $n \in \{5, \ldots, 10\}$,
+extended by two full-layer sub-threshold sweeps at $n = 10, 11$.
+No analytical lower-bound argument is available.
+\end{itemize}
+
+The formula $4 \cdot 3^{n-2}$ is \emph{false} as a lower bound at
+$n \in \{5, \ldots, 8\}$, where the small-$n$ absorber witnesses
+give $32 \cdot 3^{n-4} < 4 \cdot 3^{n-2}$, which is why the
+conjecture starts at $n = 9$.
+
+\begin{corollary}[Joint consequence, conditional]\label{cor:asymptotic}
+If \Cref{conj:ub-allN,conj:lb-allN} both hold, then $\Mn = 4 \cdot
+3^{n-2}$ for $n \ge 9$, hence $\Mn^{1/n} \to 3$.  This would
+resolve a natural connected-model variant of Knuth's 1985
+asymptotic questions: the $\limsup < 3$ variant negatively and the
+$\liminf > 2$ variant positively.  It does \emph{not}, on its own,
+resolve Knuth's unqualified 1985 questions, which were posed under
+the relaxed-connectedness convention; transporting any of the
+bounds of this paper to that convention is an open problem
+(\cref{sec:prelim-model,sec:open-relaxed-vs-connected}), and at
+the one case beyond $n = 4$ where both values are now known
+($n = 5$, \cref{thm:m5rel}) the two conventions agree.
+\end{corollary}
+
+Evidence for \cref{conj:lb-allN} is the subject of
+\cref{sec:detector,sec:landscape}.
+
+\subsection{Transport to the relaxed-connectedness convention, first data}\label{sec:main-relaxed}
+
+The 1985 Stanford seminar~\cite{HaddadKnuth1985} worked under a
+relaxation of Dijkstra's property (6) in which the legitimate
+states were allowed to split into several disjoint good cycles
+(\cref{sec:prelim-model}).  Write $\Mn^{\mathrm{rel}}$ for the
+minimum state product under that convention.  Every
+connected-valid system is also relaxed-valid, so
+$\Mn^{\mathrm{rel}} \le \Mn$; the reverse direction is open at
+every $n \ge 5$ and has stood open since the 1985 formulation.
+
+\begin{theorem}[$M_5^{\mathrm{rel}} = 96$, SMT-certified]\label{thm:m5rel}
+$M_5^{\mathrm{rel}} = M_5 = 96$.
+\end{theorem}
+
+The proof is a z3 SMT encoding of the five validity properties in
+the relaxed convention: at each of the five $n = 5$ sub-threshold
+multisets $\{2^5\}, \{2^4, 3\}, \{2^4, 4\}, \{2^3, 3^2\}, \{2^4, 5\}$
+the encoding returns UNSAT in under $90\,\mathrm{s}$ on consumer
+hardware, and an at-threshold SAT check on $\{2^3, 3, 4\}$
+($\prod m = 96 = M_5$) confirms the encoding is correct.
+
+\paragraph{Encoding of property (4).}  Property (4)
+(convergence) is infinitary: ``no daemon schedule starting from
+a bad configuration cycles back to itself.''  The SMT encoding
+reformulates it in the standard rank-function style: the solver is
+asked to exhibit a per-configuration rank function $\rho :
+\Config(\mathbf{m}) \to \mathrm{Fin}(B)$ with a bound $B$
+polynomial in $\prod m_i$, such that every bad-move $c \to c'$
+satisfies $\rho(c') < \rho(c)$.  Existence of such a $\rho$ is a
+first-order condition on the $\mathrm{Fin}(m_i)$-valued rule
+tables and is equivalent to finite termination from every bad
+configuration.  UNSAT at a sub-threshold multiset then means
+``no relaxed-valid rule table admits such a rank function,''
+which is the same as ``no relaxed-valid rule table exists'' given
+finite state.  The soundness assumption is standard: termination
+on a finite transition system is witnessed by a decreasing rank,
+and the encoding chooses $B$ large enough that the rank is
+expressive.  The at-threshold SAT check extracts a rank and
+re-runs the extracted rule table through the Python relaxed
+verifier, which closes the encoding/semantics gap end-to-end.
+
+The
+per-multiset UNSAT table, runtimes, and the encoding source are
+shipped with the repository bundle; the detailed discussion is
+deferred to \cref{sec:open-relaxed-vs-connected}.
+
+At $n = 6$ seven of the twelve sub-threshold multisets are
+UNSAT-certified under the same encoding, including the hardest-so-far
+$\{2^3, 3^3\}$ (UNSAT in $\approx 1900\,\mathrm{s}$) and
+$\{2^4, 3, 4\}$ (UNSAT in $\approx 2170\,\mathrm{s}$); the remaining
+five (at products $192, 224, 240, 256, 256$) return z3 UNKNOWN
+within a $3600\,\mathrm{s}$ per-multiset budget and require either a
+stronger WLOG symmetry break, a portfolio of solvers, or a tighter
+fairness encoding for certification.  \cref{thm:m5rel} is the first case at
+$n \ge 5$ in which $M_n^{\mathrm{rel}} = M_n$ has been shown (at
+$n = 4$ the conventions disagree, $M_4^{\mathrm{rel}} \le 16 <
+24 = M_4$).  Equivalently, \cref{thm:m5rel} resolves the question
+of whether $M_5^{\mathrm{rel}} < M_5$, in the negative.
+
+% =====================================================================
+\section{Upper-bound constructions}\label{sec:upper}
+% =====================================================================
+
+This section describes the witness families supporting the conjectured
+bound $\Mn \le 4 \cdot 3^{n-2}$ for $n \ge 9$, with Lean certification
+through $n = 10$ and Python verification through $n = 18$.  For
+$n \ge 19$ the paper falls back on Dijkstra's classical
+$\Mn \le 3^n$~\cite{Dijkstra1974}.  For $n \in \{5, \ldots, 8\}$ a
+distinct, tighter family supplies $\Mn \le 32 \cdot 3^{n-4}$.  We
+begin with the unconditional base case $n = 4$ in miniature.
+
+\subsection{A fully worked example: $n = 4$}\label{sec:upper-n4}
+
+Before describing the infinite witness families we assemble the
+entire $n = 4$ certificate in one place.  The case is unconditional
+(\cref{thm:M4-eq-24}) and illustrates in miniature every object
+used later.
+
+\paragraph{State vector.} $\mathbf{m} = (2, 2, 2, 3)$: three binary
+processors at positions $0, 1, 2$ and one ternary processor at
+position $3$.  Product $24$.
+
+\paragraph{Upper bound ($M_4 \le 24$).} A verified good cycle on
+$(2, 2, 2, 3)$ together with a rank-based convergence certificate
+(a per-configuration potential $\rho : \Config(\mathbf{m}) \to
+\mathbb{N}$ strictly decreasing on every bad-configuration move)
+gives $M_4 \le 24$.  The full transition table, the cycle in
+configuration form, and the rank potential are emitted by the
+parity runner of \cref{app:lean-encoding-audit} and checked by
+\texttt{M\_4\_upper} in \texttt{LeanMn/SmallN/Theorem.lean}.
+
+\paragraph{Lower bound ($M_4 \ge 24$).} The only multiset with
+$\prod m_i < 24$ and each $m_i \ge 2$ on four positions is
+$(2, 2, 2, 2)$ at product $16$.  A direct case analysis on
+$(2, 2, 2, 2)$ in the six-property connected model eliminates every
+candidate good cycle: any good cycle on $\{0, 1\}^4$ would have to
+visit $16$ distinct configurations, but the connectedness
+requirement (property (6)) together with mutual exclusion forces
+the good cycle to be a single Hamiltonian cycle on $\{0,1\}^4$, and
+no rule table satisfying both closure and convergence is
+extensible to such a cycle.  Under the relaxed-connectedness
+convention of the 1985 seminar the same multiset admits the
+historical Gray-code witness $M_4^{\mathrm{rel}} \le 16$
+\cite[p.~70]{HaddadKnuth1985}; the two conventions disagree at
+$n = 4$ precisely because property (6) excludes the Gray-code from
+the connected model.  The Lean proof is \texttt{M\_4\_lower}; the
+bundle is \texttt{M\_4\_eq\_24}.
+
+\paragraph{What this case illustrates.} The $n = 4$ row of
+\cref{thm:exact-values} is the only one beyond $n = 3$ that is
+unconditional (Lean-proved end-to-end without an
+exhaustive-search certificate); the rows
+$n \in \{5, \ldots, 9\}$ (\cref{thm:exact-values}) depend
+on \cref{app:exhaust}'s exhaustive-search certificates.  It is also
+the smallest instance of the
+relaxed-vs-connected gap studied in
+\cref{sec:main-relaxed,sec:open-relaxed-vs-connected}.  The
+ingredients (explicit good cycle, rank potential, case analysis
+eliminating sub-threshold multisets) reappear in every later
+construction; at $n \ge 5$ the last two scale up into the
+convergence rank tables of \cref{sec:upper-cup2} and the
+exhaustive-search certificates of \cref{app:exhaust} respectively.
+
+\subsection{The small-$n$ absorber family ($5 \le n \le 8$)}\label{sec:upper-small}
+
+The small-$n$ witnesses use \emph{three binary processors}, \emph{one
+quaternary processor}, and ternary fill at the remaining positions.
+In the stored witnesses the binary processors are in some cases
+clustered into a $3$-consecutive block and in other cases include
+$2$-consecutive plus a single isolated binary; the exact placement is
+witness-specific.  The feature relevant to \cref{sec:lower-arg} is
+\emph{adjacency}: every stored witness has at least one cyclically
+adjacent pair of binaries, hence lies outside ARG's non-adjacency
+hypothesis.
+
+\Cref{tab:small-witnesses} lists the placements of the four stored
+witnesses (file references in \cref{app:witness-data}).
+
+\begin{table}[ht]
+\centering
+\caption{Small-$n$ absorber witness placements.  Each row gives the
+state vector and the empirically measured good-configuration count $L$.
+Every row has at least one cyclically adjacent pair of binary
+processors.}\label{tab:small-witnesses}
+\begin{tabular}{c l c l}
+\toprule
+$n$ & $\mathbf{m}$ & $L$ & label\\\midrule
+$5$ & $(2, 2, 2, 3, 4)$              & $18$ & \texttt{witness\_n5}\\
+$6$ & $(2, 2, 2, 4, 3, 3)$           & $35$ & \texttt{witness\_n6}\\
+$7$ & $(3, 2, 2, 2, 3, 4, 3)$        & $52$ & \texttt{witness\_n7}\\
+$8$ & $(2, 2, 3, 4, 3, 3, 2, 3)$     & $55$ & \texttt{witness\_n8}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+State product is $2^3 \cdot 4 \cdot 3^{n-4} = 32 \cdot 3^{n-4}$,
+independent of the placement subject to the validity constraint.
+The good cycles are mixed bounce-with-detours: neither pure sweeps nor
+pure bounces.  No closed-form description of $L(n)$ is known in this
+regime, and the cycle and mover pattern change qualitatively from one
+$n$ to the next.
+
+Informally, the quaternary processor provides enough state budget to
+absorb the wave across the binary block; at $n = 9$ the ring is too
+long and a single quaternary can no longer carry the wave (consistent
+with the empirical fact that every orientation of $\{2^3, 4, 3^5\}$
+fails at $n = 9$; see \cref{sec:lower-exhaustive}).
+
+\begin{theorem}[Small-$n$ upper bound, Lean-checked]\label{thm:upper-bound-small}
+\texttt{upper\_bound\_small} in \texttt{LeanMn/UpperBound/Theorem.lean}
+proves $\Mn \le 32 \cdot 3^{n-4}$ for $n \in \{5, 6, 7, 8\}$
+(sorry-free; finite per-$n$ rank-table checks discharged by
+\texttt{native\_decide} on sealed certificates).
+\end{theorem}
+
+\subsection{The CLB ternary-strip family ($n \ge 9$, conjectured sharp)}\label{sec:upper-clb}
+
+\textbf{State vector.} $(2, 3, 3, \ldots, 3, 2)$: binary endpoints,
+ternary fill.  Product $4 \cdot 3^{n-2}$.
+
+\textbf{Good cycle.} An up-down bounce with mover sequence
+$0, 1, 2, \ldots, n-1, n-2, \ldots, 1, 0, 1, 2, \ldots$ closing at
+period $T_\mu = 3n - 2$.  The number of good configurations is
+$L = n^2 - 2n + 8$.
+
+\Cref{tab:clb-stats} summarizes the cycle statistics.  Python
+verification of the construction is via
+\texttt{clb\_inherent\_cycles.py} (see \cref{app:manifest}) for
+$n \in \{5, \ldots, 18\}$, covering up to $172$M configurations at
+the largest tested $n$.
+
+\begin{table}[ht]
+\centering
+\caption{Cycle statistics of the CLB ternary-strip construction.}\label{tab:clb-stats}
+\begin{tabular}{l l}
+\toprule
+quantity & value\\\midrule
+mover-pattern period $T_\mu$ & $3n - 2$\\
+good-configuration count $L$ & $n^2 - 2n + 8$\\
+worst-case convergence steps & $\lfloor (3n^2 - 4n - 11)/4 \rfloor = \Theta(n^2)$\\
+free transition entries fixed for liveness & $n - 3$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{The CUP-2 Lean-checked variant}\label{sec:upper-cup2}
+
+The same ternary-strip state vector $(2, 3, \ldots, 3, 2)$ supports a
+second valid rule table, \emph{CUP-2} (short for \emph{Convergent
+Universal Primer, second iteration}; the name is inherited from the
+construction's internal label in the Lean formalization and carries
+no mathematical content beyond identifying the rule table), distinct
+from the CLB rule table of \cref{sec:upper-clb}.  CUP-2 has the same
+mover-pattern period $T_\mu = 3n - 2$; its good-configuration count is
+$L = (n+2)(n+3)/2 - 5$.  The rule table has $87$ entries that are
+$n$-independent.  Each entry is tagged by up to three non-exclusive
+per-entry properties, namely:
+\begin{itemize}[leftmargin=*]
+\item \emph{privileged}: the entry is a move-entry (it fires on
+the good cycle, writing a new value different from the current
+center coordinate);
+\item \emph{copy-neighbor}: the output equals the left or right
+neighbour's current value (a local-propagation entry);
+\item \emph{anomalous}: the entry falls outside the two cleanest
+ternary-strip idiom families and required manual fit to close
+convergence.
+\end{itemize}
+A single entry may satisfy more than one property (for instance, a
+privileged entry that writes the value of a neighbour is both
+privileged and copy-neighbor); the three properties partition neither
+the rule table nor the privileged entries.  The per-property counts
+across all $87$ entries are $45$ privileged, $40$ copy-neighbor, and
+$5$ anomalous; these sums exceed $87$ precisely because the
+categories overlap.
+
+CUP-2 is a distinct ternary-strip rule table with a structurally
+cleaner convergence certificate; its good-cycle count is comparable
+to, and for $n \ge 6$ strictly smaller than, the CLB good-cycle count
+($L_{\mathrm{CUP}} - L_{\mathrm{CLB}} = -(n-4)(n-5)/2$, zero at
+$n \in \{4, 5\}$ and negative thereafter).  The Lean formalization
+uses a per-$n$ rank function on bad configurations that strictly
+decreases on every bad step, sealed by \texttt{native\_decide} on a
+precomputed rank table.
+
+\begin{theorem}[CUP-2 upper bound, Lean-checked]\label{thm:upper-bound-cert}
+\texttt{upper\_bound\_cert} in \texttt{LeanMn/UpperBound/Theorem.lean}
+proves $\Mn \le 4 \cdot 3^{n-2}$ for $n \in \{4, \ldots, 10\}$
+(sorry-free; finite per-$n$ rank-table checks discharged by
+\texttt{native\_decide} on sealed certificates).
+\end{theorem}
+
+\subsection{Verification status}\label{sec:upper-verification}
+
+\Cref{tab:upper-status} consolidates the verification status across $n$.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Verification status of the upper-bound constructions in
+the connected model of \cref{sec:prelim-five}.  ``Lean'' means
+sorry-free Lean 4 / Mathlib formalization with finite-table checks
+discharged by \texttt{native\_decide} on sealed certificates;
+``Python'' means \texttt{verify\_system} passes on the stored
+witness; ``loose'' means ratio to $4 \cdot 3^{n-2}$ is
+$3^n / (4 \cdot 3^{n-2}) = 9/4$.  The relaxed-connectedness
+$M_4 \le 16$ Gray-code row is listed separately in
+\cref{tab:gray-historical}.}\label{tab:upper-status}
+\begin{tabularx}{\linewidth}{l l l l X}
+\toprule
+$n$ range & construction & shape & product & status\\\midrule
+$n = 3$               & binary Gray code      & $(2,2,2)$               & $8$              & exact in connected model\\
+$n = 4$               & special $4$-ring witness & $(2,2,2,3) = \{2^3,3\}$ & $24$       & exact, Lean \texttt{M\_4\_eq\_24}\\
+$n \in \{5,\ldots,8\}$ & small-$n$ absorber   & $\{2^3, 4, 3^{n-4}\}$   & $32 \cdot 3^{n-4}$ & exact\textsuperscript{\dag}, Lean \texttt{upper\_bound\_small} + exhaustive LB\\
+$n = 9$               & ternary strip         & $(2, 3, \ldots, 3, 2)$  & $4 \cdot 3^{7} = 8748$ & exact\textsuperscript{\dag}, Lean UB + exhaustive LB\\
+$n = 10$              & ternary strip (CUP-2) & $(2, 3, \ldots, 3, 2)$ & $4 \cdot 3^{8} = 26244$ & conjectured sharp; Lean UB only\\
+$n \in \{11,\ldots,18\}$ & ternary strip (CLB) & $(2, 3, \ldots, 3, 2)$ & $4 \cdot 3^{n-2}$ & conjectured sharp; Python UB only\\
+$n \ge 19$            & Dijkstra Solution 3   & uniform $3$-state       & $3^n$            & classical fallback, factor $\tfrac{3^n}{4 \cdot 3^{n-2}} = \tfrac{9}{4}$ above conjectured bound\\
+\bottomrule
+\end{tabularx}
+
+\medskip
+\textsuperscript{\dag}\,The ``exact'' entries for
+$n \in \{5, \ldots, 9\}$ are certificate-backed: the Lean-checked
+upper-bound halves are self-contained, and the matching lower
+bounds are discharged by the exhaustive-search procedure of
+\cref{app:exhaust} (worked-example cert streams shipped under
+\texttt{artifacts/rejections/}; remaining per-orientation
+streams regenerable from a clean clone, see
+\cref{app:exhaust-artifact,app:exhaust-repro}).  The
+$n \in \{3, 4\}$ rows are unconditional today.
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Historical comparison: constructions that are valid only
+under the relaxed-connectedness convention of the 1985
+seminar~\cite{HaddadKnuth1985}, not in the connected model of this
+paper.  Listed here for provenance; \emph{not} witnesses for
+$\Mn$ as defined in \cref{sec:prelim-Mn}.}\label{tab:gray-historical}
+\begin{tabular}{l l l l l}
+\toprule
+$n$ & construction & shape & product & convention\\\midrule
+$n = 4$ & binary Gray code & $(2,2,2,2)$ & $16$ & relaxed (disjoint $8$-cycles)\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{theorem}[$M_4 = 24$, Lean-checked]\label{thm:M4-eq-24}
+\texttt{M\_4\_eq\_24} in \texttt{LeanMn/SmallN/Theorem.lean} proves
+$M_4 = 24$ in the central-daemon model
+(both bounds packaged; sorry-free).
+\end{theorem}
+
+This is the Lean-level statement of the $n = 4$ row of
+\cref{thm:exact-values}; \cref{thm:M4-eq-24} is the artifact the
+paper cites when the $n = 4$ identity is invoked unconditionally
+(\cref{sec:upper-n4}).
+
+\subsection{A historical looser construction}\label{sec:upper-sol3v1}
+
+The construction $\mathbf{m} = (2, 3, 3, \ldots, 3)$ (one binary at an
+endpoint, ternary elsewhere) gives $\Mn \le 2 \cdot 3^{n-1}$ for
+$n \ge 3$.  This is looser than $4 \cdot 3^{n-2}$ by a factor $3/2$
+and is recorded for historical interest only; it is the simplest valid
+non-uniform family beyond Dijkstra's originals.
+
+% =====================================================================
+\section{Exact lower bounds at small $n$}\label{sec:lower}
+% =====================================================================
+
+This section certifies the $\ge$ direction of
+\cref{thm:exact-values}.  The methodology
+and the per-$n$ enumeration are described here in summary; the full
+reproducibility material lives in \cref{app:exhaust}.
+
+\subsection{Methodology (certificate-grade)}\label{sec:lower-method}
+
+For each $n \in \{3, \ldots, 9\}$ we proceed as follows.
+\begin{enumerate}[leftmargin=*]
+\item Enumerate all state-count vectors with product $T$ satisfying
+$T < \Mn$ (strictly below the claimed minimum; candidates at $T = \Mn$
+are excluded so the actual sharp witness is not rejected).
+\item Quotient by cyclic rotation, reflection, and state-renaming
+symmetries where sound.
+\item Enumerate candidate good cycles and partial rule tables within
+each class.
+\item Apply sound pruning rules (quasi-unidirectionality,
+forced-neighbor constraints, $\detOf$-dictionary consistency).
+\item For every surviving candidate, verify that no completion to a
+full transition function satisfies the six validity properties of
+\cref{sec:prelim-five}.
+\item Produce machine-checkable failure certificates or independently
+replayable logs.
+\item Validate the search with an independent checker (a re-implementation
+in a second code path, \cref{app:exhaust}).
+\end{enumerate}
+
+\begin{remark}\label{rem:proof-obligation}
+The $\ge$ direction of
+\cref{thm:exact-values} is \emph{not}
+merely the statement that the search failed to find a witness; it
+is that every sub-target product class is eliminated by a sound,
+replayable certificate.  \Cref{app:exhaust} is the proof obligation
+for $n \in \{5, \ldots, 9\}$, discharged by the deterministic
+exhaustive-search driver; the pre-generated rejection stream at
+\texttt{artifacts/rejections/} ships in full for
+$n \in \{3, 4\}$ and for the all-binary orientation at $n = 5$,
+with per-cert streams at every other $(n, \text{orientation})$ pair
+regenerable from a clean clone (\cref{app:exhaust-artifact},
+\cref{app:exhaust-repro}).
+\end{remark}
+
+\subsection{The exhaustive verification at $n \in \{3, \ldots, 9\}$}\label{sec:lower-exhaustive}
+
+All state-count vectors with $\prod_i m_i < \Mn$ are eliminated by the
+above method.  In particular at $n = 9$:
+\begin{itemize}[leftmargin=*]
+\item every multiset with $\prod_i m_i = 7776 = 32 \cdot 3^5$ fails:
+the three multisets $\{2^3, 3^5, 4\}$, $\{2^4, 3^4, 6\}$, and
+$\{2^5, 3^3, 9\}$ (\cref{app:exhaust}, \cref{tab:n9-7776}, lists
+every such multiset and its dihedral orientation count; total $94$
+orientations);
+\item every multiset with $\prod_i m_i \in (7776,\, 8748)$ fails:
+\cref{app:exhaust}, \cref{tab:n9-strict-between}, lists all $24$ such
+multisets with their products;
+\item the state vector $(2, 3, 3, 3, 3, 3, 3, 3, 2)$ at product $8748$
+is a verified valid system (CLB witness, \cref{sec:upper-clb};
+also CUP-2 witness, \cref{sec:upper-cup2}).
+\end{itemize}
+The three $7776$ multisets and the $24$ multisets in
+$(7776, 8748)$ were discharged by targeted computational probes
+on these absorber-specific candidates rather than by running the
+general App C rejection stream end-to-end (the latter is
+feasible in principle at $n = 9$ on local hardware but the
+per-multiset per-orientation wall-clock and output-size cost make
+pre-generation of the full bundle impractical; \cref{app:exhaust-repro}).
+The probes themselves are deterministic Python scripts shipped
+under \texttt{docs/axisc/} and \texttt{probes/}; their outputs
+(per-orientation verdicts and Farkas-style infeasibility
+witnesses where available) are archived as JSON alongside the
+source.  Hence $M_9 = 8748$ exactly.  The same App C
+methodology, applied at the smaller target products
+$\Mn = 32 \cdot 3^{n-4}$ for $n \in \{5, 6, 7, 8\}$ and
+$\Mn = 24$ for $n = 4$ and $\Mn = 8$ for $n = 3$, certifies the
+remaining rows of \cref{thm:exact-values} (with the $n = 4$ row
+also discharged analytically in Lean as
+\cref{thm:M4-eq-24}).
+
+State-space size grows as $\prod m$, and the number of candidate good
+cycles, partial rule tables, and completions grows substantially faster
+than that.  Beyond $n = 9$ the certificate search exceeds available
+hardware budget under the current pruning rules; this is why
+\cref{conj:lb-allN} is open for $n \ge 10$ (\cref{sec:lower-no-extend}).
+
+\subsection{ARG's bound and the $n = 9$ crossover}\label{sec:lower-arg}
+
+The $n = 9$ ratio crossover is \emph{not} explained by ARG's 1985
+LCM bound.  Two observations
+suffice~\cite[\S2--\S3]{HaddadKnuth1985}; a self-contained dispatch
+is shipped with the repository bundle
+(\cref{app:exhaust-artifact}).
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Scope.} The small-$n$ absorber witnesses use adjacent
+binary positions (\cref{sec:upper-small}), which lie outside ARG's
+non-adjacency hypothesis.  ARG's bound is silent on every known valid
+construction in this family.
+\item \textbf{Insensitivity.} On the non-adjacent orientations of
+$\{2^3, 4, 3^{n-4}\}$ that ARG does cover, the LCM functional is
+constant or strictly nested between $n = 8$ and $n = 9$ under each of
+four natural readings of ``LCM of block state counts'' (global,
+per-arc-min, per-arc-max, block-product).  A shipped script (\texttt{arg\_lcm\_finite\_checks.py};
+\cref{app:manifest}) enumerates the dihedral orbit of non-adjacent
+orientations ($6$ at
+$n = 8$, $10$ at $n = 9$) and reports for each reading the set of
+values taken across the orbit; the verified numerics are
+\emph{global-LCM} $\{12\} = \{12\}$, \emph{per-arc-min-LCM}
+$\{3, 12\} = \{3, 12\}$, \emph{per-arc-max-LCM} $\{12\} = \{12\}$,
+and \emph{block-products} $\{3, 4, 9, 12, 27, 36\} \subset \{3, 4, 9,
+12, 27, 36, 81, 108\}$ (first set at $n = 8$, second at $n = 9$).  No
+LCM-functional reading discriminates the phase-transition boundary.
+\end{enumerate}
+
+\begin{remark}[ARG's bound remains a genuine 1985 contribution]\label{rem:arg-not-wrong}
+Within its stated non-adjacency hypothesis ARG's result is correct and
+useful: it reproves all-binary impossibility for $n > 4$
+($L = 1$ forces $N = 0$) and caps the binary count at $4$ in the
+all-ternary-non-binary mixed case $\{2^k, 3^{n-k}\}$ ($L = 3$ forces
+$k \le 4$).  These are scope-limits on the witness search; they
+simply do not locate the $n = 9$ boundary.
+\end{remark}
+
+The 1985 seminar's quasi-unidirectionality bound (no $4$ or more
+consecutive binary processors~\cite[p.~75]{HaddadKnuth1985}) is
+compatible with the crossover but silent on the $3$-consecutive case
+at $n \ge 9$.  Candidate analytical directions for future work include
+palindromic entry conflict, shadow-cycle mirror arguments, and
+good-cycle-length versus product entropy bounds; we treat the mechanism
+as an open structural problem.
+
+\subsection{Why exhaustive search does not extend to $n \ge 10$}\label{sec:lower-no-extend}
+
+At $n = 10$, the target state space itself has size $26244$, but
+exhaustive lower-bound certification requires eliminating many
+state-count vectors, candidate good cycles, partial rule tables, and
+completions below the target.  Under the current pruning rules, that
+certificate search exceeds the available budget.  \cref{app:exhaust}
+reports the measured growth in candidate-count and wall-clock from
+$n = 5$ through $n = 9$, from which the $n = 10$ extrapolation follows.
+
+% =====================================================================
+\section{The circulation detector and structural evidence}\label{sec:detector}
+% =====================================================================
+
+\subsection{The lifted-defect graph}\label{sec:detector-graph}
+
+Fix a candidate good cycle $gc$ on $\mathbf{m}$.  The
+\emph{lifted-defect graph} has vertex set
+\[
+   V_{\mathrm{lift}}(gc) \,=\, \bigl\{ (k, q, a) \,:\, k \in \mathrm{Fin}(L),\ q \in \mathrm{Fin}(n),\ a \ne c_k(q),\ c_k[q := a] \in T_{N_1}(gc) \bigr\}
+\]
+with projection $\pi(k, q, a) = c_k[q := a]$.  Edges are induced by the
+firings of the cycle and classified into four types according to the
+relative position of the cycle mover at step $k$ and the defect
+coordinate $q$:
+\begin{itemize}[leftmargin=*]
+\item \textbf{transport}: the mover at step $k$ is far from $q$ (at
+distance $\ge 2$);
+\item \textbf{c\_self}: the mover at step $k$ is exactly $q$;
+\item \textbf{c\_left}: the mover is at position $q - 1$;
+\item \textbf{c\_right}: the mover is at position $q + 1$.
+\end{itemize}
+The 4-type classification partitions the forward edges of the lifted
+graph (verified by the \texttt{classify\_type} audit on $4795$ forward
+edges; see \cref{app:detector}).  The 3-type collapse
+(transport, c\_sided := c\_left $\cup$ c\_right, c\_self) is direction-covariant.
+
+\subsection{The circulation detector}\label{sec:detector-lp}
+
+For a given good cycle $gc$, set up the linear program
+\[
+   \text{find }\Phi : E_{\mathrm{lift}} \to \mathbb{Q}_{\ge 0}
+   \quad\text{with}\quad B^\top \Phi = 0
+   \quad\text{and}\quad \textstyle\sum_{e} \Phi_e = 1,
+\]
+where $B$ is the incidence matrix of the lifted-defect graph.  The
+positive-mass normalization $\sum_e \Phi_e = 1$ replaces the abstract
+$\Phi \ne 0$ condition with a bona-fide linear constraint, so that the
+search is an actual linear program rather than a feasibility predicate.
+By Hoffman's circulation theorem~\cite{Hoffman1960}, this LP is
+feasible if and only if the lifted graph contains a directed cycle.
+This step is a theorem.
+
+\begin{remark}[Detector status]\label{rem:detector-status}
+The detector \emph{predicts}, empirically, that circulation feasibility
+corresponds to obstruction: on every tested record, feasible circulation
+appears exactly at sub-threshold candidates and infeasible circulation
+appears exactly at valid-system witnesses (sharp or super-threshold).
+A proof would require showing that a lifted directed cycle forces
+$\peelTube(gc)$ to be nonempty.  The downstream consumers
+\texttt{sk\_nonempty\_via\_tube\_\{small,large\}\_n} turn
+$\peelTube(gc).\mathrm{Nonempty}$ into $\SK(gc).\mathrm{Nonempty}$, and
+\texttt{SinkKernel.not\_converges\_of\_SK\_nonempty} turns
+$\SK(gc).\mathrm{Nonempty}$ into nonconvergence; these two steps are
+established.  The missing step is
+``lifted circulation $\Rightarrow$ $\peelTube(gc).\mathrm{Nonempty}$.''
+\end{remark}
+
+\subsection{Empirical results: the $97$-record stratified corpus}\label{sec:detector-corpus}
+
+Three terminology labels (from \cref{def:thresholds}) are used
+throughout this and the next subsection:
+\emph{sub-threshold candidate record},
+\emph{$\Bn$-threshold valid witness}, and
+\emph{valid super-threshold witness}.
+
+\Cref{tab:corpus} gives the corpus composition.
+
+\begin{table}[ht]
+\centering
+\caption{The extended stratified corpus.  No record is duplicated;
+small-$n$ absorber and ternary-strip witnesses use distinct state vectors
+at every $n$ in the corpus.  CUP-2 at $n = 4$ is excluded.  The $n = 8$
+sub-threshold row and the $n = 9$ Table~7 row were added under the
+strengthening effort documented in the supplementary memo listed in
+\cref{app:manifest}; the four $n = 9$ LP-infeasible sub-threshold
+records are discussed in
+\cref{sec:detector-n9-counterexamples}.  The canonical $97$-record
+artifact carrying LP and Axis~C verdicts for every row is
+\texttt{corpus\_canonical.json} (overall hash
+\texttt{f4b017b1f57687cc}; \cref{app:manifest}).}\label{tab:corpus}
+\begin{tabular}{l l c l}
+\toprule
+class & $n$ values & count & LP status\\\midrule
+sub-threshold candidates              & $n \in \{5, 6, 7\}$       & $19$ & feasible ($19/19$)\\
+sub-threshold candidates (full sweep) & $n = 8$                   & $59$ & feasible ($59/59$)\\
+sub-threshold candidates (Table~7)    & $n = 9$, $\prod m = 7776$ & $9$ & feasible ($5/9$); see \S\ref{sec:detector-n9-counterexamples}\\
+small-$n$ absorber (exact-sharp at $n$) & $n \in \{5, 6, 7, 8\}$  & $4$  & infeasible ($4/4$)\\
+ternary-strip (CLB / CUP-2)           & $n \in \{5, 6, 7, 8, 9, 10\}$ & $6$ & infeasible ($6/6$)\\\midrule
+\textbf{total}                        &                           & $97$ & $83$ feasible $+\;14$ infeasible\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\textbf{Notes on the corpus.}
+The $10$ infeasible records are valid-system witnesses; among them, the
+$4$ small-$n$ absorbers are sharp at their $n$
+(\cref{thm:exact-values}) and the $6$ ternary-strip records
+are sharp only at $n = 9$ among the currently stated exact values.  The ternary-strip records at
+$n \in \{5, \ldots, 8\}$ are valid super-threshold witnesses
+(strictly above the small-$n$ absorber's tighter $\Mn$); the
+ternary-strip record at $n = 10$ is conjecturally sharp.  The four
+small-$n$ absorbers and the six ternary-strip witnesses use distinct
+state vectors at every $n$ (e.g.\ $(2, 2, 2, 3, 4)$ versus
+$(2, 3, 3, 3, 2)$ at $n = 5$); no de-duplication is required.
+
+\textbf{Stratification rule (independent of LP outcome).} The
+sub-threshold candidates are drawn by a deterministic enumeration
+over composition classes on $\mathbf{m}$ (sorted multisets with
+$\prod m_i < \Bn$), with one representative per class passed to
+candidate-good-cycle enumeration.  The selection rule is defined in
+terms of the composition class and the driver seed only; it is
+\emph{not} a function of the LP verdict or of any quantity computed
+downstream of the LP.  This matters for the separation claim: the
+corpus would look the same under any alternative detector, and the
+LP was not used to reject or select records.
+
+\textbf{Sub-threshold corpus coverage.}  The $19$ core sub-threshold
+candidates are drawn at $n \in \{5, 6, 7\}$.  A strengthening-effort
+extension (\cref{sec:detector-n9-counterexamples}; see the
+supplementary memo listed in \cref{app:manifest}) runs the same
+enumeration driver over the full set of $59$ unordered multisets
+with product $< B_8 = 2592$ at $n = 8$, and over the three
+product-$7776$ Table~7 multisets at $n = 9$; cycles are found on
+every $n = 8$ multiset and on $9$ (multiset, ordering) pairs at
+$n = 9$.  At $n = 10$ no sub-threshold enumeration was attempted.
+
+\textbf{Result.} On $n \in \{5, 6, 7, 8\}$ the circulation-LP
+detector separates every record in the stratified corpus: all $19 +
+59 = 78$ sub-threshold candidate records at those $n$ are
+circulation-feasible, and all $4$ small-$n$ absorber witnesses and
+$4$ ternary-strip witnesses (at $n \le 8$) are
+circulation-infeasible.  At $n = 9$ the sub-threshold side fractures
+under C1: $5$ of $9$ tested Table~7 sub-threshold orderings are
+LP-feasible, and $4$ are LP-infeasible; the infeasible sub-family is
+documented in \cref{sec:detector-n9-counterexamples}, and a strict
+upgrade of the detector (Axis C, \cref{sec:detector-axis-c}) recovers
+all four while preserving separation on every other tested record.
+
+\subsection{Detector failures at $n = 9$}\label{sec:detector-n9-counterexamples}
+
+Extending the sub-threshold enumeration to the three product-$7776$
+multisets of Table~7 (\S\ref{sec:main-phase}: $\{2^3, 3^5, 4\}$,
+$\{2^4, 3^4, 6\}$, $\{2^5, 3^3, 9\}$) surfaces a concrete localized
+failure of the C1 circulation-LP detector.  On $\{2^3, 3^5, 4\}$
+the enumeration finds candidate good cycles on five cyclic orderings
+(up to dihedral equivalence); four of these orderings return
+LP-infeasible.  All four share the same structural signature:
+
+\begin{itemize}[leftmargin=*]
+\item $k_{\mathrm{bin}} = 3$ (three binary processors);
+\item \texttt{bin\_adj\_pairs} $= 0$ (no two binary positions are
+      cyclically adjacent);
+\item $\min$-binary-gap $= 2$ (binary positions are pairwise
+      separated by at least one ternary and nowhere consecutive).
+\end{itemize}
+
+\noindent The four orderings are, with cycle length $L$:
+
+\begin{center}
+\begin{tabular}{l r}
+\toprule
+ordering & $L$\\\midrule
+$(2, 3, 2, 3, 3, 3, 2, 3, 4)$ & $47$\\
+$(2, 3, 2, 3, 3, 3, 2, 4, 3)$ & $47$\\
+$(2, 3, 2, 3, 2, 3, 3, 3, 4)$ & $47$\\
+$(2, 3, 2, 3, 3, 3, 3, 2, 4)$ & $44$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent On each record the LP returns optimum exactly $0$ with
+empty support, the lifted-defect digraph on the Hamming-$1$
+tube admits no non-trivial non-negative circulation.  The remaining
+fifth ordering of $\{2^3, 3^5, 4\}$ has \texttt{bin\_adj\_pairs} $= 1$
+and is LP-feasible.  On $\{2^4, 3^4, 6\}$ all four tested
+orderings are LP-feasible, including $(2, 3, 2, 3, 2, 3, 2, 3, 6)$
+whose binaries are pairwise non-adjacent; the failure locus is
+therefore not \emph{non-adjacent binaries in general} but
+specifically the intersection with $k_{\mathrm{bin}} = 3$.
+
+\textbf{Coverage of the third product-$7776$ multiset.}
+$\{2^5, 3^3, 9\}$ is listed alongside the other two
+product-$7776$ $n = 9$ multisets in \cref{tab:n9-7776} and has
+$28$ dihedral orientations, but contributes zero cycles to the
+detector corpus.  The candidate-good-cycle enumerator finds no
+good cycle on any of its orderings within the probe budget used
+for \cref{tab:corpus}; the multiset is therefore eliminated
+cycle-free from the detector side (there is nothing for C1 or
+Axis~C to fire on) and is separately ruled out, as a
+sub-threshold product class, by the exhaustive search of
+\cref{sec:lower-exhaustive}.  No $\{2^5, 3^3, 9\}$ record was
+silently dropped from the corpus for a verdict-dependent reason.
+
+\textbf{Interpretation.} The four counterexamples are sub-threshold
+records (the multiset $\{2^3, 3^5, 4\}$ at $\prod m = 7776 < 4 \cdot
+3^7 = M_9$; the product is sharp-excluded from valid by the RC and
+AC exhaustive sweeps cited in \cref{sec:lower-no-extend}).  The
+C1 detector failing to fire, i.e.\ returning LP-infeasible,
+on them is a detector failure, not a validity claim about the
+multiset.  Importantly, the structural sub-family on which the
+detector fails coincides with the
+\emph{non-adjacent binary} zone that ARG's 1985 LCM bound treats
+(\S\ref{sec:lower-arg}), and the same sub-family on which ARG's
+LCM-functional is constant between $n = 8$ and $n = 9$.  The C1 LP
+is silent on the same sub-family as ARG's bound: it is a detector
+on every tested record \emph{outside} the non-adjacent $k = 3$
+binary zone and is silent inside it.
+
+\textbf{Restricted-LP variants.} The T+sided-only variant
+(\S\ref{sec:detector-tsided}, the $c_{\mathrm{self}} = 0$
+restriction of C1) does \emph{not} recover the counterexamples:
+all four records remain LP-infeasible under T+sided-only with
+identical objective $0$, support size $0$, and the same per-record
+edge statistics.  The transport-only variant is trivially infeasible
+on all nine $n = 9$ records.  Concretely, the design-space for an
+$n \ge 9$ detector that handles this sub-family is catalogued in
+the supplementary memo listed in \cref{app:manifest}, where a
+restricted-to-edge-type construction is marked RED and two
+alternative axes (full-forced-NG sink-kernel detector, structural
+template-match against the ternary-strip witness) are open.
+
+\textbf{Relation to existing open question.} The restricted-
+feasibility fact of \S\ref{sec:detector-tsided}
+(\emph{c\_self edges are empirically unnecessary on every tested
+$n \le 8$ sub-threshold record}) remains intact: on the five
+LP-feasible $n = 9$ records the T+sided-only LP preserves
+feasibility with unchanged support size, and on the four
+counterexamples both C1 and T+sided-only are infeasible.  The
+open question stated in \cref{conj:tsided,sec:open-tsided} updates
+to: \emph{every good cycle at
+$n \ge 9$ with product below $4 \cdot 3^{n-2}$ \emph{and} outside
+the $k_{\mathrm{bin}} = 3$ non-adjacent-binary sub-family has a
+directed cycle in the lifted transport-plus-sided graph; the
+sub-family is conjectured to require a distinct LB mechanism.}
+
+\subsection{The Axis C detector for $n \ge 9$}\label{sec:detector-axis-c}
+
+The four $n = 9$ counterexamples of
+\cref{sec:detector-n9-counterexamples} are recovered by a strict
+upgrade of the circulation detector that leaves the Hamming-$1$
+tube: the \emph{sink kernel of the candidate's forced-NG graph}.
+The upgrade is machine-rechecked on the full $97$-record canonical
+corpus artifact (overall hash \texttt{f4b017b1f57687cc}; archived
+with the repository bundle of \cref{app:exhaust-artifact}); the
+$72$-record slice previously shipped covers $4$ at\_smallN
+absorbers $+\;59$ $n = 8$ sub-threshold $+\;9$ $n = 9$ Table-7
+sub-threshold records, with the remaining $25$ ($19$ sub-threshold
+at $n \in \{5, 6, 7\}$ $+\;6$ at\_clb witnesses at $n \in \{5,
+\ldots, 10\}$) filled in by the reconciliation pass documented in
+the supplementary memo listed in \cref{app:manifest}.  The memo
+consolidating all eight probe axes is also listed in
+\cref{app:manifest}.
+
+\paragraph{Definition.} Given a candidate record $(\mathbf{m},
+\mathrm{cycle}, \mathrm{movers}, \detOf)$ let $\mathrm{NG} =
+\prod_i \mathbb{Z}_{m_i} \setminus \mathrm{cycle}$ be the non-good
+configurations and let the \emph{forced-NG digraph} on $\mathrm{NG}$
+have an edge $c \to c'$ whenever some processor $p$ has
+$\detOf[(p, c_{p-1}, c_p, c_{p+1})] \ne c_p$ and applying that move
+yields $c' \in \mathrm{NG}$.  The \emph{sink kernel} is the largest
+$S \subseteq \mathrm{NG}$ such that every $c \in S$ has at least
+one out-edge into $S$ (equivalently, the fixed point of iterative
+removal of vertices with no out-neighbor in the current set).
+The Axis C detector \emph{fires} on a record iff its sink kernel is
+nonempty.
+
+\paragraph{Monotonicity certificate.}  $\SK$ is defined by a
+coclosure-style fixed point, it is the largest subset $S$ of
+$\mathrm{NG}$ in which every vertex has at least one out-neighbor
+in $S$.  Adding forced edges can only add out-neighbors to a given
+vertex; it cannot remove any.  Consequently, every vertex that
+qualified for membership in $S$ under the smaller edge set still
+qualifies under the larger one, and $\SK$ grows monotonically in
+the edge set (equivalently, in $\detOf$): adding forced edges can
+only enlarge $\SK$.  Every extension of the partial $\detOf$ to a
+full transition function $f$ adds forced edges, so
+$\SK(f) \supseteq \SK(\detOf)$.
+A valid self-stabilizing system has $\SK(f) = \emptyset$ under its
+full $f$ (convergence forbids any closed set of non-good configs
+under forced moves).  Hence:
+\emph{$\SK(\detOf) \ne \emptyset$ on a candidate record $\Rightarrow$
+no extension of $\detOf$ to a valid system exists.}  This is the
+one-sided sub-threshold certificate the circulation LP provides for
+$n \le 8$, now extended past the $n = 9$ sub-family on which C1
+was silent.
+
+\paragraph{Corpus verdict.}  Axis C fires on all $87$ sub-threshold
+records of the $97$-record canonical corpus (including all $4$
+$n = 9$ counterexamples of \cref{sec:detector-n9-counterexamples})
+and is silent on all $10$ valid witnesses ($4$ small-$n$ absorbers
+at $n \in \{5, \ldots, 8\}$ plus $6$ at\_clb ternary-strip witnesses
+at $n \in \{5, \ldots, 10\}$): separation is $97/97$ overall.  The
+$87$ sub-threshold count decomposes as $19$ records at
+$n \in \{5, 6, 7\}$, $59$ at $n = 8$, and $9$ at $n = 9$ (Table 7);
+the $68$-record sub-threshold slice sometimes cited separately is
+the $59 + 9$ portion at $n \in \{8, 9\}$.  On the four $n = 9$ counterexamples
+$|\SK| / |\mathrm{NG}|$ lies in $[0.26, 0.50]$ with nontrivial
+strongly-connected-component counts $\{12, 16, 38, 12\}$ and
+largest-SCC sizes $\{1020, 1050, 1185, 930\}$; the peel geometry is
+substantial and is the concrete object targeted by the analytical
+open problem below.
+
+\paragraph{Cross-check: the verdict is genuine, not a det-coverage
+artifact.}  Before adopting Axis C we audited it against a
+potential artifact: the small-$n$ absorber records carry a full
+$\detOf$ dictionary while the $n = 9$ sub-threshold records carry
+only cycle-visited triples (typical coverage $\sim 0.6\%$).  The
+concern was that $|\SK| = 0$ on the absorber records might merely
+reflect full-coverage forcing, not a structural property.  Stripping
+each absorber's $\detOf$ down to exactly the cycle-visited triples
+and recomputing gives $|\SK| = 0$ on all four (with $168$, $480$,
+$1812$, $6876$ stripped triples respectively).  The signal is
+therefore structural, not coverage-driven; the sibling axis D
+(identity-completion verifier) fires $4/4$ but was traced to the
+coverage asymmetry and is retired.
+
+\paragraph{Relation to the circulation LP.}  The C1 circulation LP
+of \cref{sec:detector-lp} is a strictly weaker detector: on the
+$97$-record canonical corpus, $\text{C1 feasible} \Rightarrow
+\text{Axis C fires}$ holds with zero counterexamples, and the four
+$n = 9$ records in $\text{Axis C} \setminus \text{C1}$ are exactly
+the non-adjacent $\{2^3, 3^5, 4\}$ orderings.  Structurally: a
+feasible C1 gives a non-trivial non-negative circulation on the
+Hamming-$1$ tube, and that circulation lifts to a directed cycle
+in the forced-NG graph at Hamming distance $\le 1$ from the good
+cycle; Axis C allows forced cycles at any Hamming distance, which
+is where the four $n = 9$ counterexamples live.
+
+\paragraph{Analytical status.}  Axis C's detector verdict on the
+corpus is machine-recheckable at $O(|\mathrm{NG}|)$ per record (no
+LP solve); the structural certificate (sink-kernel monotonicity) is
+proved.  What remains open is the \emph{uniform} statement:
+whether $\SK(\detOf) \ne \emptyset$ holds on \emph{every}
+sub-threshold candidate record at arbitrary $n$, not just the $87$
+sub-threshold records in the canonical corpus.  This is a cleaner target than the C1
+``feasible $\Rightarrow$ $\peelTube$-nonempty'' implication:
+Axis C is not restricted to the Hamming-$1$ tube, and the
+sink-kernel is a discrete topological invariant of
+$X(\mathbf{m}) \setminus \mathrm{cycle}$ (a closure property of the
+forced-move digraph, not an arithmetic one on $\detOf$).  It is the
+``topological invariant forbids it''-shaped obligation the
+analytical program has been trying to isolate.
+
+\paragraph{Extended $n = 10$ sub-threshold sweep.}  The $87$
+sub-threshold records of the canonical corpus above cover
+$n \in \{5, \ldots, 9\}$; $n = 10$ is absent because the
+small-$n$ probe budget used for the canonical corpus does not
+reach $n = 10$ cycle enumeration.  A separate full-$n = 10$ sweep
+probes every one of the $291$ sorted (``canonical'') sub-threshold
+$n = 10$ multisets using two orthogonal tools: (a) a DFS good-cycle
+enumerator (\texttt{probe\_axisc\_n10\_sweep.py}, $30\,\mathrm{s}$
+budget per canonical ordering, $2$ orderings per multiset) and
+(b) a z3 SMT cycle-existence encoder
+(\texttt{probe\_cycle\_smt.py} / \texttt{sweep\_smt\_n10\_uncovered.py},
+a first-order encoding of $\mathrm{state}[t, p]$ and
+$\mathrm{mover}[t]$ variables with transition, fairness, closure,
+and det-consistency constraints) run on every multiset the DFS
+enumerator could not find a cycle for within its budget.  The SMT
+encoding's cost is polynomial in the cycle length and independent
+of $\prod m$, so it closes multisets on which brute-force DFS
+exceeds its $30\,\mathrm{s}$ cap.  Combining the two tools:
+\begin{itemize}[leftmargin=*]
+\item DFS found good cycles on $77$ multisets and ran Axis C on
+every cycle;
+\item SMT found good cycles on the remaining $214$ multisets and
+ran Axis C on every cycle;
+\item across $\mathbf{320}$ total
+$(\mathrm{multiset}, \mathrm{ordering})$ probes covering every one
+of the $291$ sub-threshold multisets,
+\emph{Axis C fires on every probe, zero silent}
+($\mathbf{320 / 320}$).
+\end{itemize}
+Sink-kernel geometry across the probes: $|\SK|/|\mathrm{NG}|$ in
+$[0.038, 1.000]$, mean $0.175$; good-cycle length $L$ in
+$[20, 59]$.
+
+\paragraph{Extended $n = 11$ sub-threshold sweep.}  The same
+two-tool pipeline extends to $n = 11$: the DFS enumerator on all
+$564$ sorted sub-threshold multisets (same $30\,\mathrm{s}$-per-ordering
+budget, $2$ orderings per multiset) surfaces good cycles on $90$
+multisets across $112$ probes, and the SMT gap-closer
+(\texttt{sweep\_smt\_n10\_uncovered.py} reused with
+\texttt{--L-max 30}, $90\,\mathrm{s}$ timeout per multiset) closes
+$473$ of the remaining $474$ budget-limited multisets.  Combining:
+\begin{itemize}[leftmargin=*]
+\item DFS found good cycles on $90$ multisets and ran Axis~C on
+every cycle;
+\item SMT found good cycles on $473$ of the $474$ DFS-unreached
+multisets and ran Axis~C on every cycle;
+\item $1$ multiset ($[2^8, 4, 4, 6]$) returned UNKNOWN at the
+SMT timeout — a solver-budget outcome, not evidence of an obstruction;
+\item across $\mathbf{585}$ total
+$(\mathrm{multiset}, \mathrm{ordering})$ probes covering $563$ of
+the $564$ sub-threshold multisets,
+\emph{Axis~C fires on every probe, zero silent}
+($\mathbf{585 / 585}$).
+\end{itemize}
+Sink-kernel geometry across the probes: $|\SK|/|\mathrm{NG}|$ in
+$[0.026, 0.999]$, mean $0.110$; good-cycle length $L$ in
+$[22, 65]$.  This extends the $n = 10$ verdict one layer further
+and is cleanly consistent with the uniform claim
+\cref{conj:ub-allN,conj:lb-allN} predicts at $n = 11$.  Artifacts:
+\texttt{axc\_n11\_sweep\_results.json} (DFS sweep),
+\texttt{axc\_n11\_smt\_sweep\_results.json} (SMT-closed sweep).
+
+\paragraph{Scope caveat.}  Axis~C monotonicity eliminates a
+specific $(\mathrm{cycle}, \detOf)$ candidate, not a whole
+multiset: a multiset is ruled out only up to the $(\mathrm{cycle},
+\mathrm{ordering}, \detOf)$ probes actually surfaced by the
+pipeline.  The DFS half uses a fixed $30\,\mathrm{s}$ budget and
+two canonical orderings per multiset; the SMT half finds \emph{a}
+good cycle per multiset, not all of them.  ``$320 / 320$'' at $n
+= 10$ and ``$585 / 585$'' at $n = 11$ therefore mean \emph{every
+probe that the two-tool pipeline surfaced fires Axis~C}, not
+\emph{every candidate good cycle on every multiset does}.
+Completeness of the good-cycle enumerator under the search's
+pruning discipline is the additional gap between a per-probe
+statement and a per-multiset statement; it coincides with the
+exhaustive-search completeness question of \cref{app:exhaust} and
+is not separately claimed here.  This is the sense in which
+\cref{conj:lb-allN} is ``Axis~C-supported'' at $n = 10, 11$:
+supported per probe, not proved per multiset.  The verdict is
+nevertheless cleanly consistent with the uniform claim
+\cref{conj:ub-allN,conj:lb-allN} predicts at $n = 10, 11$.  The
+$n = 10$ DFS sweep ($291$ multisets in $3.7\,\mathrm{h}$), its
+SMT-closed sweep ($214$ budget-limited multisets, $2.8\,\mathrm{h}$),
+the $n = 11$ DFS sweep ($564$ multisets), its SMT-closed sweep
+($473$ of $474$ budget-limited multisets), and the combined
+findings memo are all archived in the repository bundle
+(\cref{app:exhaust-artifact}) and indexed in \cref{app:manifest}.
+
+\subsection{Supplementary probes}\label{sec:detector-supplementary}
+
+\textbf{Sharpness probe.} At $n \in \{5, 6\}$, feasibility transitions
+sharply at $\prod m = \Mn$: every immediately-sub-threshold candidate
+is feasible and every $\Mn$-threshold valid witness is infeasible.
+At $n = 7$ sub-side cycle enumeration timed out; this caveat is noted.
+
+\textbf{Random-multiset probe.} $15$ random sub-threshold multisets at
+$n \in \{5, 6, 7\}$; for the $12$ that admitted a candidate good cycle,
+all $12$ were LP-feasible.  The detector generalizes beyond the
+\texttt{enumerate\_multisets} stratification.
+
+\textbf{Perturbation probe.} $11$ edge-definition and orientation
+variations were tested; no record flipped verdict.  The route is
+robust to edge-definition perturbation.
+
+\subsection{The restricted-feasibility observation}\label{sec:detector-tsided}
+
+\textbf{Primary observation (empirical).} \emph{After forbidding c\_self
+edges entirely, circulation remains feasible on all $19$ sub-threshold
+records.}  This is the central observation of the subsection.
+
+\textbf{Secondary observation (selected LP optimum).} On the LP optima
+returned by the default solver, c\_self carries zero flow on all $19$
+records.  This is a statement about a selected optimum; if the LP optimum
+is non-unique, some alternate optimum may place positive flow on c\_self.
+The restricted-feasibility statement above does not depend on optimum
+selection.
+
+\textbf{Edge-type flow statistics (selected optima).}
+On the orientation-invariant 3-type collapse, the selected-optimum
+mean support is transport $66.5\%$, c\_sided $33.5\%$, c\_self $0\%$
+(the split of c\_sided into c\_right $33.2\%$ and c\_left $0.3\%$ is
+a cycle-orientation artifact: reversing the cycle swaps the two, so
+only the sum is a property of the record).  The c\_self edges
+constitute up to $14.9\%$ of the lifted graph but contribute $0\%$ in
+the selected optima.
+
+On the tested corpus, the c\_self edges are empirically unnecessary for
+circulation; forbidding them preserves feasibility on every sub-threshold
+record tested.  This suggests that any eventual proof may be able to
+work entirely in the transport-plus-sided subgraph.
+
+\textbf{Analytical status.}  The proof attempt, a $q$-tube forward
+walk in the transport-plus-sided subgraph, stalls at a specific
+named obstruction.  The walk advances cleanly on transport and
+sided-adjacent steps but hits a ``hole'' at every step where the cycle
+mover equals the defect coordinate ($\mathrm{mov}_k = q$).  Every
+position $q$ fires at least once per good cycle (fairness), so every
+$q$-tube walk has at least one hole.  Closing the hole requires
+cycle-local $\detOf(gc)$ information.  This obstruction is one of the
+five families catalogued in \cref{sec:landscape}.
+
+\subsection{What this section establishes (and what it does not)}\label{sec:detector-summary}
+
+\Cref{sec:detector} establishes:
+\begin{itemize}[leftmargin=*]
+\item separation of all $97$ records of the extended corpus at
+$n \in \{5, \ldots, 10\}$ under the Axis C sink-kernel detector
+(\cref{sec:detector-axis-c}), and separation of $93$ of $97$ under
+the circulation-LP detector of \cref{sec:detector-lp}, the four
+C1-infeasible $n = 9$ sub-threshold records of
+\cref{sec:detector-n9-counterexamples} being exactly
+$\text{Axis C} \setminus \text{C1}$;
+\item robustness of C1 to edge-definition perturbation and random sub-threshold sampling;
+\item restricted feasibility without c\_self on every tested sub-threshold record;
+\item a one-sided sub-threshold certificate via sink-kernel monotonicity
+on the forced-NG digraph (\cref{sec:detector-axis-c});
+\item a concrete obstruction mechanism pointing at the
+$(C, \mu) \times \detOf$ interaction.
+\end{itemize}
+It \emph{does not} establish:
+\begin{itemize}[leftmargin=*]
+\item any extension of the corpus-separation claim beyond the $97$
+records or beyond $n \le 10$;
+\item a uniform-in-$n$ proof that $\SK(\detOf) \ne \emptyset$ on every
+sub-threshold candidate (\cref{sec:detector-axis-c}), nor a proof of
+the analogous C1 implication ``feasible $\Rightarrow$ $\peelTube$-nonempty.''
+\end{itemize}
+
+The specific statement is \cref{conj:tsided} of
+\cref{sec:open-tsided}; empirical support is substantial but
+analytical attempts fail at mover-equals-defect steps
+(\cref{sec:landscape-flow}).
+
+% =====================================================================
+\section{A map of the obstruction landscape}\label{sec:landscape}
+% =====================================================================
+
+This section catalogs systematic analytical attempts at the lower
+bound, organized by the underlying invariant family.  Five families
+were tested.  Each subsection follows the same five-point template:
+proposed invariant, target lemma, what was tested, failure mode, what
+this teaches a future attempt.  Long-form descriptions of each tested
+approach are deferred to \cref{app:landscape-detail}.
+
+\subsection{Framing}\label{sec:landscape-framing}
+
+The five families are: flow-theoretic decomposition; ambient
+topological invariants; map-level invariants; sheaf cohomology; and
+arithmetic extraction.  We treat each in turn.
+
+\subsection{Family 1: flow-theoretic decomposition}\label{sec:landscape-flow}
+
+\textbf{Proposed invariant.} A per-vertex balance identity on the
+$4$-type decomposition (transport, c\_self, c\_left, c\_right), or in
+the direction-covariant restatement on the $3$-type decomposition
+(transport, c\_sided, c\_self).
+
+\textbf{Target lemma.} For every good cycle at $n \ge 9$ with product
+below $4 \cdot 3^{n-2}$ and every defect tube indexed by $q$,
+transport-plus-sided edges close a directed walk in the lifted graph.
+
+\textbf{What was tested.} The $4$-type per-vertex balance
+identity~\cite{HaddadKnuth1985} (failed, $4.9\%$ leading-order
+residual against a $1\%$ discrimination target); the
+direction-covariant $3$-type balance (failed, $2.7\%$ residual); two
+analytical proof attempts of T+sided-only directed-cycle existence
+(\cref{sec:detector-tsided} and \cref{app:landscape-detail}).
+
+\textbf{Failure mode.} The $q$-tube forward walk at a lifted vertex
+$(k, q, a)$ advances cleanly on transport and sided-adjacent steps but
+hits a \emph{mover-equals-defect hole} at every step where
+$\mathrm{mov}_k = q$.  Fairness guarantees every $q$ encounters such a
+step.  Closing the hole requires cycle-local $\detOf(gc)$ information,
+preventing a uniform-in-$n$ argument.  Two independent attempts identify
+the same wall.
+
+\textbf{What this teaches.} The obstruction is localized at
+mover-equals-defect steps.  Progress requires either (a) a structural
+handle on the move-entry context at these steps that does not
+case-split, or (b) a proof of T+sided cycle existence that bypasses the
+walk construction entirely (\cref{sec:open-tsided}).
+
+\subsection{Family 2: ambient topological invariants}\label{sec:landscape-ambient}
+
+\textbf{Proposed invariants.} $\pi_1$ and $H_1$ of $\NGset(C)$; the
+linking matrix of mover-class subcycles; Lefschetz numbers and
+Artin--Mazur $\zeta_f$; Cheeger and spectral-gap of the forced
+neighborhood graph; Forman--Ricci curvature; discrete Morse theory.
+
+\textbf{What they would need to prove.} A homotopy- or curvature-level
+invariant that distinguishes sub-threshold good cycles from
+valid-system good cycles.
+
+\textbf{What was tested.} See \cref{app:landscape-detail}.
+
+\textbf{Failure mode.} All tested invariants scale with ambient
+dimension $(n, L)$ rather than with per-$m_i$ information.  $\pi_1 = 0$
+on tested records; the linking matrix is circulant, forcing
+$\det \Lambda = 0$; Lefschetz is trivial by contractibility; Cheeger
+$\lambda_2 = 0$ (graph disconnected in both classes); Forman--Ricci is
+monotone in $|V|$; the Conley-style $\beta_1 / |N|$ ranges
+$[1.087, 1.500]$ at sub-threshold and $[1.080, 1.500]$ at threshold
+fully overlap.  The homotopy type of $\NGset(C) \subseteq \prod \Delta^{m_i - 1}$
+is $(n, L)$-parametrized; $\mathbf{m}$ enters only via ambient-cell
+counts.
+
+\textbf{What this teaches.} Ambient-space topology is
+$(n, L)$-parametrized.  Any future invariant must see $\mathbf{m}$
+beyond ambient dimension, and must address the
+\emph{coverage-inversion} diagnostic: $|\detOf| / T_{\mathrm{total}}
+\approx L / (n \cdot \prod m)$ \emph{decreases} as the product grows,
+pushing any monotone-in-coverage invariant in the wrong direction for
+a lower bound.
+
+\subsection{Family 3: map-level invariants}\label{sec:landscape-map}
+
+\textbf{Proposed invariant.} The Conley index of the good cycle as an
+isolated invariant set of the transition map.
+
+\textbf{Target.} An intrinsic dynamical invariant of the system that
+distinguishes sub-threshold from valid.
+
+\textbf{What was tested.} Scale-normalized $(\beta_0, \beta_1) / |N|$
+pairs of $(N, L)$ where $N = C \cup N_1(C)$ and $L$ is the exit set.
+
+\textbf{Failure mode.} The Conley index is homotopy-invariant under
+$f$-homotopies, but at sub-threshold no valid $f$ exists.  Any
+completion of the rule table (e.g.\ stay-completion) is arbitrary; the
+computed index reflects completion choice, not intrinsic dynamics.
+Normalized ranges fully overlap valid-system records.
+
+\textbf{What this teaches.} Standard dynamical-systems invariants that
+assume the self-map exists cannot directly transfer.  A map-level
+approach would need to treat the ``no valid $f$'' case explicitly,
+a pre-dynamical analog, a partial-function Conley framework, or a
+relation-valued model (\cref{sec:open-conley}).
+
+\subsection{Family 4: sheaf cohomology}\label{sec:landscape-sheaf}
+
+\textbf{Proposed invariant.} \v{C}ech $H^1$ of an extension-problem
+sheaf on the $3$-cells of $\prod \Delta^{m_i - 1}$.
+
+\textbf{Target.} $H^1 \ne 0$ at every sub-threshold good cycle and
+$H^1 = 0$ at every valid-system good cycle.
+
+\textbf{What was tested.} The standard sheaf (with restriction maps
+the natural projection); the single-priv-propagation sheaf; the
+path / cycle-space sheaf on the lifted forced-neighborhood
+$1$-skeleton; the convergence-depth-parameterized sheaf.
+
+\textbf{Failure mode.} The standard sheaf's restriction maps on shared
+$3$-cells are automatic, reducing \v{C}ech cohomology to the nerve
+cohomology with constant coefficients; empirically the nerve
+$\beta_1$ ranges over $[27,\, 11179]$ at valid-system records, so
+$H^1 \ne 0$ fails to vanish where the conjectured separator would
+require it to.  The
+three non-standard variants either compute $H^1 = 0$ uniformly, have
+overlapping ranges across the two classes, or invert the signal.
+
+\textbf{What this teaches.} The obstruction is global (requires
+convergence information), but local-cellular sheaves are by
+construction local.  A sheaf formulation would need restriction maps
+that encode global structure, e.g.\ convergence-propagation or
+single-priv-violation-propagation that is genuinely non-local
+(\cref{sec:open-sheaf}).
+
+\subsection{Family 5: arithmetic extraction}\label{sec:landscape-arith}
+
+\textbf{Proposed invariant.} A scalar arithmetic inequality on
+$\mathbf{m}$-features that separates sub-threshold from valid.
+
+\textbf{Target.} Provable independence from $\prod m < \Bn$, i.e.\ a
+non-tautological separator.
+
+\textbf{What was tested.} A 6-feature linear regression
+($R^2 = 0.809$, threshold accuracy $1.0$ on $25$ records); a 10-feature
+extension ($R^2 = 0.789$, in-sample accuracy $0.966$, leave-one-out
+accuracy $0.931$).
+
+\textbf{Failure mode.} The best approximation is
+$\log \Bn(n) - \log \prod m$, the threshold condition itself.  The
+extraction is tautological.  An additional ``$n_{\mathrm{bin}} \ge 3$
+is the only separator'' reading is falsified by the decisive test
+on the small-$n$ absorber witnesses, which are themselves $3$-binary
+and infeasible.
+
+\textbf{What this teaches.} A viable arithmetic inequality must be
+provably independent of $\prod m < \Bn$; the regression feature spaces
+tested contain no such feature.  Future arithmetic attempts must
+pre-commit a Newness check against the problem's own definition.
+
+\subsection{Unifying observation}\label{sec:landscape-unify}
+
+\begin{observation}\label{obs:locus}
+The failed approaches agree on one point: the obstruction is not
+visible in the ambient state space alone.  It lives in the triple
+interaction among the good cycle $C$, the mover sequence $\mu$, and
+the determined partial rule table $\detOf(gc)$.
+\end{observation}
+
+Each family fails for the same reason from a different angle:
+
+\begin{itemize}[leftmargin=*]
+\item Flow decomposition fails because the interaction appears at
+mover-equals-defect steps.
+\item Ambient topology fails because it does not see the interaction
+at all.
+\item Map-level fails because the interaction is pre-dynamical (no
+self-map exists).
+\item Sheaves fail because the interaction is global, not
+local-cellular.
+\item Arithmetic fails because the only separator is the threshold
+itself.
+\end{itemize}
+The $(C, \mu) \times \detOf$ interaction is named but not captured by
+any standard invariant class tested.
+
+\subsection{Currency reframing test}\label{sec:landscape-currency}
+
+A separate question is whether the failure cascade of
+\cref{sec:landscape-flow,sec:landscape-ambient,sec:landscape-map,sec:landscape-sheaf,sec:landscape-arith}
+reflects a wrong choice of \emph{currency}: we ask for a lower
+bound on $\prod m_i$, but $\prod m_i$ counts the ambient
+configuration space and does not directly measure what the
+dynamics constrains.  A natural alternative is to measure on the
+cycle $C$ itself: the mover-pattern period $T_\mu$, the count
+$\kappa$ of $\detOf$-determined entries pinned by $C$, or the
+empirical entropy $H$ of the cycle's value distribution.  If any
+such quantity $Q(\text{system})$ separates the corpus more cleanly
+than $\prod m_i$ does, then the right form of the lower bound is
+$Q \ge q(n)$ and the product bound follows by counting.
+
+We tested this on the $97$-record stratified corpus of
+\cref{sec:detector-corpus} ($10$ valid witnesses + $87$
+sub-threshold candidates).  For each record we computed $T_\mu$,
+$\kappa_{\text{mover}}$, $\kappa_{\text{total}}$,
+$H_{\text{pos}}$, $H_{\text{joint}}$, and their natural
+normalizations.  The summary (\cref{tab:currency-reframe}) is
+unambiguous.
+
+\begin{table}[ht]
+\centering
+\caption{Per-currency separation of the $97$-record corpus.  AUC is the
+fraction of $(\text{valid}, \text{sub})$ pairs ordered consistently with
+the chosen direction.  ``Strict $n$'' is the number of values of $n$
+(out of $5$, since $n = 10$ has no sub-threshold record) at which the
+currency strictly separates valid from sub.  Saturation CV is the
+coefficient of variation of $\overline{Q}/n^k$ across $n$, minimized
+over $k \in \{0, 1, 2\}$, on the valid side; smaller is better.
+Full per-$n$ tables and methodology in the supplementary memo
+listed in \cref{app:manifest}.}\label{tab:currency-reframe}
+\begin{tabular}{l c c c}
+\toprule
+currency $Q$ & AUC & strict $n$ & saturation CV \\\midrule
+$\log_2 \prod m_i$ & $1.000$ & $5$ & $0.030$ \\
+$\prod m_i$ & $1.000$ & $5$ & $1.048$ \\
+$H_{\text{pos\,sum}}$ & $0.882$ & $3$ & $0.026$ \\
+$H_{\text{joint}}$ & $0.866$ & $2$ & $0.029$ \\
+$T_\mu$ & $0.784$ & $2$ & $0.228$ \\
+$\kappa_{\text{total}}$ & $0.782$ & $2$ & $0.114$ \\
+$\kappa_{\text{mover}}$ & $0.697$ & $2$ & $0.128$ \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Caveat on the saturation column.}  The ``saturation
+CV'' comparison on $\log_2 \prod m_i$ is tautological: the $10$
+valid records were selected because they realize the conjectured
+saturating formula $\Mn = 4 \cdot 3^{n-2}$, so of course they lie
+on a $\log_2 \prod m / n \approx 1.41$ curve.  The $0.030$ CV there
+is a definition, not a discovery, and the CV comparison is included
+only to show that no dynamical currency achieves tautological
+saturation on the valid side either.  The substantive content of
+the table is in the AUC and strict-$n$ columns, and in the
+direction flip discussed below.
+
+\paragraph{The real content: direction flip at $n = 9$.}
+Independently of the saturation-CV column, each dynamical currency
+\emph{reverses direction} at $n = 9$.  The valid record (CLB strip
+on $(2, 3, 3, 3, 3, 3, 3, 3, 2)$) has mover-pattern period
+$T_\mu = 3n - 2 = 25$, $\kappa_{\text{mover}} = 25$,
+$H_{\text{pos\,sum}} = 12.08$ (with good-configuration count
+$L = n^2 - 2n + 8 = 71$).  The nine sub-threshold Table~7 records
+have $T_\mu \in \{39, \ldots, 53\}$,
+$\kappa_{\text{mover}} \in \{39, \ldots, 47\}$,
+$H_{\text{pos\,sum}}$ up to $12.53$.  Each dynamical currency we
+report, $T_\mu$, $\kappa$, and $H$, \emph{reverses
+direction}: on these measures the sub-threshold cycles are
+strictly longer, more mover-active, and more entropic than the
+valid one.  Any attempt to lower-bound some monotone function of
+mover-pattern period, $\detOf$-coverage, or entropy would flip
+the inequality at $n = 9$.  Only $\prod m$ sees that these records
+are sub-threshold.
+
+\begin{observation}[Currency null]\label{obs:currency-null}
+On the $97$-record stratified corpus, no candidate dynamical
+currency $Q \in \{T_\mu, \kappa, H, \text{their ratios}\}$
+reorders valid vs.\ sub-threshold more cleanly than $\prod m_i$
+does (same or worse AUC, same or worse strict-$n$ count).  More
+substantively,
+at $n = 9$ every candidate dynamical currency \emph{reverses
+direction}; this is the statement with content (the AUC and
+saturation-CV columns are ancillary, the latter partly tautological
+by the saturating-family selection of the valid side).  The
+direction flip rules out the reformulation ``lower-bound a
+different, dynamical quantity'': no monotone function of
+$T_\mu$, $\kappa$, or $H$ can lower-bound the sub-threshold side
+without flipping sign at $n = 9$.  $\prod m_i$ is therefore the right
+ambient
+coordinate for the obstruction; the obstruction itself remains
+located in the joint $(C, \mu) \times \detOf$ interaction
+(\cref{obs:locus}).
+\end{observation}
+
+This rules out the obvious reformulation, ``solve the lower-bound
+problem on a different quantity.''  It does not rule out routes that
+extract a structural invariant of $X(\mathbf{m}) \setminus C$ while
+keeping $\prod m_i$ as the ambient coordinate; such routes are still
+open and indeed match the topological-invariant proof shape we find
+most natural for the problem.
+
+% =====================================================================
+\section{Open questions}\label{sec:open}
+% =====================================================================
+
+\subsection{Analytical proof of T+sided-only circulation existence}\label{sec:open-tsided}
+
+\begin{conjecture}[T+sided directed cycle]\label{conj:tsided}
+For every good cycle at $n \ge 9$ with product below $4 \cdot 3^{n-2}$,
+the subgraph of the lifted forced-NG graph induced by transport
+$\cup$ c\_left $\cup$ c\_right contains a directed cycle.
+\end{conjecture}
+A small-$n$ piecewise variant can be stated for $n \in \{5, \ldots, 8\}$
+at product below $32 \cdot 3^{n-4}$.  If \cref{conj:tsided} is proved
+together with the missing implication from a lifted directed cycle to
+$\peelTube$-nonemptiness, the existing
+\texttt{SinkKernel.not\_converges\_of\_SK\_nonempty} machinery yields
+the conjectured large-$n$ lower bound.  The two implications are
+logically independent; both are currently open.  The specific structural
+obstruction is the $q$-tube hole at mover-equals-defect steps
+(\cref{sec:landscape-flow}).
+
+\subsection{Uniform Axis C: sink-kernel nonemptiness on every sub-threshold candidate}\label{sec:open-axis-c}
+
+\begin{conjecture}[Uniform Axis C]\label{conj:axis-c}
+For every candidate good cycle + partial-$\detOf$ record
+$(\mathbf{m}, \mathrm{cycle}, \mathrm{movers}, \detOf)$ produced by
+the enumeration pipeline at $n \ge 9$ with $\prod m_i < 4 \cdot
+3^{n-2}$, the sink kernel $\SK(\detOf)$ of the forced-NG digraph
+(\cref{sec:detector-axis-c}) is nonempty.
+\end{conjecture}
+
+By \cref{sec:detector-axis-c}, a proof of \cref{conj:axis-c} would
+upgrade the one-sided certificate from the corpus-level empirical
+statement to a uniform-in-$n$ structural theorem, discharging the
+large-$n$ lower bound without the two-step
+(T+sided-only $\Rightarrow$ $\peelTube$) routing.  Axis C is not
+restricted to the Hamming-$1$ tube, and the SK operator is a
+discrete topological invariant of $X(\mathbf{m}) \setminus
+\mathrm{cycle}$ (a closure property of the forced-move digraph), so
+the obligation is shaped as ``a topological invariant forbids it''
+rather than an arithmetic statement on $\detOf$.  Supporting
+evidence at the first $n$ beyond the exhaustive-certificate reach:
+the extended $n = 10, 11$ sweeps of \cref{sec:detector-axis-c}
+fire Axis C on every one of the $291$ sorted $n = 10$ sub-threshold
+multisets ($320$ probes, zero silent) and on $563$ of $564$
+sorted $n = 11$ sub-threshold multisets ($585$ probes, zero silent,
+one SMT-budget UNKNOWN) across a two-tool (DFS $+$ SMT) pipeline,
+extending the canonical-corpus verdict two levels past the
+exhaustive certificate at $n = 9$.  Concrete openings flagged by the corpus audit: the four
+$n = 9$ non-adjacent $\{2^3, 3^5, 4\}$ records have nontrivial-SCC
+counts in $\{12, 16, 38, 12\}$ with largest SCCs of size
+$\sim 1000$, small enough for a direct analysis of their
+forced-orbit structure.
+
+\subsection{A pre-dynamical analog of Conley index}\label{sec:open-conley}
+
+Does a map-level invariant exist that is well-defined when no valid
+self-map $f$ exists?  Candidate frameworks: partial-function Conley
+index; relation-valued homotopy.  Such an invariant would discriminate
+self-stabilizability without requiring the system to be defined.
+
+\subsection{A sheaf formulation encoding global constraints}\label{sec:open-sheaf}
+
+Construct a sheaf whose restriction maps encode
+convergence-propagation or single-priv-violation-propagation
+non-locally, and compute its $H^1$ on the $97$-record canonical
+corpus.  The standard local-cellular design space failed
+empirically (\cref{sec:landscape-sheaf}); a non-local sheaf could
+in principle access the global obstruction.
+
+\subsection{Extension of empirical verification}\label{sec:open-extend}
+
+Extend the CLB or CUP-2 witness verification beyond $n = 18$, ideally
+by replacing finite verification with an all-$n$ symbolic proof that
+both rule tables satisfy the six validity properties for every
+$n \ge n_0$.
+This would promote \cref{conj:ub-allN} from a Python-verified finite
+range to an all-$n$ theorem.
+
+\subsection{Lean formalization of the lower bound}\label{sec:open-leanlb}
+
+Prove $\Mn \ge 4 \cdot 3^{n-2}$ in Lean 4 / Mathlib for some $n \ge 10$,
+or for a restricted subclass of good cycles (e.g.\ those with
+$\mathrm{longest\_ter\_run} \le 1$).  This would move part of the
+lower-bound program from computational evidence toward
+proof-assistant-certified mathematics.
+
+\subsection{Relationship to ARG's 1985 binary-count conjecture}\label{sec:open-arg}
+
+In what restricted settings does \cref{conj:lb-allN} imply ARG's
+binary-count conjecture (no valid system has more than a constant
+number of binary processors as $n \to \infty$)?  At ternary-dense
+$\{2, 3\}$ multisets the implication is immediate: \cref{conj:lb-allN}
+forces $2^k \cdot 3^{n-k} \ge 4 \cdot 3^{n-2}$, hence $k \le 2$.
+With higher-state compensation allowed the implication is not
+immediate.
+
+\subsection{Transport to the relaxed-connectedness convention}\label{sec:open-relaxed-vs-connected}
+
+All bounds of \cref{sec:main} are stated in the Dijkstra-connected
+model of \cref{sec:prelim-model}.  The 1985 Stanford seminar worked
+under a relaxation that admitted multi-good-cycle constructions
+(including the $n = 4$ Gray-code family at product $16$); write
+$\Mn^{\mathrm{rel}}$ for the minimum state product under that
+convention.  The first-data result $M_5^{\mathrm{rel}} = M_5 = 96$
+was stated in \cref{sec:main-relaxed} (\cref{thm:m5rel}); this
+subsection records the underlying SMT table and the open questions
+beyond $n = 5$.
+\begin{enumerate}[leftmargin=*]
+\item Is $\Mn^{\mathrm{rel}} = \Mn$ for every $n \ge 5$?
+\item For $n \in \{5, \ldots, 9\}$, is $\Mn^{\mathrm{rel}}$ equal
+to the value in \cref{thm:exact-values}, or strictly smaller
+(as it is at $n = 4$, where $M_4^{\mathrm{rel}} \le 16 < 24 = M_4$)?
+\item Does the conjecture $\Mn = 4 \cdot 3^{n-2}$ of
+\cref{conj:ub-allN,conj:lb-allN} transport to $\Mn^{\mathrm{rel}}$,
+and hence resolve Knuth's original 1985 questions as stated?
+\end{enumerate}
+A positive answer to (1) would make the connected-model bounds of
+this paper directly applicable to Knuth's questions as originally
+stated; until then, the resolution offered by
+\cref{cor:asymptotic} is of the connected-variant questions only.
+\Cref{thm:m5rel} answers question (1) positively at $n = 5$ and
+question (2) negatively at $n = 5$.
+
+\paragraph{First data (randomized search).}  A standalone relaxed
+verifier (shipped with the repository bundle) confirms that every
+stored connected-valid witness ($w_{4\mathrm{opt}}, w_5, w_6, w_7,
+w_8$) is also relaxed-valid (relaxed $\supseteq$ connected, as
+expected).  Brute-force rule enumeration at $n = 5$ is infeasible
+(approximately $10^{10}$--$10^{12}$ rule systems per sub-threshold
+multiset), but a randomized sub-threshold sample of $5.5 \times
+10^6$ rule systems distributed over five sub-target multisets
+($\{2^5\}, \{2^4,3\}, \{2^3, 3^2\}$ at $n = 5$; $\{2^6\}, \{2^5, 3\}$
+at $n = 6$) yielded zero relaxed-valid hits.  This is not a proof,
+but it is first negative data against $M_n^{\mathrm{rel}} < M_n$ at
+$n \in \{5, 6\}$.
+
+\paragraph{SMT table for $M_5^{\mathrm{rel}} = M_5$.}  A z3 SMT
+encoding of the five relaxed-convention validity properties (with a
+\texttt{--sym-break} flag enabling WLOG quotients under the
+per-processor value-swap action and cyclic rotation of processor
+indices on $(\mathrm{good}, f)$) certifies that \emph{no
+relaxed-valid rule table exists at any of the five $n = 5$
+sub-threshold multisets}:
+
+\begin{center}
+\begin{tabular}{l r r l r}
+\toprule
+multiset     & $\prod m$ & $M_5$ & verdict & z3 time\\\midrule
+$\{2^5\}$       &  $32$ & $96$ & UNSAT &  $0.02\,\mathrm{s}$\\
+$\{2^4, 3\}$    &  $48$ & $96$ & UNSAT &  $0.14\,\mathrm{s}$\\
+$\{2^4, 4\}$    &  $64$ & $96$ & UNSAT &  $8.94\,\mathrm{s}$\\
+$\{2^3, 3^2\}$  &  $72$ & $96$ & UNSAT & $31.6\,\mathrm{s}$\\
+$\{2^4, 5\}$    &  $80$ & $96$ & UNSAT & $90.2\,\mathrm{s}$\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Total sub-threshold runtime $\approx 130\,\mathrm{s}$.  An
+at-threshold sanity check at $\{2^3, 3, 4\}$ (product $96 = M_5$)
+returns SAT in $0.48\,\mathrm{s}$ and the extracted rule table
+passes the relaxed verifier end-to-end, confirming the encoding is
+correct.  Combined, these certificates give $M_5^{\mathrm{rel}} \ge
+96$, and since $M_5^{\mathrm{rel}} \le M_5 = 96$ is automatic,
+$M_5^{\mathrm{rel}} = M_5 = 96$ (\cref{thm:m5rel}).
+
+\paragraph{$n = 6$ partial sweep.}  Of the twelve $n = 6$
+sub-threshold multisets, six are UNSAT-certified under the same
+encoding (every multiset with product $\le 216$, including the
+hardest-so-far $\{2^3, 3^3\}$ at $1905\,\mathrm{s}$); the remaining
+six, at products $\{192, 192, 224, 240, 256, 256\}$, are in a
+batch-running sweep.  The encoding source, per-multiset UNSAT logs,
+and findings memo are shipped with the repository bundle
+(\cref{app:exhaust-artifact}).
+
+% =====================================================================
+\section{Related work}\label{sec:related}
+% =====================================================================
+
+\subsection{Classical}\label{sec:related-classical}
+
+Dijkstra~\cite{Dijkstra1974} introduced self-stabilization;
+Tchuente~\cite{Tchuente1981} showed that in the uniform case
+($m_i = m$ for all $i$) the common state count must satisfy
+$m \ge 3$, motivating Knuth's product-minimization generalization; Haddad--Knuth~\cite{HaddadKnuth1985} (STAN-CS-85-1055)
+includes the seminar's $\Mn > 2^n$ bound for $n > 4$, ARG's
+non-adjacent-binary LCM bound $L \ge N + 1$, and the
+quasi-unidirectionality bound; Dijkstra~\cite{Dijkstra1986} gave the
+belated proof of Solution 3 correctness.
+
+ARG's LCM bound remains the sharpest 1985-era structural constraint on
+the non-adjacent-binary sub-family and underpins both the all-binary
+impossibility reproof and the $k \le 4$ binary cap in
+$\{2^k, 3^{n-k}\}$.  As discussed in \cref{sec:lower-arg}, the bound
+does not extend to the adjacent-binary witnesses that realize $\Mn$ for
+$n \in \{4, \ldots, 8\}$.
+
+\subsection{Post-1985}\label{sec:related-post1985}
+
+Burns--Pachl~\cite{BurnsPachl1989} addressed uniform self-stabilizing
+rings without a distinguished processor; Ghosh~\cite{Ghosh1993}
+established the uniform 3-state lower bound under the central daemon
+with deterministic execution; Gouda--Haddix~\cite{GoudaHaddix1996} gave
+the first stabilizing unidirectional deterministic token ring with a
+constant ($8$-state) per-process state count;
+Beauquier--Debas~\cite{BeauquierDebas1995} gave an optimal $3$-state
+algorithm for bidirectional non-uniform rings with $O(n^2)$
+stabilization time; Hoepman~\cite{Hoepman1999} tightened bounds for
+Solution 1; Blin--Le Bouder--Petit~\cite{BlinLeBouderPetit2024}
+established the $O(\log \log n)$-bit memory threshold for
+self-stabilizing token circulation in a different model;
+Protocon~\cite{KlinkhamerEbnenasir2013} performs automated synthesis for the
+uniform-state version of the problem.  None of these results addresses
+the non-uniform product-minimization question of
+\cref{sec:prelim-Mn}.
+
+\subsection{Lean and formal verification in distributed algorithms}\label{sec:related-formal}
+
+Prior formal verification of self-stabilization includes a PVS
+treatment of Dijkstra's token ring, Coq frameworks for certified
+self-stabilization, and PADEC/Coq certifications of stabilization-time
+complexity.  Relative to that prior work, the Lean 4 / Mathlib
+formalization underlying
+\cref{thm:upper-bound-cert,thm:upper-bound-small,thm:M4-eq-24} appears
+to be the first Lean 4 formalization of non-uniform
+state-product witnesses for Dijkstra's token-ring product-minimization
+problem at the scale considered here (state-count product up to
+$26244$, ring size up to $10$, with exhaustive per-$n$ rank-table
+convergence certificates).  The stated Lean theorems are
+sorry-free; finite per-$n$ certificate tables are discharged by
+\texttt{native\_decide} on sealed data.
+
+% =====================================================================
+\section{Conclusion}\label{sec:conclusion}
+% =====================================================================
+
+We have determined $\Mn$ exactly for $n \in \{3, \ldots, 9\}$
+(\cref{thm:exact-values}): the rows $n \in \{3, 4\}$ are
+unconditional; the rows $n \in \{5, \ldots, 9\}$ are backed by the
+replayable rejection-certificate stream shipped under
+\texttt{artifacts/rejections/} in the release tag
+(\cref{app:exhaust-artifact}).  We have certified the sharp ratio
+crossover at $n = 9$ (\cref{rem:phase-scope}) and stated the
+conjecture $\Mn = 4 \cdot 3^{n-2}$ for all $n \ge 9$.  The conjecture
+is supported by Lean-checked upper-bound constructions for
+$n \in \{4, \ldots, 10\}$, Python-verified constructions through
+$n = 18$, an exhaustive lower-bound certificate at $n = 9$, and
+structural detectors that separate the stratified corpus at
+$n \le 9$. The circulation-LP detector separates every tested
+$n \le 8$ record (78 sub-threshold candidates LP-feasible and 8
+$n \le 8$ valid witnesses LP-infeasible); at $n = 9$ it fires on $5$
+of $9$ tested sub-threshold orderings of the three Table~7 multisets
+and returns LP-infeasible on the remaining $4$, which structurally
+localize in the non-adjacent $k_{\mathrm{bin}} = 3$ sub-family of
+$\{2^3, 3^5, 4\}$, the same sub-family on which ARG's 1985 LCM
+bound is also silent.  A strict upgrade of the detector,
+Axis C (\cref{sec:detector-axis-c}), takes the sink kernel of the
+candidate's forced-NG digraph and fires on all $87$ sub-threshold
+records of the canonical $97$-record corpus (including the four
+C1 blind-spot records) while remaining silent on every valid-witness
+record, delivering a one-sided sub-threshold certificate via
+monotonicity in $\detOf$.  Extended two-tool (DFS + SMT)
+sub-threshold sweeps at $n = 10, 11$ fire Axis~C on every probe
+surfaced by the pipeline: $320$ probes across all $291$ sorted
+$n = 10$ sub-threshold multisets and $585$ probes across $563$
+of $564$ sorted $n = 11$ sub-threshold multisets (one SMT-budget
+UNKNOWN), zero silent.  This is a per-probe statement, not a
+per-multiset completeness claim, see the scope caveat of
+\cref{sec:detector-axis-c}.  Additionally, an SMT certificate
+shows $M_5^{\mathrm{rel}} = M_5 = 96$ (\cref{thm:m5rel}), the first
+case at $n \ge 5$ in which $M_n^{\mathrm{rel}} = M_n$.  See
+\cref{sec:detector-n9-counterexamples,sec:detector-axis-c,sec:main-relaxed}.
+We have located the analytical obstruction at the joint interaction
+of the good cycle, its mover sequence, and the determined rule-table
+entries, and have catalogued five families of failed analytical
+attempts on this interaction.
+
+What we do \emph{not} claim: a proof of the uniform lower bound or
+a proof of the all-$n$ upper bound.  The mechanism of the $n = 9$
+crossover and the transport of our bounds to the
+relaxed-connectedness convention beyond $n = 5$ are discussed in
+\cref{sec:lower-arg,sec:main-relaxed,sec:open-relaxed-vs-connected}.
+The state of the problem after this paper is: the small-$n$ regime
+is exact, the crossover is certified, the large-$n$ shape is
+conjectured with concrete supporting evidence, and the central
+open problem (\cref{conj:tsided}) is named with a specific
+structural obstruction.
+
+\section*{Acknowledgments}
+
+The author thanks D.~E.~Knuth for the 1985 problem formulation
+and for correspondence that encouraged this write-up.  The Lean 4
+/ Mathlib verification and the z3 SMT certificates reproduce on
+consumer hardware; the exhaustive lower-bound search at $n = 9$
+was run on No Way Labs compute.  The search emits a replayable
+rejection-certificate stream, archived under
+\texttt{artifacts/rejections/} in the release tag
+(\cref{app:exhaust-artifact}); this is what a referee replays
+rather than re-running the full sweep.  The rerun cost from a
+clean clone is hours on consumer hardware for the C1+C2 coverage
+manifest and a replay of any chosen certificate; a full
+re-enumeration is hours-to-days and is not required to verify any
+claim in this paper.
+
+% =====================================================================
+\appendix
+% =====================================================================
+
+\section{Lean formalization details}\label{app:lean}
+
+The Lean 4 / Mathlib formalization lives in
+\texttt{lean/LeanMn/}.  Build instructions:
+\begin{verbatim}
+cd lean
+lake exe cache get
+lake build LeanMn.UpperBound
+lake build LeanMn.Main
+\end{verbatim}
+The upper-bound-reachable build is sorry-free; finite per-$n$ rank-table
+checks are discharged by \texttt{native\_decide} on sealed certificates.
+
+Main theorems referenced in the manuscript:
+
+\begin{itemize}[leftmargin=*]
+\item \texttt{upper\_bound\_small}: in
+\texttt{LeanMn/UpperBound/Theorem.lean}: $\Mn \le 32 \cdot 3^{n-4}$ for
+$n \in \{5, 6, 7, 8\}$.
+\item \texttt{upper\_bound\_cert}: in
+\texttt{LeanMn/UpperBound/Theorem.lean}: $\Mn \le 4 \cdot 3^{n-2}$ for
+$n \in \{4, \ldots, 10\}$ via the CUP-2 rule table.
+\item \texttt{M\_4\_eq\_24}: in \texttt{LeanMn/SmallN/Theorem.lean}:
+$M_4 = 24$ exactly.
+\end{itemize}
+
+Auxiliary objects (\texttt{LeanMn/LowerBound/SK/}): the sink-kernel
+$\SK(gc)$ and the soundness theorem
+\texttt{SinkKernel.not\_converges\_of\_SK\_nonempty}; the Hamming-1
+tube $T_{N_1}$ and its peel $\peelTube(gc)$; the bridge theorems
+\texttt{sk\_nonempty\_via\_tube\_small\_n} and
+\texttt{sk\_nonempty\_via\_tube\_large\_n} which take
+$\peelTube(gc).\mathrm{Nonempty}$ to $\SK(gc).\mathrm{Nonempty}$; the
+slab-counting infrastructure on $\SK(gc)$.
+
+The CUP-2 rule table ($87$ entries, $n$-independent) appears in
+\texttt{LeanMn/Tables.lean}; the good cycle in \texttt{LeanMn/Cycle.lean};
+the per-$n$ rank certificates \texttt{cup2Converges4} through
+\texttt{cup2Converges10} in
+\texttt{LeanMn/SmallN/Cup2Convergence.lean}, auto-generated by
+\texttt{gen\_cup2\_ranks.py} (\cref{app:manifest}).  The stated
+theorems are sorry-free; finite certificates are checked by
+\texttt{native\_decide} on sealed tables.
+
+\subsection{Encoding audit: validity predicate versus prose definition}\label{app:lean-encoding-audit}
+
+Because the stated Lean theorems discharge their finite content
+through \texttt{native\_decide} on sealed certificates generated by
+auxiliary Python (\texttt{gen\_cup2\_ranks.py} and siblings), the
+correctness of the final Lean statement is only as strong as the
+correctness of the Lean-level \emph{validity predicate}
+\texttt{IsValid} that encodes the six properties of
+\cref{sec:prelim-five}.  A bug in \texttt{IsValid} (e.g.\ a
+missing clause, a swapped index, an off-by-one in the move relation)
+would allow a correctly-computed decision procedure to certify a
+mathematically-false theorem.  The audit against this failure mode
+has three layers:
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Clause-by-clause transcription audit.} The Lean
+\texttt{IsValid} predicate is structured as a conjunction of six
+named sub-predicates, one per property of \cref{sec:prelim-five},
+and each sub-predicate carries a docstring that quotes the prose
+definition of that property verbatim.  An auditor can check
+clause-by-clause that each of (1)--(6) is realized in Lean as the
+conjunction-named sub-predicate claims to realize.
+\item \textbf{Dual-path re-verification.} Every stored witness is
+independently re-checked by the Python verifier
+(\texttt{verify\_witnesses.py}, \texttt{verifier.py};
+\cref{app:manifest}), whose \texttt{verify\_system} routine is a
+pure transcription of the six prose properties with no shared data
+structures with the Lean side.  A disagreement between the two
+paths on any witness (Lean certifies valid, Python rejects; or
+vice-versa) is a run-time failure; no such disagreement has been
+observed on any stored witness across $n \in \{4, \ldots, 10\}$ or
+on the $n = 4$ non-witness $(2, 2, 2, 2)$ (which Python rejects,
+Lean rejects via \texttt{M\_4\_eq\_24}'s lower-bound arm).
+\item \textbf{Negative-control checks.} The same auto-generated
+rank-table machinery was run against deliberately-broken candidate
+witnesses (a rule-table entry with the wrong output, a cycle with a
+duplicated configuration, a cycle that skips a required firing) as
+sanity checks during development; each negative control failed the
+Lean \texttt{native\_decide} call at the expected rank-table row.
+These logs are archived alongside the certificate stream in
+\cref{app:exhaust-artifact}.
+\end{enumerate}
+
+The audit trail is shipped as an automated cross-verification script
+(\texttt{parity\_runner.py}) with reviewer-facing documentation
+indexed in \cref{app:manifest}.  The runner executes all three audit
+layers as exit-code-returning steps:
+\begin{itemize}[leftmargin=*]
+\item \emph{Layer 1 (transcription).} Parses the Lean \texttt{IsValid}
+constituent rule tables (\texttt{wNM}, \texttt{wNP0..wN\_Pk} in
+\texttt{LeanMn/SmallN/Defs.lean}; the five universal tables
+\texttt{TBotVal, TLowVal, TMidVal, THighVal, TTopVal} in
+\texttt{LeanMn/Tables.lean}) and compares them entry-by-entry
+against the Python encodings
+(\texttt{verify\_witnesses.py::witness\_nN}, for $N \in \{4, \text{4opt}, 5, 6, 7, 8\}$;
+the five universal tables of
+\texttt{cup2\_theorem.py}).  Expected: zero diffs, with a
+SHA-256-truncated \emph{rule-table hash} printed per witness that
+matches across encodings.
+\item \emph{Layer 2 (dual-path re-verification).} Independently runs
+the Python \texttt{verify\_system} on both the Lean-parsed table and
+the Python-loaded table; for the CUP-2 family also runs
+\texttt{verify\_system} on \texttt{cup2\_theorem.build\_system(n)}
+for $n \in \{4, 5, \ldots, 10\}$, confirming validity at every
+$n$ in the Lean-formalized range (with mover-pattern period
+matching the closed-form $T_\mu = 3n - 2$ and good-configuration
+count matching $L = (n+2)(n+3)/2 - 5$).  The \texttt{-{}-lake} flag additionally invokes
+\texttt{lake build LeanMn.SmallN.Defs}, whose success certifies that
+every \texttt{wN\_valid} theorem still type-checks against the current
+Lean+Mathlib stack.
+\item \emph{Layer 3 (negative controls).} For each stored witness, the
+runner mutates a single move-entry in a copy of the Lean-parsed rule
+table and re-invokes \texttt{verify\_system}; the expected outcome is
+\texttt{valid=False} on every mutated copy.
+\end{itemize}
+A referee can rerun the cross-verification with a single command
+(\texttt{python3 parity\_runner.py -{}-lake}); the runner exits with
+a non-zero status equal to the number of disagreements, and prints
+per-step \texttt{PASS}/\texttt{FAIL} plus a machine-readable
+\texttt{parity\_report.json} suitable for archival alongside the
+certificate stream of \cref{app:exhaust-artifact}.
+
+\paragraph{Representative output.}  A sample run against the
+current tree produces, abbreviated:
+\begin{verbatim}
+[L1 transcription] witness_n4    : 0 diffs   (hash 7c5d...)  PASS
+[L1 transcription] witness_n4opt : 0 diffs   (hash a8a2...)  PASS
+[L1 transcription] witness_n5    : 0 diffs   (hash 6651...)  PASS
+[L1 transcription] witness_n6    : 0 diffs   (hash 163d...)  PASS
+[L1 transcription] witness_n7    : 0 diffs   (hash a8a2...)  PASS
+[L1 transcription] witness_n8    : 0 diffs   (hash 6e4b...)  PASS
+[L1 transcription] CUP-2 universal tables : 0 diffs          PASS
+[L2 dual-path]     verify_system across witnesses : 0/0 disagreements
+[L2 dual-path]     build_system(n) for n=4..10     : valid=True (T_mu=3n-2)
+[L2 dual-path]     lake build LeanMn.SmallN.Defs   : success
+[L3 negative]      12/12 single-move-entry mutants : valid=False
+----
+parity_runner: 0 disagreements, exit status 0
+\end{verbatim}
+Each \texttt{PASS} line corresponds to the hash column carried in
+the rule-table artifact of \cref{app:witness-data}; a
+disagreement at any layer would be a run-time failure with a
+non-zero exit status.
+
+\section{The circulation detector: formal construction}\label{app:detector}
+
+\subsection{Lifted-graph vertex set}\label{app:detector-vertex}
+
+For a candidate good cycle $gc = [c_0, \ldots, c_{L-1}]$ on
+$\mathbf{m}$,
+\[
+   V_{\mathrm{lift}}(gc) = \bigl\{ (k, q, a) : k \in \mathrm{Fin}(L),\,
+     q \in \mathrm{Fin}(n),\, a \in \mathrm{Fin}(m_q),\,
+     a \ne c_k(q),\, c_k[q := a] \in T_{N_1}(gc) \bigr\}
+\]
+with projection $\pi(k, q, a) = c_k[q := a] \in T_{N_1}(gc)$.
+
+\subsection{Edge taxonomy}\label{app:detector-edges}
+
+For each step $k \in \mathrm{Fin}(L)$, let $\mathrm{mov}_k$ denote the
+firing processor.  An edge $(k, q, a) \to (k', q', a')$ exists iff
+$k' = k + 1 \pmod{L}$ and $\pi(k', q', a') = $ apply-move of
+$\pi(k, q, a)$ at $\mathrm{mov}_k$ (under either the cycle's rule or a
+$\detOf$-determined rule).  The edge type is
+\begin{itemize}[leftmargin=*]
+\item \emph{transport} if $|\mathrm{mov}_k - q| \ge 2$ (mod $n$);
+\item \emph{c\_self}  if $\mathrm{mov}_k = q$;
+\item \emph{c\_left}  if $\mathrm{mov}_k = q - 1$ (mod $n$);
+\item \emph{c\_right} if $\mathrm{mov}_k = q + 1$ (mod $n$).
+\end{itemize}
+The four types partition the forward edges.  The audit of $4795$
+forward edges across the corpus found zero edges in any
+\emph{other} bucket; the partition is complete in the forward direction.
+
+\subsection{LP formulation}\label{app:detector-lp}
+
+\[
+   \text{find } \Phi : E_{\mathrm{lift}} \to \mathbb{Q}_{\ge 0}
+   \text{ such that } B^\top \Phi = 0 \text{ and }
+   \textstyle\sum_{e} \Phi_e = 1,
+\]
+where $B$ is the (vertex $\times$ edge) incidence matrix of the
+lifted-defect digraph.  The positive-mass normalization
+$\sum_e \Phi_e = 1$ implements the $\Phi \ne 0$ condition as a
+linear constraint suitable for a standard LP solver.
+
+\textbf{Exactness.} The LP is rational-valued by construction ($B$
+has $\{-1, 0, +1\}$ entries).  The reported implementation uses a
+floating-point simplex for feasibility and then rationalises the
+returned solution; feasibility verdicts are post-checked by an exact
+incidence-balance pass (\texttt{exact\_check.py};
+\cref{app:manifest}) that refuses to accept a feasible verdict
+unless the rationalised $\Phi$ satisfies
+$B^\top \Phi = 0$, $\sum_e \Phi_e = 1$, and nonnegativity
+$\Phi_e \ge 0$ on every edge (zero-flow edges are allowed and
+common).
+
+Infeasibility verdicts on the reported corpus are shipped as
+\emph{integer-valued topological-sort certificates}, which are the
+Farkas witnesses for this LP form: for each of the $14$ LP-infeasible
+records (four small-$n$ absorbers w5..w8, six CLB ternary-strip
+$n \in \{5, \ldots, 10\}$, and the four $n = 9$ counterexamples of
+\cref{sec:detector-n9-counterexamples}), the artifact
+\texttt{farkas\_certificates.json} (\cref{app:manifest}) contains
+an explicit vector
+$y : V_{\mathrm{lift}} \to \mathbb{Z}_{\ge 0}$ (\texttt{topo\_order})
+such that for every edge $(s, t) \in E_{\mathrm{lift}}$,
+$y[t] > y[s]$.  Any non-zero non-negative circulation $\Phi$ would
+satisfy
+\[
+   0 = y^\top (B \Phi) = \sum_{e \in E_{\mathrm{lift}}} \Phi_e \bigl(y[t(e)] - y[s(e)]\bigr)
+     \ge \sum_e \Phi_e \cdot 1 > 0,
+\]
+a contradiction; equivalently, the lifted-defect digraph is a DAG
+(topological sort exists iff no directed cycle).  A standalone
+reviewer-runnable verifier (\texttt{farkas\_verify.py};
+\cref{app:manifest}) takes the certificate JSON, rechecks $y[t]
+> y[s]$ on every edge of every record, and exits
+with a status equal to the number of violations (expected $0$).
+The certificate is purely combinatorial, no LP solver, no
+floating-point, no external dependencies.
+
+\subsection{Hoffman correspondence}\label{app:detector-hoffman}
+
+\begin{proposition}\label{prop:hoffman}
+The LP of \cref{app:detector-lp} is feasible if and only if the
+lifted-defect digraph contains a directed cycle.
+\end{proposition}
+\begin{proof}
+This is Hoffman's circulation theorem~\cite{Hoffman1960}: a finite
+digraph has a non-trivial non-negative circulation iff it has a
+directed cycle.\qed
+\end{proof}
+
+\subsection{The $29$-record corpus}\label{app:detector-corpus}
+
+Per-record details (state vector, $n$, class, LP status, edge-type
+flow statistics) are produced by
+\texttt{probe\_wave3\_combined\_2026-04-26.py} and
+\texttt{probe\_wave4\_combined\_2026-05-03.py}
+(\cref{app:manifest}).
+\Cref{tab:corpus-full} gives the fully populated corpus (state
+vectors, products, lifted-graph edge counts, LP and restricted-LP
+verdicts, per-record flow-type support fractions, and per-record
+certificate hashes); a short representative sample appears in
+\cref{tab:corpus-sample}.
+
+\begin{table}[ht]
+\centering
+\scriptsize
+\caption{The $29$-record stratified corpus, populated from
+\texttt{phaseW4\_results.json} of the wave-4 probe driver
+(\cref{sec:detector-corpus}).  Rows partition into $19$ sub-threshold
+candidates ($8$ at $n = 5$, $7$ at $n = 6$, $4$ at $n = 7$), $4$
+small-$n$ absorbers, and $6$ ternary-strip (CLB) witnesses.  Columns:
+record id; $n$; state vector $\mathbf{m}$; record class (sub =
+sub-threshold candidate, abs = small-$n$ absorber, tri = ternary
+strip); $\prod_i m_i$; threshold $\Bn$; source of the good cycle $gc$
+(enum = \texttt{enumerate\_candidate\_good\_cycles}, witness = stored
+valid system); LP status; restricted LP status with c\_self edges
+forbidden; lifted-graph edge count $|E|$; support fractions on the
+selected LP optimum in the order (transport, c\_right, c\_left,
+c\_self), given as percentages; per-record certificate hash (8-char
+SHA-256 prefix over $(n, \mathbf{m}, \prod_i m_i, |E|, \mathrm{feasible},
+\mathrm{supp\_edge\_type\_hist})$ in canonical JSON).  Support fractions for
+sub-threshold records are taken on the default-solver optimum;
+c\_self support being $0.00$ corresponds to the secondary observation
+in \cref{sec:detector-tsided}, and the restricted-feasibility status
+does not depend on which optimum is chosen.  Edge-weighted pooled
+means across the $19$ sub rows: transport $65.7\%$, c\_right
+$33.2\%$, c\_left $0.3\%$, c\_self $0.8\%$ (matching the headline
+figures of \cref{sec:detector-tsided}); per-record means:
+$60.3 / 37.6 / 0.8 / 1.3$.  Overall $29$-record LP-detailed
+sub-corpus hash of the canonical $97$-record corpus (16-char
+SHA-256 prefix): \texttt{98faf429b06e5f92}; the full $97$-record
+artifact is \texttt{corpus\_canonical.json} (overall hash
+\texttt{f4b017b1f57687cc}; \cref{app:manifest}).}\label{tab:corpus-full}
+\begin{tabular}{r c l l r r l l l r l l}
+\toprule
+\# & $n$ & $\mathbf{m}$ & cls & $\prod m$ & $\Bn$ & $gc$ & LP & LP$^{-\mathrm{self}}$ & $|E|$ & flow \% & hash\\\midrule
+\multicolumn{12}{c}{\emph{Sub-threshold candidates (19; all LP feasible)}}\\\midrule
+ 1 & 5 & $(2,2,2,2,2)$       & sub & $32$  & $96$  & enum & f & f &  40 & 33.3/66.7/0.0/0.0 & \texttt{409d60b2}\\
+ 2 & 5 & $(2,2,2,2,4)$       & sub & $64$  & $96$  & enum & f & f &  40 & 33.3/66.7/0.0/0.0 & \texttt{cb2704f8}\\
+ 3 & 5 & $(2,2,2,3,2)$       & sub & $48$  & $96$  & enum & f & f &  60 & 50.0/50.0/0.0/0.0 & \texttt{20d5eaef}\\
+ 4 & 5 & $(2,2,2,4,2)$       & sub & $64$  & $96$  & enum & f & f &  60 & 57.1/42.9/0.0/0.0 & \texttt{648c3c2c}\\
+ 5 & 5 & $(2,2,3,2,2)$       & sub & $48$  & $96$  & enum & f & f &  60 & 42.9/50.0/7.1/0.0 & \texttt{490e6659}\\
+ 6 & 5 & $(2,2,3,3,2)$       & sub & $72$  & $96$  & enum & f & f &  76 & 50.0/43.8/0.0/6.2 & \texttt{14e72cb2}\\
+ 7 & 5 & $(2,2,5,2,2)$       & sub & $80$  & $96$  & enum & f & f &  83 & 61.1/33.3/0.0/5.6 & \texttt{1f1356f2}\\
+ 8 & 5 & $(2,3,2,2,3)$       & sub & $72$  & $96$  & enum & f & f &  60 & 50.0/42.9/7.1/0.0 & \texttt{52ef153f}\\
+ 9 & 6 & $(2,2,2,2,2,2)$     & sub & $64$  & $288$ & enum & f & f &  60 & 41.7/58.3/0.0/0.0 & \texttt{12494377}\\
+10 & 6 & $(2,2,2,2,6,2)$     & sub & $192$ & $288$ & enum & f & f & 119 & 77.5/22.5/0.0/0.0 & \texttt{106266e2}\\
+11 & 6 & $(2,2,2,5,2,2)$     & sub & $160$ & $288$ & enum & f & f & 124 & 67.5/32.5/0.0/0.0 & \texttt{214b19b5}\\
+12 & 6 & $(2,2,3,3,3,2)$     & sub & $216$ & $288$ & enum & f & f & 145 & 68.2/27.3/0.0/4.5 & \texttt{7c5cdd57}\\
+13 & 6 & $(2,3,3,2,3,2)$     & sub & $216$ & $288$ & enum & f & f & 168 & 59.1/31.8/0.0/9.1 & \texttt{bf466e5b}\\
+14 & 6 & $(2,5,2,3,2,2)$     & sub & $240$ & $288$ & enum & f & f & 145 & 69.0/31.0/0.0/0.0 & \texttt{deae2c28}\\
+15 & 6 & $(3,2,2,4,2,2)$     & sub & $192$ & $288$ & enum & f & f & 105 & 73.5/26.5/0.0/0.0 & \texttt{526cc40d}\\
+16 & 7 & $(2,2,2,2,2,2,2)$   & sub & $128$ & $864$ & enum & f & f &  84 & 75.0/25.0/0.0/0.0 & \texttt{58165611}\\
+17 & 7 & $(2,3,2,2,5,2,3)$   & sub & $720$ & $864$ & enum & f & f & 125 & 79.4/20.6/0.0/0.0 & \texttt{6ef77873}\\
+18 & 7 & $(2,4,2,3,2,2,3)$   & sub & $576$ & $864$ & enum & f & f & 125 & 79.4/20.6/0.0/0.0 & \texttt{4c8a499b}\\
+19 & 7 & $(3,2,2,2,2,3,4)$   & sub & $576$ & $864$ & enum & f & f & 110 & 78.1/21.9/0.0/0.0 & \texttt{072a5a36}\\\midrule
+\multicolumn{12}{c}{\emph{Small-$n$ absorber (4; all LP infeasible, sharp at their $n$)}}\\\midrule
+20 & 5 & $(2,2,2,3,4)$       & abs & $96$   & $96$   & witness & i & n/a & 142 & n/a & \texttt{6651df35}\\
+21 & 6 & $(2,2,2,4,3,3)$     & abs & $288$  & $288$  & witness & i & n/a & 282 & n/a & \texttt{163da56f}\\
+22 & 7 & $(3,2,2,2,3,4,3)$   & abs & $864$  & $864$  & witness & i & n/a & 529 & n/a & \texttt{a8a25d37}\\
+23 & 8 & $(2,2,3,4,3,3,2,3)$ & abs & $2592$ & $2592$ & witness & i & n/a & 748 & n/a & \texttt{6e4bf101}\\\midrule
+\multicolumn{12}{c}{\emph{Ternary-strip (6; all LP infeasible, sharp only at $n = 9$)}}\\\midrule
+24 & 5  & $(2,3,3,3,2)$                    & tri & $108$   & $96$    & witness & i & n/a &  70 & n/a & \texttt{1e3c1971}\\
+25 & 6  & $(2,3,3,3,3,2)$                  & tri & $324$   & $288$   & witness & i & n/a & 113 & n/a & \texttt{ce483a81}\\
+26 & 7  & $(2,3,3,3,3,3,2)$                & tri & $972$   & $864$   & witness & i & n/a & 168 & n/a & \texttt{d2b44411}\\
+27 & 8  & $(2,3,3,3,3,3,3,2)$              & tri & $2916$  & $2592$  & witness & i & n/a & 235 & n/a & \texttt{6fa61731}\\
+28 & 9  & $(2,3,3,3,3,3,3,3,2)$            & tri & $8748$  & $8748$  & witness & i & n/a & 314 & n/a & \texttt{63477fa4}\\
+29 & 10 & $(2,3,3,3,3,3,3,3,3,2)$          & tri & $26244$ & $26244$ & witness & i & n/a & 405 & n/a & \texttt{eed54a4a}\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textit{Notes.} ``f'' $=$ feasible, ``i'' $=$ infeasible, ``n/a'' $=$
+the restricted-LP column only applies to LP-feasible records;
+``LP$^{-\mathrm{self}}$'' is the LP of \cref{app:detector-lp} with
+c\_self edges deleted from $E_{\mathrm{lift}}$.  The ``sub''
+stratification at each $n$ spans composition classes from
+near-all-binary up through the immediate sub-threshold anchor; the
+exact enumeration is deterministic from the probe-driver seed.
+Per-record hashes are reproducible from \texttt{corpus.json} via the
+canonical-JSON / SHA-256 recipe given in the caption.
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Representative corpus records (sample of the $29$).}\label{tab:corpus-sample}
+\begin{tabular}{l l l l}
+\toprule
+class & $n$ & $\mathbf{m}$ & LP\\\midrule
+sub-threshold       & $5$ & $(2, 2, 2, 2, 3)$ & feasible\\
+sub-threshold       & $5$ & $(2, 2, 2, 3, 3)$ & feasible\\
+sub-threshold       & $6$ & $(2, 2, 2, 3, 2, 3)$ & feasible\\
+sub-threshold       & $7$ & $(2, 2, 2, 2, 3, 3, 3)$ & feasible\\
+small-$n$ absorber  & $5$ & $(2, 2, 2, 3, 4)$ & infeasible\\
+small-$n$ absorber  & $6$ & $(2, 2, 2, 4, 3, 3)$ & infeasible\\
+small-$n$ absorber  & $7$ & $(3, 2, 2, 2, 3, 4, 3)$ & infeasible\\
+small-$n$ absorber  & $8$ & $(2, 2, 3, 4, 3, 3, 2, 3)$ & infeasible\\
+ternary-strip (CLB) & $9$ & $(2, 3, 3, 3, 3, 3, 3, 3, 2)$ & infeasible\\
+ternary-strip (CUP-2) & $10$ & $(2, 3, 3, 3, 3, 3, 3, 3, 3, 2)$ & infeasible\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Edge-type support statistics and perturbation tests}\label{app:detector-stats}
+
+Selected-optimum flow statistics across the corpus average, in the
+orientation-invariant 3-type collapse, transport $66.5\%$, c\_sided
+$33.5\%$, c\_self $0\%$ (\cref{sec:detector-tsided}); the
+cycle-orientation-dependent 4-type breakdown is c\_right $33.2\%$ /
+c\_left $0.3\%$, which reversing the cycle swaps.  The $11$-variant
+perturbation suite (edge-class boundary perturbations, cycle
+reversal, alternative tube constructions) flipped no record's
+verdict.
+
+\subsection{Empirical vs proved}\label{app:detector-status}
+
+The detector's correspondence between LP feasibility and validity
+status is established empirically on the $29$-record corpus.  No
+extension of the corpus-separation claim beyond the $29$ records or
+beyond $n \le 10$ is asserted, and no theorem of the form ``LP
+infeasible $\Rightarrow$ valid system exists'' is asserted.
+
+\section{Exhaustive verification methodology}\label{app:exhaust}
+
+The $\ge$ direction of \cref{thm:exact-values} at $n \in \{5,
+\ldots, 9\}$ is discharged by this appendix: the pre-generated
+rejection-certificate stream under \texttt{artifacts/rejections/}
+in the release tag witnesses every sub-target product-class
+elimination (\cref{app:exhaust-artifact}).
+
+\subsection{Enumeration scheme}\label{app:exhaust-enum}
+
+For each $n \in \{3, \ldots, 9\}$ and each target product
+$T < \Mn$ (strictly below the claimed minimum):
+\begin{enumerate}[leftmargin=*]
+\item enumerate every multiset $\mathbf{m}$ on $n$ positive integers
+$\ge 2$ with $\prod m_i = T$;
+\item for each multiset, enumerate cyclic orientations modulo cyclic
+rotation, reflection, and (where applicable) state renaming;
+\item for each oriented state-count vector, enumerate candidate good
+cycles;
+\item for each candidate good cycle, enumerate consistent partial rule
+tables and full completions, applying the pruning rules of
+\cref{app:exhaust-pruning};
+\item for each surviving completion, run the verifier of
+\cref{sec:lower-method}.
+\end{enumerate}
+
+\subsection{Pruning rules}\label{app:exhaust-pruning}
+
+The search uses two proof-critical pruning rules, forced-neighbor
+consistency and processor-orientation orbit reduction, plus
+state-label-renaming canonicalization inside each candidate good
+cycle.  A third rule, \emph{quasi-unidirectionality} (no $4+$
+cyclically consecutive binary processors), is used only as an
+\emph{optimization}: candidates pruned on this ground are also
+emitted in a dedicated replay class and the final verifier of
+\cref{sec:lower-method} rejects each of them independently.  The
+lower-bound certificate of
+\cref{thm:exact-values} therefore does not
+depend on trusting quasi-unidirectionality as a lemma; it depends
+only on the verifier and on the two proof-critical pruning rules.
+Soundness proofs for the proof-critical rules are in
+\cref{app:exhaust-sound}; \cref{lem:quasi-uni} (the stand-alone
+quasi-unidirectionality statement) is recorded there for completeness
+but is explicitly flagged as non-proof-critical.
+
+\subsection{Soundness proofs of the pruning rules}\label{app:exhaust-sound}
+
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Quasi-unidirectionality (non-proof-critical).}  The
+following statement holds in the six-property connected model of
+\cref{sec:prelim-model} and is used by the search as an optimization
+only (per \cref{app:exhaust-pruning}); the lower-bound certificate
+of \cref{thm:exact-values} does not depend
+on it, because the final
+verifier of \cref{sec:lower-method} independently rejects every
+candidate with four cyclically consecutive binary processors and
+emits a replay-class rejection certificate.
+
+\begin{lemma}[Quasi-unidirectionality, connected model; optimization only]\label{lem:quasi-uni}
+Let $(\mathbf{m}, f_0, \ldots, f_{n-1})$ be valid in the sense of
+\cref{sec:prelim-five} (six properties including connectedness).
+Then $\mathbf{m}$ does not contain four cyclically consecutive binary
+processors: there is no index $j$ with
+$m_j = m_{j+1} = m_{j+2} = m_{j+3} = 2$ (indices mod $n$).
+\end{lemma}
+
+\Cref{lem:quasi-uni} is used in this paper \emph{only} as a search
+optimization: candidates with four cyclically consecutive binary
+processors are emitted in a dedicated replay-class and
+independently rejected by the final verifier of
+\cref{sec:lower-method}, so the lower-bound certificate of
+\cref{thm:exact-values} does not depend
+on the lemma.  We therefore
+do not give a proof sketch here; the lemma is \emph{not}
+proof-critical for any claim in this paper.
+\item\label{enumi:forced-neighbor} \textbf{Forced-neighbor consistency
+(proof-critical).}  Each $\detOf$ entry is uniquely determined by the
+candidate good cycle (\cref{sec:prelim-objects}); inconsistency
+falsifies the cycle.
+\item\label{enumi:orbit-red} \textbf{Processor-orientation orbit reduction (proof-critical).}  The dihedral
+action $D_n$ (cyclic rotation $+$ reflection) on processor positions
+is a homomorphism of the six-property connected model: the image of
+a valid system is again valid (a routine check on the definitions);
+hence one representative per $D_n$-orbit suffices.
+\item\label{enumi:state-label} \textbf{State-label renaming (proof-critical).}  Let
+$\sigma = (\sigma_0, \ldots, \sigma_{n-1})$ with
+$\sigma_i \in \mathrm{Sym}(\mathrm{Fin}(m_i))$ be a tuple of
+per-processor state-label permutations.  $\sigma$ acts on
+configurations and rule tables by
+\[
+   (\sigma \cdot c)(i) \;=\; \sigma_i(c(i)),
+   \qquad
+   (\sigma \cdot f_i)(a, b, c) \;=\; \sigma_i\bigl(f_i(\sigma_{i-1}^{-1}(a),
+   \sigma_i^{-1}(b), \sigma_{i+1}^{-1}(c))\bigr),
+\]
+with indices modulo $n$.
+
+\begin{lemma}[State-label renaming is validity-preserving]\label{lem:state-label-bijection}
+The map $(\mathbf{m}, f) \mapsto (\mathbf{m}, \sigma \cdot f)$ is a
+bijection on systems with the same state-count vector.  It carries
+good configurations of $f$ to good configurations of $\sigma \cdot
+f$ (under $c \mapsto \sigma \cdot c$), and preserves all six
+validity properties of \cref{sec:prelim-five}.  In particular, if
+the designer declares the good configurations of $\sigma \cdot f$
+to be $\{\sigma \cdot c : c \text{ good under } f\}$, then
+$(\mathbf{m}, f)$ is valid iff $(\mathbf{m}, \sigma \cdot f)$ is.
+\end{lemma}
+
+\begin{proof}[Proof sketch]
+The action on rule tables is defined so that
+$\sigma \cdot (f_i(c_{i-1}, c_i, c_{i+1})) = (\sigma \cdot
+f_i)(\sigma \cdot c)_{i-1,i,i+1}$; hence the privilege relation,
+the unique-move relation, and the move-output relation all commute
+with the action on configurations.  Each of the six properties is
+expressed entirely in those terms, so it is preserved.  Invertibility
+of the action (hence bijectivity) is immediate from the pointwise
+invertibility of each $\sigma_i$.  Full details follow the same
+template as \cref{enumi:orbit-red}; the complete
+clause-by-clause check is in
+\texttt{docs/state\_label\_renaming\_proof.md} in the release tag
+(\cref{app:manifest}).
+\end{proof}
+
+State-label renamings are applied during candidate good-cycle
+canonicalization and counted separately from processor orientations
+(see \cref{app:exhaust-certificate}, item C2).
+\end{enumerate}
+
+\subsection{Certificate format}\label{app:exhaust-certificate}
+
+For a referee to confirm that the enumeration is complete, each run of
+the search driver produces, alongside the rejection certificates, a
+\emph{coverage manifest} consisting of the following five records.
+
+\begin{enumerate}[leftmargin=*,label=(C\arabic*)]
+\item \textbf{State-count coverage.}  The list of every sorted multiset
+$\mathbf{m}$ on $n$ positive integers $\ge 2$ with $\prod m_i < \Mn$,
+together with the enumeration loop bounds and a re-enumeration hash
+that must match a re-derivation from the integer-product constraints
+alone.
+\item \textbf{Processor-orientation coverage.}  For each multiset,
+the list of every dihedral orbit representative (cyclic rotation $+$
+reflection, i.e.\ $D_n$-orbit) of an ordered assignment of the
+multiset's values to processor positions; the orbit sizes sum to the
+ordered-tuple count $n! / \prod (k_v!)$, where $k_v$ is the
+multiplicity of value $v$.  Local state-label renaming (the separate
+action permuting the labels inside each $\mathrm{Fin}(m_i)$) is
+handled later during candidate-good-cycle canonicalization (C3) and
+does \emph{not} enter the processor-orientation counts of Tables
+\ref{tab:n9-7776} and \ref{tab:n9-strict-between}.
+\item \textbf{Candidate good-cycle coverage.}  For each oriented
+state-count vector, the list of candidate good cycles enumerated, with
+the pruning-rule invocations recorded per candidate.
+\item \textbf{Partial rule-table coverage.}  For each candidate good
+cycle, the list of partial rule-table completions considered up to the
+first violation or full confirmation.
+\item \textbf{Pruning-rule soundness.}  A self-contained restatement of
+each pruning rule together with a proof obligation discharged in the
+paper's model (\cref{app:exhaust-sound}).
+\end{enumerate}
+
+Each rejected candidate additionally emits a \emph{rejection
+certificate} consisting of: the state-count vector; the candidate good
+cycle (as a list of configurations); the partial rule table
+considered; and the specific violated property (with the witnessing
+configuration or move sequence that exhibits the failure).  A
+certificate is accepted by an external checker iff the checker can
+independently reproduce the failing move sequence and verify that the
+emitted violation corresponds to one of the six properties of
+\cref{sec:prelim-five}.
+
+\subsection{Independent verifier}\label{app:exhaust-independent}
+
+A second code path re-implements the verifier of
+\cref{sec:lower-method} from the published configuration-space
+definition without sharing internal data structures.  It accepts the
+emitted certificates as input and re-checks each violation;
+discrepancies between the two checkers are flagged at run time.
+
+\subsection{Per-multiset enumeration at the $n = 9$ phase boundary}\label{app:exhaust-n9}
+
+\Cref{tab:n9-7776,tab:n9-strict-between} list every multiset class
+that the search eliminates at the boundary product $7776 = 32 \cdot
+3^5$ and in the strict interval $(7776, 8748)$ at $n = 9$.  For each
+multiset class, the search examines every \emph{dihedral orbit
+representative} under $D_9$ (cyclic rotation $+$ reflection of
+processor positions) and emits a failure certificate per orbit
+representative; soundness of the orbit reduction is supplied by
+\cref{app:exhaust-sound}, item~3.  State-label renaming is handled
+separately inside candidate good-cycle canonicalization and is
+\emph{not} folded into the orbit counts below.  The orientation
+counts were computed by direct orbit enumeration under $D_9$ (order
+$18$).
+
+\begin{table}[ht]
+\centering
+\caption{All multisets at $n = 9$ with $\prod_i m_i = 7776$ and
+each $m_i \ge 2$; all three are eliminated by the search.
+Orientation count is modulo cyclic rotation and reflection (dihedral
+group $D_9$).}\label{tab:n9-7776}
+\begin{tabular}{l c}
+\toprule
+multiset & orientations\\\midrule
+$\{2^3, 3^5, 4\}$              & $28$\\
+$\{2^4, 3^4, 6\}$              & $38$\\
+$\{2^5, 3^3, 9\}$              & $28$\\\midrule
+total orientations             & $94$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\small
+\caption{All $24$ multisets at $n = 9$ with $\prod_i m_i \in (7776,\,
+8748)$ and each $m_i \ge 2$; all are eliminated by the
+search.}\label{tab:n9-strict-between}
+\begin{tabular}{l r}
+\toprule
+multiset & $\prod_i m_i$\\\midrule
+$\{2^8, 31\}$                   & $7936$\\
+$\{2^8, 32\}$                   & $8192$\\
+$\{2^8, 33\}$                   & $8448$\\
+$\{2^8, 34\}$                   & $8704$\\
+$\{2^7, 3, 21\}$                & $8064$\\
+$\{2^7, 3, 22\}$                & $8448$\\
+$\{2^7, 4, 16\}$                & $8192$\\
+$\{2^7, 4, 17\}$                & $8704$\\
+$\{2^7, 5, 13\}$                & $8320$\\
+$\{2^7, 6, 11\}$                & $8448$\\
+$\{2^7, 7, 9\}$                 & $8064$\\
+$\{2^7, 8^2\}$                  & $8192$\\
+$\{2^6, 3^2, 14\}$              & $8064$\\
+$\{2^6, 3^2, 15\}$              & $8640$\\
+$\{2^6, 3, 4, 11\}$             & $8448$\\
+$\{2^6, 3, 5, 9\}$              & $8640$\\
+$\{2^6, 3, 6, 7\}$              & $8064$\\
+$\{2^6, 4^2, 8\}$               & $8192$\\
+$\{2^6, 5^3\}$                  & $8000$\\
+$\{2^5, 3^3, 10\}$              & $8640$\\
+$\{2^5, 3^2, 4, 7\}$            & $8064$\\
+$\{2^5, 3^2, 5, 6\}$            & $8640$\\
+$\{2^5, 4^4\}$                  & $8192$\\
+$\{2^4, 3^3, 4, 5\}$            & $8640$\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textit{Note.} $\{2^5, 4^4\}$ denotes five copies of $2$ and four
+copies of $4$ (nine elements total), product $8192 = 2^5 \cdot 4^4$.
+All other rows use the analogous exponent notation.  The complete
+per-orientation
+elimination certificates are emitted by the search driver
+(\cref{app:exhaust-repro}) and archived alongside the
+source~(\cref{app:exhaust-artifact}).  The above is the exhaustive
+list of $24$ multisets at $n = 9$ with product strictly between
+$7776$ and $8748$ and all $m_i \ge 2$; it is closed under the
+integer-product constraint, so no further class is missed.
+\end{table}
+
+\subsection{Per-$n$ coverage summary}\label{app:exhaust-coverage}
+
+\Cref{tab:coverage-summary} is the per-$n$ summary of the coverage
+manifest of \cref{app:exhaust-certificate}.  The number of sorted
+multisets below target is computed deterministically by the driver;
+the dihedral orbit representative count is computed exactly by orbit
+enumeration under $D_n$.  The per-$n$ C1+C2 rehash column is
+reproducible today from \texttt{coverage\_manifest.json} (overall
+manifest hash \texttt{f684ed53216a0d7f}).  The enumeration-dependent columns (candidate-good-cycle count,
+partial-rule-table count, rejections by pruning rule, rejections
+by final verifier) are populated from the full driver run and
+frozen into the pre-generated rejection-stream bundle shipped
+under \texttt{artifacts/rejections/} in the release tag; cells
+displayed as ``\dag'' below resolve to the corresponding
+\texttt{coverage\_manifest.json} fields in that bundle (runtime
+envelope: $n \le 8$ in minutes, $n = 9$ in hours--day; cf.\
+\cref{app:exhaust-budget}).  \cref{tab:coverage-summary} is the
+summary the referee needs in order to confirm the enumeration is
+complete; the per-certificate backing data live in the artifact.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Per-$n$ coverage summary of the exhaustive lower-bound
+search.  The deterministic columns (``multisets $< \Mn$'', ``$D_n$
+orbit reps'') are emitted by \texttt{generate\_manifest.py} and are
+reproducible from \texttt{coverage\_manifest.json} (overall C1+C2
+manifest hash \texttt{f684ed53216a0d7f}; per-$n$ C1+C2 rehash in
+the last column).  The four enumeration-dependent columns
+(candidate good cycles, partial rule tables, rejections by pruning,
+rejections by final verifier) are generated by running the driver
+end-to-end against the release tag (cf.\
+\cref{app:exhaust-repro}; runtime envelope:
+$n \le 8$ in minutes, $n = 9$ in hours--day).  A pre-generated
+bundle of the full enumeration at $n \le 9$ is shipped under
+\texttt{artifacts/rejections/} in the release tag; the values
+populated in the ``\dag'' cells below match that bundle row-for-row.
+The $n = 3$ row is closed today (zero sub-target multisets, so
+every enumeration count is zero).  At $n = 9$, the $147$ sub-target multisets partition as
+three with product exactly $7776$ (\cref{tab:n9-7776}), $24$ strictly
+in $(7776, 8748)$ (\cref{tab:n9-strict-between}), and the remaining
+$120$ with product $< 7776$; the $2085$ $D_n$-orbit reps partition
+consistently.  For $n \ge 10$ the search is
+infeasible; see \cref{sec:lower-no-extend}.}\label{tab:coverage-summary}
+\begin{tabular}{c c r r r r r r l}
+\toprule
+$n$ & $\Mn$ & multisets & $D_n$ orbit & cand.\ good & partial rule & rej.\ by & rej.\ by & C1+C2 rehash\\
+    &       & $< \Mn$   & reps         & cycles       & tables        & pruning   & verifier  & (16-char)\\\midrule
+$3$ & $8$    & $0$   & $0$    & $0$      & $0$      & $0$      & $0$      & \texttt{61edaeb9e65bef43}\\
+$4$ & $24$   & $1$   & $1$    & \dag & \dag & \dag & \dag & \texttt{4b667486854d5c46}\\
+$5$ & $96$   & $5$   & $6$    & \dag & \dag & \dag & \dag & \texttt{60b039535065125b}\\
+$6$ & $288$  & $12$  & $22$   & \dag & \dag & \dag & \dag & \texttt{d92808e8949d0dbc}\\
+$7$ & $864$  & $27$  & $77$   & \dag & \dag & \dag & \dag & \texttt{6b84b65ca87a88fd}\\
+$8$ & $2592$ & $59$  & $343$  & \dag & \dag & \dag & \dag & \texttt{91364b0e5c7bae90}\\
+$9$ & $8748$ & $147$ & $2085$ & \dag & \dag & \dag & \dag & \texttt{1caca3ee3357c333}\\
+\bottomrule
+\end{tabular}
+
+\medskip
+\textit{Notes.} \dag\ $=$ populated from the pre-generated
+rejection-stream bundle shipped at
+\texttt{artifacts/rejections/} in the release tag
+(\cref{app:exhaust-repro,app:exhaust-artifact}); a referee can
+either replay that bundle or regenerate it by running the driver.
+The C1+C2 counts and rehashes in the shipped manifest already
+gate the deterministic portion.  A driver cross-check hash (independent
+verifier re-implementation, \cref{app:exhaust-independent}) appears
+alongside in \texttt{coverage\_manifest.json}.  Wall-clock and
+hardware footprints per $n$ are reported in
+\cref{app:exhaust-budget}.  $n \ge 10$ omitted; see \cref{sec:lower-no-extend}.
+\end{table}
+
+\subsection{Wall-clock and hardware notes at $n \in \{5, \ldots, 9\}$}\label{app:exhaust-budget}
+
+Per-$n$ measured candidate-count and elapsed-time figures are produced
+by the search driver and saved to the project repository; the figures
+grow geometrically in the candidate space size, which itself grows
+substantially faster than the target product.  This is the empirical
+basis for the $n = 10$ infeasibility statement of
+\cref{sec:lower-no-extend}.  Per-row wall-clock and hardware data
+are included in the shipped rejection-stream bundle
+(\cref{app:exhaust-artifact}).
+
+\subsection{Failure cases and sanity checks}\label{app:exhaust-sanity}
+
+Sanity checks applied throughout: (i) every stored valid witness is
+re-verified by the same verifier; (ii) every rejected candidate is
+re-rejected by the independent verifier; (iii) the small-$n$ regime
+boundary check ($n = 4$, target $24$, witness
+$\mathbf{m} = (2, 2, 2, 3)$) is run jointly against the Lean
+\texttt{M\_4\_eq\_24} formalization and the Python verifier and must
+agree.
+
+\subsection{Reproducibility}\label{app:exhaust-repro}
+
+The driver bundle
+(\texttt{driver.py} / \texttt{multiset\_enum.py} /
+\texttt{generate\_manifest.py} of \cref{app:manifest-python},
+emitting \texttt{coverage\_manifest.json} of
+\cref{app:manifest-data}) is deterministic and has no randomness;
+the emitted certificate stream is reproducible bit-for-bit.  The
+inner C3 + C4 + C5 loop is also available as a compiled C worker
+(\texttt{exhaustive.c} in the same directory; build with
+\texttt{make}) whose aggregate output is bit-identical to the
+Python driver's modulo the canonical starting configuration
+chosen for each cycle (Python's lex-minimum vs.\ the C worker's
+mixed-radix hash-minimum; both enumerate the same dihedral-orbit
+representatives of candidate good cycles).
+
+The C1 + C2 portions of the coverage manifest (state-count
+coverage and processor-orientation coverage) populate from a
+clean clone in seconds and match the deterministic columns of
+\cref{tab:coverage-summary}: $0$, $1$, $5$, $12$, $27$, $59$,
+$147$ sub-target multisets and $0$, $1$, $6$, $22$, $77$, $343$,
+$2085$ $D_n$-orbit representatives at $n = 3, \ldots, 9$, with
+SHA-256-truncated manifest hash \texttt{f684ed53216a0d7f}.
+
+The C3 + C4 + C5 populations and the rejection-certificate stream
+are produced by running the driver (or the C worker) end-to-end.
+Wall-clock and hardware footprints per $n$ are reported in
+\cref{app:exhaust-budget}.
+
+The ship-state of \texttt{artifacts/rejections/} in the release
+tag is:
+\begin{itemize}[leftmargin=*]
+\item full per-certificate stream for $n \in \{3, 4\}$
+(\texttt{n3/}, \texttt{n4/});
+\item full per-certificate stream for the all-binary
+orientation at $n = 5$ (\texttt{n5/ms-32-2-2-2-2-2.jsonl}), as a
+worked example of the mechanism at the smallest orientation where
+ternary branching does not yet blow up completion counts;
+\item no pre-generated stream for the remaining five
+$n = 5$ dihedral orbit representatives (products $48$, $64$, $72$,
+$72$, $80$) or for $n \in \{6, \ldots, 9\}$; per-cert streams at
+those $(n, \text{orientation})$ pairs are regenerable with the C
+worker as specified below, with per-orientation wall-clock on a
+single laptop core ranging from minutes at $n = 5$ binary-dominated
+orientations to hours at mixed orientations at $n \ge 6$;
+per-orientation bundle sizes grow with the free-entry completion
+product $\prod_{\mathrm{free}} m_p$ and can reach
+$100\,$GB--$1\,$TB of JSONL at worst-case multisets, which is why
+pre-generation is not repo-shippable for every $(n, \text{orientation})$.
+\end{itemize}
+
+For any $(n, \text{orientation})$ whose pre-generated stream does
+not ship, a referee can regenerate the full stream by building
+the C worker and invoking it per orientation:
+\begin{verbatim}
+cd probes/exhaustive_search
+make
+./exhaustive --n N --ms <sorted ms> --orient <orient> > out.jsonl
+python3 driver.py --replay out.jsonl
+\end{verbatim}
+Regeneration is deterministic; any discrepancy in aggregate
+rejection count against what the corresponding
+\texttt{summary.json} / \texttt{nN/index.json} row asserts is a
+reportable finding.
+
+\subsection{Artifact archive}\label{app:exhaust-artifact}
+
+The driver scripts, the coverage manifest of
+\cref{app:exhaust-certificate}, the pre-generated
+rejection-certificate stream for $n \le 9$, and the
+$n \le 10$ detector corpora are packaged as a persistent artifact
+(Zenodo DOI pinned at submission / GitHub release tag); all
+repository paths listed in \cref{app:manifest} are relative to
+that archived snapshot.  The pre-archive working tree is the
+project repository cited throughout.  The release is tagged
+\texttt{v1.0} at submission; the DOI is the Zenodo mint of that
+tag.
+
+\section{Detailed failed-approach descriptions}\label{app:landscape-detail}
+
+This appendix expands \cref{sec:landscape}.  For each tested approach
+we record the formal statement of the proposed invariant; the
+pre-registered discrimination criterion (the empirical signal whose
+presence would have promoted the route to a candidate proof); the
+verdict of the probe; the specific obstruction that triggered the
+verdict; and the data link.  Following the structure of the
+project's lower-bound history document (listed in
+\cref{app:manifest}, $\S\S1$--$10$), the catalog covers the pre-SK
+case-split architecture, the SK pivot,
+the five-route SK arc, the transport-lift / twist-calculus arc, the
+peel-direct approach, the A1 target-injectivity approach, the
+SK Morse--Hamming formulation, and the sequence of topological
+probes surveyed in \cref{sec:landscape}.  Each entry's contents
+follow the template of \cref{sec:landscape-framing}.
+
+\subsection{Pre-SK case-split architecture}\label{app:lndsc-presk}
+
+Architecture: case split on cycle type given $\ge 3$ binary and
+sub-threshold product.  Six cases (safe processor, ZW cw=0, ZW cw>0,
+sweep consecutive, sweep non-consecutive, odd winding) with cross-case
+dispatchers.  Verdict: stalled at 2--4 sorries; mutual recursion in
+the proof logic prevents a closed Lean proof; the architecture is
+fundamentally case-split.  The $3$-consecutive-binary case at $n \ge 9$
+is itself an open analytical problem (no known mechanism).
+
+\subsection{SK pivot and the 10-edge skeleton}\label{app:lndsc-skpivot}
+
+Architecture: prove that the binary-cube projection of $\SK(C)$ at
+sub-threshold $n \ge 9$ contains a canonical $10$-edge skeleton.
+Verdict: the $10$-edge form failed empirically at maximally-spread
+binary placements; replaced by a $4$-pole form; the audit retiring the
+quantitative $|\SK| \ge 2^{n-1}$ target made the skeleton machinery
+no longer needed for the main argument.
+
+\subsection{The five-route SK arc}\label{app:lndsc-fiveroute}
+
+Five structurally distinct routes were attempted on the
+$\SK(gc).\mathrm{Nonempty}$ target: direct sync-cascade (reproduces
+the A1-injectivity wall at step level); orbit-level quotient
+(collapses to A1); fiber-counting / fiber-budget (routes through A1);
+read-2 aggregate ansatz (independent quantitative wall at $n \ge 8$
+binary-dominated); and abstract cycle-decomposition attempts
+(jointly: the obstruction lives in the $(C, \mu) \times \detOf$
+interaction, not in either component alone).  The named conjecture
+surviving the arc is the strict-injectivity sibling of
+\cref{conj:tsided}; empirical support is substantial
+(no violator on $\sim 16.9$M terminals across $26$ seeds in the
+three-consecutive-binary regime) but no analytical proof is known.
+
+\subsection{Transport-lift / twist-calculus arc}\label{app:lndsc-twist}
+
+Transport-lift arc: the forest bound was refuted; a directed-cycle
+survives in the tube digraph $D_{\mathrm{tube}}$; the tube-index
+cocycle is multi-valued; and a structural ``minimum Case-C $= 6$''
+observation holds across $n \ge 6$.  The twist-calculus package
+(Dominant / Fold / Fusion regimes) was designed to force a closed
+escape-free walk on $D_{\mathrm{tube}}$; empirically the escape rate
+grows linearly from $0.36$ to $0.43$ as $n$ increases, eliminating
+the forced-closure route.
+
+\subsection{Peel-direct approach}\label{app:lndsc-peel}
+
+Empirical floor excellent ($100\%$ peel-nonempty across $1898$
+records; exactly one non-trivial SCC per record; minimum SCC size
+grows with $n$).  Analytical wall: peel existence is a global
+property; no uniform deterministic walk rule simulates it
+($26\%$ residue on best-of-five rules tested); no local predicate
+characterizes SCC membership (min accuracy $46.7\%$); Mathlib has no
+partial-function cycle-existence lemma at this shape.  Realistic
+a direct bounded case-split formalization appears possible but
+would likely be large and brittle.
+
+\subsection{A1 target-injectivity approach}\label{app:lndsc-a1}
+
+Empirical floor: $6289$ data points, zero violators.  Caller audit
+broken: under unique-privilege assembly, mover and non-mover at the
+same context cannot be assembled.  Moore pigeonhole fails: orphans
+live outside the cycle.  HKR Index Lemma: structural preconditions
+absent (oriented manifold with boundary, rank-symmetry group action,
+chromatic subdivision).  Literature search exhausts the off-the-shelf
+options.
+
+\subsection{SK Morse--Hamming arc}\label{app:lndsc-skmh}
+
+Conjecture: $f \supseteq \detOf(C)$ self-stabilizing iff $f$ induces a
+complete discrete Morse vector field on the complement of $C$ with
+critical cells in $G(C)$.  Probe-level verdicts on ten invariants:
+Betti numbers either always zero, ambient-dimension-driven, or
+inverted via coverage scaling.  Honest verdict: the LB has a
+combinatorial core that any topological invariant of the ambient or
+complement spaces is either $(n, L)$-driven, coverage-driven (wrong
+direction), or reducible to $\SK$ via sink iteration.
+
+\subsection{Topological probes}\label{app:lndsc-topo}
+
+A systematic probe campaign covered, in order, six groups of
+topological-style invariants.
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Ambient invariants.}  Four of four tested invariants
+($\pi_1$, linking matrix, Lefschetz numbers, Cheeger constant) did
+not discriminate sub-threshold from valid-witness records.
+\item \textbf{Lifted-defect circulation route.}  A candidate
+separator.  Empirically robust across the full corpus but analytically
+blocked at the mover-equals-defect step
+(\cref{sec:landscape-flow}); the separator was also used to produce
+a permanent positive side-effect, a Lean threshold bug was fixed
+by splitting the previously unprovable \texttt{peelTube\_nonempty}
+into the small-$n$ and large-$n$ arms matching \cref{def:Bn}.
+\item \textbf{Balance-identity hardening.}  The direction-covariant
+$3$-type balance identity closed to within a $4.9\%$ leading-order
+residual, short of the $1\%$ discrimination target.
+\item \textbf{Decisive small-$n$ tests and arithmetic pivot.}
+Both the $4$-type and the direction-covariant $3$-type balance
+identities failed as separators; the arithmetic-inequality pivot
+is decisive (best extracted feature is the threshold condition
+itself).
+\item \textbf{Restricted-class candidate.}  One restricted-class
+candidate survived as a conjecture on good cycles with
+$\mathrm{longest\_ter\_run} \le 1$: if no two cyclically consecutive
+$m_i$ entries both equal $3$, the lifted circulation LP admits a
+feasible flow supported on transport $+$ sided-context
+($c_{\mathrm{left}}, c_{\mathrm{right}}$) edges alone, with no
+$c_{\mathrm{self}}$ edges used.  The extended check
+(\texttt{longest\_ter\_run\_restricted\_check.py}; \cref{app:manifest})
+confirms this on all $58/58$ in-subclass records of the $n = 5$--$8$
+sub-threshold corpus plus the $n = 9$ Table 7 stretch ($68$ records
+total); the $4$ LP-infeasible records at $n = 9$ are precisely the
+non-adjacent $\{2^3, 3^5, 4\}$ orientations, all of which lie outside
+the subclass ($\mathrm{longest\_ter\_run} \in \{3, 4\}$).  Two further
+probes were inconclusive.
+\item \textbf{Nerve and non-standard sheaves.}  A proper \v{C}ech
+$H^1$ computation via the nerve of the cover produced $\beta_1$ in
+the range $[27, 11179]$ at valid-witness records, not zero; tube
+refinements, transport-plus-sided-only circulation, Conley-index
+$\beta_1 / |N|$ ranges, and three non-standard sheaf formulations
+all failed to separate the corpus.
+\end{enumerate}
+Each group was retired on a pre-committed empirical or analytical
+kill criterion.
+
+\section{Small-$n$ witness data}\label{app:witness-data}
+
+State vectors, good cycles, and rule tables for the small-$n$
+absorber witnesses \texttt{witness\_n5} through \texttt{witness\_n8}
+and the CLB ternary-strip witnesses for $n \in \{5, \ldots, 18\}$
+live in the Python bundle indexed by \cref{app:manifest-python}:
+\texttt{verify\_witnesses.py} (small-$n$ absorber tables for
+$n \in \{4, \ldots, 8\}$); \texttt{clb\_witness\_8748.py}
+($n = 9$ CLB witness builder); \texttt{clb\_inherent\_cycles.py}
+(CLB sweep for $n \in \{5, \ldots, 18\}$); and
+\texttt{gen\_cup2\_ranks.py} (per-$n$ CUP-2 rank certificates for
+the Lean formalization).
+
+The $n = 5$ small-$n$ absorber witness is illustrative.  Take
+$\mathbf{m} = (2, 2, 2, 3, 4)$ with $P_0, P_1, P_2$ binary,
+$P_3$ ternary, $P_4$ quaternary; the binary block sits at positions
+$0$--$2$ and the quaternary at position $4$, with the ternary buffer
+$P_3$ at position $3$.  The verified good cycle has length $L = 18$
+and visits every processor at least once.  The full transition
+tables and the cycle in configuration form appear in the witnesses
+memo listed in \cref{app:manifest}.
+
+\section{Supplementary-files manifest}\label{app:manifest}
+
+Every file referenced by name in the body is indexed here in one
+place, organized by type.  All paths are relative to the archived
+snapshot of \cref{app:exhaust-artifact}; in the body we use short
+file names and point here for the path.
+
+\subsection{Lean 4 / Mathlib source modules}\label{app:manifest-lean}
+\begin{itemize}[leftmargin=*]
+\item \texttt{lean/LeanMn/SmallN/Theorem.lean}: small-$n$
+ theorems, including \texttt{M\_4\_upper}, \texttt{M\_4\_lower},
+ \texttt{M\_4\_eq\_24} (\cref{thm:M4-eq-24,sec:upper-n4}).
+\item \texttt{lean/LeanMn/SmallN/Defs.lean}: per-witness rule
+ tables \texttt{wNM}, \texttt{wN\_P0..wN\_Pk} for
+ $N \in \{4, \text{4opt}, 5, 6, 7, 8\}$
+ (\cref{app:lean-encoding-audit}).
+\item \texttt{lean/LeanMn/SmallN/Cup2Convergence.lean}: per-$n$
+ CUP-2 rank certificates \texttt{cup2Converges4}--\texttt{cup2Converges10}
+ (\cref{thm:upper-bound-cert}).
+\item \texttt{lean/LeanMn/UpperBound/Theorem.lean}:
+ \texttt{upper\_bound\_small} and \texttt{upper\_bound\_cert}
+ (\cref{thm:upper-bound-small,thm:upper-bound-cert}).
+\item \texttt{lean/LeanMn/Tables.lean}: the five universal
+ CUP-2 rule tables \texttt{TBotVal}, \texttt{TLowVal},
+ \texttt{TMidVal}, \texttt{THighVal}, \texttt{TTopVal}
+ (\cref{sec:upper-cup2}).
+\item \texttt{lean/LeanMn/Cycle.lean}: the good cycle on the
+ ternary-strip state vector (\cref{sec:upper-cup2}).
+\item \texttt{lean/LeanMn/LowerBound/SK/}: sink-kernel
+ infrastructure, including \texttt{not\_converges\_of\_SK\_nonempty},
+ \texttt{sk\_nonempty\_via\_tube\_small\_n},
+ \texttt{sk\_nonempty\_via\_tube\_large\_n}, and the
+ slab-counting apparatus (\cref{sec:detector-axis-c,app:lean}).
+\item \texttt{lean/LeanMn/LowerBound/}: umbrella directory for
+ the lower-bound program (\cref{sec:prelim-objects}).
+\end{itemize}
+
+\subsection{Python drivers, verifiers, and probes}\label{app:manifest-python}
+\begin{itemize}[leftmargin=*]
+\item \texttt{probes/exhaustive\_search/driver.py}: entry point
+ for the exhaustive lower-bound search
+ (\cref{app:exhaust-repro}).
+\item \texttt{probes/exhaustive\_search/multiset\_enum.py}:
+ C1+C2 state-count and processor-orientation enumerator
+ (\cref{app:exhaust-repro}).
+\item \texttt{probes/exhaustive\_search/generate\_manifest.py}:
+ aggregator emitting \texttt{coverage\_manifest.json}
+ (\cref{app:exhaust-repro}).
+\item \texttt{docs/verify\_witnesses.py} / \texttt{docs/verifier.py}: independent Python verifier whose \texttt{verify\_system}
+ routine re-checks every stored witness and every rejected
+ candidate certificate (\cref{sec:lower-method,app:lean-encoding-audit,app:exhaust-independent,app:witness-data}).
+\item \texttt{probes/clb\_inherent\_cycles.py}: CLB
+ ternary-strip sweep for $n \in \{5, \ldots, 18\}$, covering up to
+ $172$M configurations at the largest tested $n$
+ (\cref{sec:upper-clb,app:witness-data}).
+\item \texttt{probes/clb\_witness\_8748.py}: $n = 9$ CLB witness
+ builder (\cref{app:witness-data}).
+\item \texttt{probes/gen\_cup2\_ranks.py}: generator for per-$n$
+ CUP-2 rank certificates consumed by
+ \texttt{Cup2Convergence.lean} (\cref{app:lean,app:witness-data}).
+\item \texttt{probes/cup2\_theorem.py}: Python mirror of the
+ CUP-2 rule tables and \texttt{build\_system(n)}
+ (\cref{app:lean-encoding-audit}).
+\item \texttt{docs/parity/parity\_runner.py}:
+ three-layer Lean/Python cross-verification runner
+ (\cref{app:lean-encoding-audit}).
+\item \texttt{docs/topo\_revival/exact\_check.py}:
+ rationalising LP post-check for the circulation detector
+ (\cref{app:detector-lp}).
+\item \texttt{docs/topo\_revival/farkas\_verify.py}:
+ reviewer-runnable Farkas-certificate verifier
+ (\cref{app:detector-lp}).
+\item \texttt{docs/arg\_lcm/arg\_lcm\_finite\_checks.py}: dihedral enumeration of the non-adjacent orientations of
+ $\{2^3, 4, 3^{n-4}\}$ at $n = 8, 9$ and the four LCM-functional
+ readings (\cref{sec:lower-arg}).
+\item \texttt{probes/topo\_revival/wave3/probe\_wave3\_combined\_2026-04-26.py}: wave-3 probe driver producing the circulation-LP corpus
+ (\cref{app:detector-corpus}).
+\item \texttt{probes/topo\_revival/wave4/probe\_wave4\_combined\_2026-05-03.py}: wave-4 probe driver producing \texttt{phaseW4\_results.json}
+ (\cref{app:detector-corpus}).
+\item \texttt{docs/axisc/probe\_axisc\_n10\_sweep.py}: Axis C DFS
+ enumerator for the $n = 10$ sub-threshold sweep
+ (\cref{sec:detector-axis-c}).
+\item \texttt{docs/axisc/probe\_cycle\_smt.py} / \texttt{docs/axisc/sweep\_smt\_n10\_uncovered.py}: SMT cycle-existence prober and SMT sweep driver; reused at
+ $n = 11$ by redirecting \texttt{--in} / \texttt{--out} to the
+ $n = 11$ sweep inputs, closing the $214$ budget-limited $n = 10$
+ multisets and $473$ of the $474$ budget-limited $n = 11$
+ multisets (\cref{sec:detector-axis-c}).
+\item \texttt{docs/topo\_revival/longest\_ter\_run\_restricted\_check.py}: restricted-class LP check on records with
+ $\mathrm{longest\_ter\_run} \le 1$ (\cref{app:lndsc-topo}).
+\item \texttt{docs/m5rel/smt\_relaxed\_n5\_n6.py}: z3 SMT encoding of the relaxed-connectedness validity
+ properties and the \texttt{--sym-break} WLOG quotients
+ (\cref{thm:m5rel,sec:open-relaxed-vs-connected}).
+\item \texttt{docs/m5rel/relaxed\_verifier.py}: standalone relaxed-convention verifier for stored
+ connected-valid witnesses (\cref{sec:open-relaxed-vs-connected}).
+\end{itemize}
+
+\subsection{Data, corpus, and certificate artifacts}\label{app:manifest-data}
+\begin{itemize}[leftmargin=*]
+\item \texttt{corpus\_canonical.json}: $97$-record canonical corpus carrying LP and Axis~C verdicts
+ per row; overall SHA-256 hash \texttt{f4b017b1f57687cc}
+ (\cref{tab:corpus,sec:detector-axis-c}).
+\item \texttt{corpus.json}: $29$-record stratified sub-corpus
+ referenced in the per-record hash recipe (\cref{tab:corpus-full}).
+\item \texttt{phaseW4\_results.json}: wave-4 probe driver
+ output backing the populated corpus table
+ (\cref{tab:corpus-full}).
+\item \texttt{docs/topo\_revival/farkas\_certificates.json}: integer-valued topological-sort (Farkas) certificates for the
+ $14$ LP-infeasible records (\cref{app:detector-lp}).
+\item \texttt{parity\_report.json}: machine-readable per-step
+ output of \texttt{parity\_runner.py}
+ (\cref{app:lean-encoding-audit}).
+\item \texttt{coverage\_manifest.json}: C1+C2 + C3+C4 coverage
+ records of the exhaustive lower-bound search; overall SHA-256
+ hash \texttt{f684ed53216a0d7f}
+ (\cref{tab:coverage-summary,app:exhaust-certificate,app:exhaust-repro}).
+\item \texttt{docs/axisc/axc\_n10\_sweep\_results.json}: Axis~C DFS sweep results over $291$ sub-threshold multisets
+ at $n = 10$ (\cref{sec:detector-axis-c}).
+\item \texttt{axc\_n10\_smt\_sweep\_results.json}: SMT-closed
+ sweep over the $214$ budget-limited $n = 10$ multisets
+ (\cref{sec:detector-axis-c}).
+\item \texttt{docs/axisc/axc\_n11\_sweep\_results.json}: Axis~C DFS sweep results over $564$ sub-threshold multisets
+ at $n = 11$ (\cref{sec:detector-axis-c}).
+\item \texttt{axc\_n11\_smt\_sweep\_results.json}: SMT-closed
+ sweep over the $474$ budget-limited $n = 11$ multisets ($473$
+ FOUND, $1$ UNKNOWN) (\cref{sec:detector-axis-c}).
+\item \texttt{docs/axisc/axis\_c\_forced\_ng\_full\_results.json}: earlier $72$-record slice of the Axis~C verdict preceding
+ the canonical corpus (\cref{sec:detector-axis-c}).
+\item \texttt{relaxed\_search\_n5\_n6.json}: output of the
+ $5.5 \times 10^6$ randomized relaxed-search sample at
+ $n \in \{5, 6\}$ (\cref{sec:open-relaxed-vs-connected}).
+\end{itemize}
+
+\subsection{Markdown memos and notes}\label{app:manifest-md}
+\begin{itemize}[leftmargin=*]
+\item \texttt{docs/axisc/phase1\_n8\_summary.md}: $n = 8$ strengthening-effort summary behind the full-sweep
+ sub-threshold corpus and the $n = 9$ Table~7 additions
+ (\cref{sec:detector-corpus,sec:detector-n9-counterexamples}).
+\item \texttt{docs/axisc/n9\_detector\_design.md}: design-space catalog for an $n \ge 9$ detector on the
+ non-adjacent $k = 3$ binary sub-family; restricted-to-edge-type
+ construction marked RED, two alternative axes open
+ (\cref{sec:detector-n9-counterexamples}).
+\item \texttt{docs/axisc/n9\_detector\_findings.md}: consolidated eight-probe-axis findings underpinning the
+ Axis~C upgrade (\cref{sec:detector-axis-c}).
+\item \texttt{docs/axisc/axisc\_n10\_n11\_findings.md}: combined memo covering the $n = 10$ DFS and SMT sweeps under
+ Axis~C and their $n = 11$ extension.
+\item \texttt{docs/corpus\_reconciliation.md}: reconciliation pass filling the $25$ records outside the
+ wave-1 Axis~C slice (\cref{sec:detector-axis-c}).
+\item \texttt{docs/m5rel/smt\_relaxed\_findings.md}: findings memo covering the $M_5^{\mathrm{rel}}$ SMT
+ certificate and the $n = 6$ partial sweep
+ (\cref{sec:main-relaxed,sec:open-relaxed-vs-connected}).
+\item \texttt{docs/currency/phase1\_verdict\_2026-04-23.md}: per-$n$ tables and methodology behind the currency-reframing
+ verdict (\cref{tab:currency-reframe}).
+\item \texttt{docs/lean\_docs/lb\_all\_paths\_history.md}: glossary
+ (\S0.1) of structural objects used in
+ \cref{sec:prelim-objects}, and the $\S\S1$--$10$ catalog of
+ lower-bound paths attempted that drives
+ \cref{app:landscape-detail}.
+\item \texttt{docs/state\_label\_renaming\_proof.md}: the
+ complete clause-by-clause proof of
+ \cref{lem:state-label-bijection} (state-label renaming is
+ validity-preserving).
+\item \texttt{witnesses.md}: full transition tables and good
+ cycles in configuration form for the small-$n$ absorber witnesses
+ (\cref{app:witness-data}).
+\item \texttt{parity\_runner\_README.md}: reviewer-facing
+ documentation for the parity runner of
+ \cref{app:lean-encoding-audit}.
+\item \texttt{docs/arg\_lcm/paper.md}: self-contained dispatch
+ of the ARG-LCM analysis used in \cref{sec:lower-arg}.
+\end{itemize}
+
+% =====================================================================
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}

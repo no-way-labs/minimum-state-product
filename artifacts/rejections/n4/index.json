@@ -1,0 +1,38 @@
+{
+  "M_n_connected": 24,
+  "multisets_count": 1,
+  "n": 4,
+  "orientations_count": 1,
+  "per_multiset": [
+    {
+      "multiset": [
+        2,
+        2,
+        2,
+        2
+      ],
+      "orientations": [
+        {
+          "candidate_cycles": 16,
+          "completions_tried": 4096,
+          "elapsed_s": 0.214,
+          "orientation": [
+            2,
+            2,
+            2,
+            2
+          ],
+          "quasi_uni_optimization_class": true,
+          "rejected": 4096,
+          "valid_found": 0,
+          "witnesses": []
+        }
+      ],
+      "product": 16
+    }
+  ],
+  "sub_threshold_witnesses": [],
+  "total_candidate_cycles": 16,
+  "total_completions_tried": 4096,
+  "total_rejections": 4096
+}

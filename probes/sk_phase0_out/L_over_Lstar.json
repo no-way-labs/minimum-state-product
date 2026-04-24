@@ -1,0 +1,132 @@
+{
+  "5": {
+    "num_cycles": 180,
+    "max_ratio": 1.0,
+    "max_ratio_example": {
+      "L": 10,
+      "Lstar": 10,
+      "ratio": 1.0,
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        3
+      ],
+      "max_sharing": 1
+    },
+    "max_sharing": 1,
+    "sharing_hist": {
+      "1": 2708
+    },
+    "ratio_hist": {
+      "1.0": 180
+    }
+  },
+  "6": {
+    "num_cycles": 320,
+    "max_ratio": 1.0,
+    "max_ratio_example": {
+      "L": 21,
+      "Lstar": 21,
+      "ratio": 1.0,
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3
+      ],
+      "max_sharing": 1
+    },
+    "max_sharing": 1,
+    "sharing_hist": {
+      "1": 6259
+    },
+    "ratio_hist": {
+      "1.0": 320
+    }
+  },
+  "7": {
+    "num_cycles": 270,
+    "max_ratio": 1.0,
+    "max_ratio_example": {
+      "L": 21,
+      "Lstar": 21,
+      "ratio": 1.0,
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3
+      ],
+      "max_sharing": 1
+    },
+    "max_sharing": 1,
+    "sharing_hist": {
+      "1": 6055
+    },
+    "ratio_hist": {
+      "1.0": 270
+    }
+  },
+  "8": {
+    "num_cycles": 240,
+    "max_ratio": 1.0,
+    "max_ratio_example": {
+      "L": 25,
+      "Lstar": 25,
+      "ratio": 1.0,
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "max_sharing": 1
+    },
+    "max_sharing": 1,
+    "sharing_hist": {
+      "1": 5937
+    },
+    "ratio_hist": {
+      "1.0": 240
+    }
+  },
+  "9": {
+    "num_cycles": 180,
+    "max_ratio": 1.0,
+    "max_ratio_example": {
+      "L": 27,
+      "Lstar": 27,
+      "ratio": 1.0,
+      "ms": [
+        2,
+        2,
+        2,
+        3,
+        3,
+        3,
+        3,
+        3,
+        3
+      ],
+      "max_sharing": 1
+    },
+    "max_sharing": 1,
+    "sharing_hist": {
+      "1": 4830
+    },
+    "ratio_hist": {
+      "1.0": 180
+    }
+  }
+}

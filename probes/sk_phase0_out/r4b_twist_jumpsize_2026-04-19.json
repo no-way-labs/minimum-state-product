@@ -1,0 +1,995 @@
+{
+  "total_twists": 5046,
+  "violators_count": 1511,
+  "violator_fraction": 0.29944510503369004,
+  "abs_di_by_n": {
+    "6": {
+      "3": 2552,
+      "5": 285,
+      "6": 350,
+      "4": 558,
+      "7": 137
+    },
+    "7": {
+      "3": 747,
+      "4": 55,
+      "5": 30,
+      "6": 34,
+      "7": 28
+    },
+    "8": {
+      "3": 236,
+      "4": 18,
+      "5": 16
+    }
+  },
+  "signed_di_by_n": {
+    "6": {
+      "3": 1905,
+      "-3": 647,
+      "-5": 188,
+      "6": 208,
+      "-4": 247,
+      "4": 311,
+      "7": 67,
+      "-7": 70,
+      "5": 97,
+      "-6": 142
+    },
+    "7": {
+      "3": 522,
+      "-3": 225,
+      "4": 28,
+      "-4": 27,
+      "-5": 23,
+      "6": 25,
+      "7": 14,
+      "-7": 14,
+      "-6": 9,
+      "5": 7
+    },
+    "8": {
+      "3": 163,
+      "-3": 73,
+      "-4": 9,
+      "4": 9,
+      "-5": 8,
+      "5": 8
+    }
+  },
+  "alphabet": [
+    {
+      "dq_signed": -1,
+      "di_signed": 3,
+      "count": 2486
+    },
+    {
+      "dq_signed": 2,
+      "di_signed": -3,
+      "count": 909
+    },
+    {
+      "dq_signed": -1,
+      "di_signed": 4,
+      "count": 341
+    },
+    {
+      "dq_signed": 2,
+      "di_signed": -4,
+      "count": 276
+    },
+    {
+      "dq_signed": 2,
+      "di_signed": -5,
+      "count": 134
+    },
+    {
+      "dq_signed": 2,
+      "di_signed": -6,
+      "count": 124
+    },
+    {
+      "dq_signed": -1,
+      "di_signed": 6,
+      "count": 121
+    },
+    {
+      "dq_signed": -1,
+      "di_signed": 5,
+      "count": 112
+    },
+    {
+      "dq_signed": 1,
+      "di_signed": 3,
+      "count": 104
+    },
+    {
+      "dq_signed": -2,
+      "di_signed": 6,
+      "count": 93
+    },
+    {
+      "dq_signed": 3,
+      "di_signed": -5,
+      "count": 85
+    },
+    {
+      "dq_signed": 2,
+      "di_signed": -7,
+      "count": 78
+    },
+    {
+      "dq_signed": -1,
+      "di_signed": 7,
+      "count": 75
+    },
+    {
+      "dq_signed": -2,
+      "di_signed": -3,
+      "count": 36
+    },
+    {
+      "dq_signed": -2,
+      "di_signed": -6,
+      "count": 19
+    },
+    {
+      "dq_signed": 1,
+      "di_signed": 6,
+      "count": 19
+    },
+    {
+      "dq_signed": 3,
+      "di_signed": -6,
+      "count": 8
+    },
+    {
+      "dq_signed": -2,
+      "di_signed": -4,
+      "count": 7
+    },
+    {
+      "dq_signed": 1,
+      "di_signed": 4,
+      "count": 7
+    },
+    {
+      "dq_signed": -2,
+      "di_signed": -7,
+      "count": 6
+    },
+    {
+      "dq_signed": 1,
+      "di_signed": 7,
+      "count": 6
+    }
+  ],
+  "alphabet_size": 21,
+  "conditional_di_sign_given_dq": {
+    "-1": {
+      "1": 3135
+    },
+    "2": {
+      "-1": 1521
+    },
+    "1": {
+      "1": 136
+    },
+    "-2": {
+      "-1": 68,
+      "1": 93
+    },
+    "3": {
+      "-1": 93
+    }
+  },
+  "violators_sample": [
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 13,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 13,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 13,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 13,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 14,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 15,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -4,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 4,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": -1,
+      "di_signed": 7,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "dq_signed": 2,
+      "di_signed": -7,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": 3,
+      "di_signed": -5,
+      "p_arity": 2
+    },
+    {
+      "n": 6,
+      "L": 16,
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "dq_signed": -2,
+      "di_signed": 6,
+      "p_arity": 3
+    }
+  ],
+  "violator_templates": [
+    {
+      "template": [
+        -1,
+        -1,
+        1,
+        -1,
+        -1,
+        1
+      ],
+      "count": 748
+    },
+    {
+      "template": [
+        -1,
+        -1,
+        -1,
+        1,
+        -1,
+        1
+      ],
+      "count": 615
+    },
+    {
+      "template": [
+        -1,
+        -1,
+        -1,
+        -1,
+        1,
+        1
+      ],
+      "count": 84
+    },
+    {
+      "template": [
+        -1,
+        1,
+        -1,
+        1,
+        1,
+        1
+      ],
+      "count": 36
+    },
+    {
+      "template": [
+        -1,
+        1,
+        1,
+        -1,
+        1,
+        1
+      ],
+      "count": 28
+    }
+  ]
+}

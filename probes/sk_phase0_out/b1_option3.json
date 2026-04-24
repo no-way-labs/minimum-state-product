@@ -1,0 +1,247 @@
+{
+  "per_n": {
+    "n=5": {
+      "n": 5,
+      "M_n": 96,
+      "num_ms_tuples": 26,
+      "ms_with_cycles": 26,
+      "total_cycles": 5032,
+      "A_any_count": 2656,
+      "B_any_count": 0,
+      "either_count": 2656,
+      "A_none_count": 2376,
+      "B_none_count": 5032,
+      "either_fail_witnesses": [
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 10
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 10
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 10
+        }
+      ]
+    },
+    "n=6": {
+      "n": 6,
+      "M_n": 288,
+      "num_ms_tuples": 129,
+      "ms_with_cycles": 129,
+      "total_cycles": 12860,
+      "A_any_count": 9823,
+      "B_any_count": 0,
+      "either_count": 9823,
+      "A_none_count": 3037,
+      "B_none_count": 12860,
+      "either_fail_witnesses": [
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 12
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 12
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 12
+        }
+      ]
+    },
+    "n=7": {
+      "n": 7,
+      "M_n": 864,
+      "num_ms_tuples": 379,
+      "ms_with_cycles": 379,
+      "total_cycles": 22572,
+      "A_any_count": 18852,
+      "B_any_count": 0,
+      "either_count": 18852,
+      "A_none_count": 3720,
+      "B_none_count": 22572,
+      "either_fail_witnesses": [
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 14
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 14
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 14
+        }
+      ]
+    },
+    "n=8": {
+      "n": 8,
+      "M_n": 2592,
+      "num_ms_tuples": 176,
+      "ms_with_cycles": 167,
+      "total_cycles": 6435,
+      "A_any_count": 5828,
+      "B_any_count": 0,
+      "either_count": 5828,
+      "A_none_count": 607,
+      "B_none_count": 6435,
+      "either_fail_witnesses": [
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 16
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 16
+        },
+        {
+          "ms": [
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2,
+            2
+          ],
+          "L": 16
+        }
+      ]
+    }
+  },
+  "sample_failures": {
+    "n=5": {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "L": 10
+    },
+    "n=6": {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "L": 12
+    },
+    "n=7": {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "L": 14
+    },
+    "n=8": {
+      "ms": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        2
+      ],
+      "L": 16
+    }
+  },
+  "aggregate_verdict": "RED"
+}
