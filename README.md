@@ -2,7 +2,7 @@
 
 Companion artifact for the paper
 **"Minimum State Products on Dijkstra's Token Ring: Exact Values for
-$3 \le n \le 9$ and a Large-$n$ Conjecture Supported through $n = 10$."**
+n = 3 through 9 and a large-n conjecture supported through n = 10."**
 
 ## What's here
 
@@ -62,7 +62,7 @@ verdict itself:
   theorem. Compiles **sorry-free** with zero `declaration uses sorry`
   warnings.
 - `lake build LeanMn.Research` — compiles the sink-kernel lower-bound
-  program for general $n$. Builds successfully but surfaces 5
+  program for general `n`. Builds successfully but surfaces 5
   `declaration uses sorry` warnings corresponding to the
   stated-but-not-yet-proved obligations the paper discusses in §7 and
   Appendix K.
@@ -148,9 +148,9 @@ This command builds `lean_lib LeanMn`, the **proved tree**. It verifies
 every paper-cited theorem and compiles **sorry-free**. Specifically, the
 proved tree covers:
 
-- The $M_4 = 24$ exact-value theorem (`SmallN/Theorem.lean`,
+- The `M_4 = 24` exact-value theorem (`SmallN/Theorem.lean`,
   `LowerBound/SmallN/LB2222.lean`).
-- Upper-bound constructions for all $n \ge 4$, including the CUP-2
+- Upper-bound constructions for all `n >= 4`, including the CUP-2
   certificate chain (`UpperBound/`, `SmallN/Cup2Convergence.lean`,
   `Cycle.lean`, `Tables.lean`).
 - Proved lower-bound infrastructure (`LowerBound/CycleTypes.lean`,
@@ -160,7 +160,7 @@ proved tree covers:
 
 #### Building the research tree (open obligations)
 
-The sink-kernel lower-bound program for general $n$ is research in
+The sink-kernel lower-bound program for general `n` is research in
 progress. These modules are collected under `LeanMn.Research`:
 
 ```bash
