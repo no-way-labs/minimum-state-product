@@ -279,9 +279,7 @@ expected output per that file, and the actual output.
 
 ## License
 
-See `LICENSE` (MIT, code). The paper text (`paper/main.tex`,
-`paper/main.pdf`) is provided under its own licensing terms — see the
-paper itself.
+See `LICENSE` (MIT).
 
 ## Citation
 
