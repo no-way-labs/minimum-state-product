@@ -279,7 +279,8 @@ expected output per that file, and the actual output.
 
 ## License
 
-See `LICENSE` (MIT).
+- Code (`probes/`, `docs/`, `lean/`) and repository infrastructure: [MIT](LICENSE)
+- Paper (`paper/`): [CC BY 4.0](paper/LICENSE)
 
 ## Citation
 
